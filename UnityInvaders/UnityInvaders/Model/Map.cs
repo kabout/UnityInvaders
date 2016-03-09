@@ -14,17 +14,18 @@ namespace UnityInvaders
         #region Properties
 
         public List<IObstacle> Obstacles { get; private set; }
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+        public uint Width { get; private set; }
+        public uint Height { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        public Map(int width, int height)
+        public Map(uint width, uint height)
         {
             Width = width;
             Height = height;
+            Obstacles = new List<IObstacle>();
 
             InitMap(width, height);
         }
@@ -37,15 +38,15 @@ namespace UnityInvaders
         {
             if (!IsValidPosition(obstacle.Position, obstacle.Width, obstacle.Height))
                 return false;
+            
+            uint xEnd = obstacle.Position.X + obstacle.Width;
+            uint yEnd = obstacle.Position.Y + obstacle.Height;
 
-            int x = obstacle.Position.x;
-            int y = obstacle.Position.y;
-            int xEnd = obstacle.Position.x + obstacle.Width;
-            int yEnd = obstacle.Position.y + obstacle.Height;
-
-            for (; x < xEnd; x++)
-                for (; y < yEnd; y++)
+            for (uint x = obstacle.Position.X; x < xEnd; x++)
+                for (uint y = obstacle.Position.Y; y < yEnd; y++)
                     map[x, y] = 1;
+
+            Obstacles.Add(obstacle);
 
             return true;
         }
@@ -54,31 +55,29 @@ namespace UnityInvaders
 
         #region Private Methods
 
-        private bool IsValidPosition(Position position, int width, int height)
+        private bool IsValidPosition(Position position, uint width, uint height)
         {
-            if (position.x < 0 || position.x >= Width ||
-                position.y < 0 || position.y >= Height)
+            if (position.X < 0 || position.X >= Width ||
+                position.Y < 0 || position.Y >= Height)
                 return false;
+            
+            uint xEnd = position.X + width;
+            uint yEnd = position.Y + height;
 
-            int x = position.x;
-            int y = position.y;
-            int xEnd = position.x + width;
-            int yEnd = position.y + height;
-
-            for (; x < xEnd; x++)
-                for (; y < yEnd; y++)
+            for (uint x = position.X; x < xEnd; x++)
+                for (uint y = position.Y; y < yEnd; y++)
                     if (map[x, y] != 0)
                         return false;
 
             return true;
         }
 
-        private void InitMap(int width, int height)
+        private void InitMap(uint width, uint height)
         {
             map = new int[width, height];
 
-            for (int x = 0; x < width; x++)
-                for (int y = 0; y < height; y++)
+            for (uint x = 0; x < width; x++)
+                for (uint y = 0; y < height; y++)
                     map[x, y] = 0;
         }
 

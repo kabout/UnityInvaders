@@ -4,8 +4,8 @@ namespace UnityInvaders
 {
     public interface IMap
     {
-        int Width { get; }
-        int Height { get; }
+        uint Width { get; }
+        uint Height { get; }
         List<IObstacle> Obstacles { get; }
     }
 }

@@ -2,7 +2,21 @@
 {
     public class Position
     {
-        public int x;
-        public int y;
+        #region Properties
+
+        public uint X { get; set; }
+        public uint Y { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        public Position(uint x, uint y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        #endregion
     }
 }

@@ -2,8 +2,8 @@
 {
     public interface IObstacle
     {
-        int Width { get; }
-        int Height { get; }
+        uint Width { get; }
+        uint Height { get; }
         Position Position { get; }
     }
 }
