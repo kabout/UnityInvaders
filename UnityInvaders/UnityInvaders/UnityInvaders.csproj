@@ -43,6 +43,10 @@
   <ItemGroup>
     <Compile Include="Interfaces\IMap.cs" />
     <Compile Include="Interfaces\IObstacle.cs" />
+    <Compile Include="Model\Defense.cs" />
+    <Compile Include="Interfaces\IDefense.cs" />
+    <Compile Include="Model\Constants.cs" />
+    <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\Map.cs" />
     <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Position.cs" />

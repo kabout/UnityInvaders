@@ -1,4 +1,6 @@
-﻿namespace UnityInvaders
+﻿using UnityInvaders.Model;
+
+namespace UnityInvaders.Interfaces
 {
     public interface IObstacle
     {

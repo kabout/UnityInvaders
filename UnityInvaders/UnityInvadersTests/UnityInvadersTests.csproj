@@ -52,6 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="UTDefense.cs" />
     <Compile Include="UTMap.cs" />
     <Compile Include="UTObstacle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

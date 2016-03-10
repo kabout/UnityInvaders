@@ -1,6 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UnityInvaders;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UnityInvaders.Model;
 
 namespace UnityInvadersTests
 {

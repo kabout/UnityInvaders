@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UnityInvaders
+namespace UnityInvaders.Interfaces
 {
     public interface IMap
     {

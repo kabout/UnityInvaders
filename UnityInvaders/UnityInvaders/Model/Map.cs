@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityInvaders.Interfaces;
 
-namespace UnityInvaders
+namespace UnityInvaders.Model
 {
     public class Map : IMap
     {

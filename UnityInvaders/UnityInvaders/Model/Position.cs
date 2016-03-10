@@ -1,4 +1,4 @@
-﻿namespace UnityInvaders
+﻿namespace UnityInvaders.Model
 {
     public class Position
     {
