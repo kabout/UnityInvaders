@@ -6,13 +6,13 @@ namespace UnityInvaders.Model
     {
         #region Properties
 
-        public uint Width
+        public int Width
         {
             get;
             private set;
         }
 
-        public uint Height
+        public int Height
         {
             get;
             private set;
@@ -28,7 +28,7 @@ namespace UnityInvaders.Model
 
         #region Constructors
 
-        public Obstacle(uint width, uint height, Position position)
+        public Obstacle(int width, int height, Position position)
         {
             Width = width;
             Height = height;

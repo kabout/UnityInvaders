@@ -20,4 +20,14 @@
         Unearthly,
         Divine
     }
+
+    public enum DifficultLevel : int
+    {
+        VeryEasy,
+        Easy,
+        Normal,
+        Difficult,
+        VeryDifficult,
+        God
+    }
 }

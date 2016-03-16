@@ -52,9 +52,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UTDefense.cs" />
-    <Compile Include="UTMap.cs" />
-    <Compile Include="UTObstacle.cs" />
+    <Compile Include="Controllers\UTDifficultController.cs" />
+    <Compile Include="Model\UTObjectGenerator.cs" />
+    <Compile Include="Model\UTDefense.cs" />
+    <Compile Include="Model\UTMap.cs" />
+    <Compile Include="Model\UTObstacle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

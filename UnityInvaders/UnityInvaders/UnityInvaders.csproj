@@ -41,13 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DifficultController.cs" />
+    <Compile Include="Interfaces\IDifficultController.cs" />
+    <Compile Include="Interfaces\IMapController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Interfaces\IGameController.cs" />
     <Compile Include="Interfaces\IMap.cs" />
     <Compile Include="Interfaces\IObstacle.cs" />
     <Compile Include="Model\Defense.cs" />
     <Compile Include="Interfaces\IDefense.cs" />
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\Enums.cs" />
+    <Compile Include="Interfaces\IObjectGenerator.cs" />
     <Compile Include="Model\Map.cs" />
+    <Compile Include="Model\ObjectGenerator.cs" />
     <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Position.cs" />
     <Compile Include="Program.cs" />

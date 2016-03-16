@@ -13,19 +13,19 @@ namespace UnityInvaders.Model
 
         public Position Position { get; private set; }
 
-        public uint Range { get; private set; }
+        public int Range { get; private set; }
 
-        public uint Width { get; private set; }
+        public int Width { get; private set; }
 
-        public uint Height { get; private set; }
+        public int Height { get; private set; }
 
-        public uint Health { get; private set; }
+        public int Health { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        public Defense(uint health, uint defenseSize, uint defaultRange, LevelDefense level, DamageType damage, Position position)
+        public Defense(int health, int defenseSize, int defaultRange, LevelDefense level, DamageType damage, Position position)
         {
             Health = health;
             Width = defenseSize;
@@ -33,7 +33,7 @@ namespace UnityInvaders.Model
             Level = level;
             Damage = damage;
             Position = position;
-            Range = defaultRange + (uint)level;
+            Range = defaultRange + (int)level;
         }
 
         #endregion
@@ -42,13 +42,15 @@ namespace UnityInvaders.Model
 
         public void TakeDamage(DamageType damage)
         {
-            uint damageNumeric = (uint)damage;
+            int damageNumeric = (int)damage;
 
             if (damageNumeric > Health)
                 Health = 0;
             else
                 Health -= damageNumeric;
         }
+
+
 
         #endregion
     }

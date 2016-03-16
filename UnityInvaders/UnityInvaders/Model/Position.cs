@@ -4,14 +4,14 @@
     {
         #region Properties
 
-        public uint X { get; set; }
-        public uint Y { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public Position(uint x, uint y)
+        public Position(int x, int y)
         {
             X = x;
             Y = y;

@@ -2,7 +2,7 @@
 using UnityInvaders.Model;
 using UnityInvaders.Interfaces;
 
-namespace UnityInvadersTests
+namespace UnityInvadersTests.Model
 {
     [TestClass]
     public class UTMap
@@ -61,7 +61,7 @@ namespace UnityInvadersTests
 
             IObstacle obstacle2 = new Obstacle(10, 10, new Position(5, 5));
 
-            Assert.IsFalse(map.AddObstacle(obstacle2));
+            Assert.IsTrue(map.AddObstacle(obstacle2));
         }
     }
 }

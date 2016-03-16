@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnityInvaders.Model;
 
-namespace UnityInvadersTests
+namespace UnityInvadersTests.Model
 {
     [TestClass]
     public class UTObstacle
