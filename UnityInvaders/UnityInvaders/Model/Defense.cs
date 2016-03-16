@@ -7,7 +7,7 @@ namespace UnityInvaders.Model
     {
         #region Properties
 
-        public DamageType Damage { get; private set; }
+        public int Damage { get; private set; }
 
         public LevelDefense Level { get; private set; }
 
@@ -25,7 +25,7 @@ namespace UnityInvaders.Model
 
         #region Constructors
 
-        public Defense(int health, int defenseSize, LevelDefense level, DamageType damage, Position position)
+        public Defense(int health, int defenseSize, LevelDefense level, int damage, Position position)
         {
             Health = health;
             Width = defenseSize;
@@ -40,14 +40,12 @@ namespace UnityInvaders.Model
 
         #region Methods
 
-        public void TakeDamage(DamageType damage)
+        public void TakeDamage(int damage)
         {
-            int damageNumeric = (int)damage;
-
-            if (damageNumeric > Health)
+            if (damage > Health)
                 Health = 0;
             else
-                Health -= damageNumeric;
+                Health -= damage;
         }
 
         public void ChangePosition(Position position)

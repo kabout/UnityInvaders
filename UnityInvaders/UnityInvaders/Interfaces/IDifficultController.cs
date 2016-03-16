@@ -15,6 +15,32 @@ namespace UnityInvaders.Interfaces
         int GetNumberCellsOfDefenses(IMap map, int sizeDefense, DifficultLevel difficultLevel);
 
         /// <summary>
+        /// Devuelve el número de recursos para crear defensas para un nivel de dificultad difficultLevel
+        /// </summary>
+        /// <param name="difficultLevel">Nivel de dificultad</param>
+        int GetNumbersOfUcosForDefenses(DifficultLevel difficultLevel);
+
+        /// <summary>
+        /// Devuelve el número de recursos para crear aliens para un nivel de dificultad difficultLevel
+        /// </summary>
+        /// <param name="difficultLevel">Nivel de dificultad</param>
+        int GetNumbersOfUcosForAliens(DifficultLevel difficultLevel);
+
+        /// <summary>
+        /// Devuelve el nivel de defensa según la dificultad del juego.
+        /// </summary>
+        /// <param name="difficultLevel">Nivel de dificultad</param>
+        /// <returns></returns>
+        LevelDefense GetLevelDefense(DifficultLevel difficultLevel);
+
+        /// <summary>
+        /// Devuelve el daño que genera la defensa en función del nivel d
+        /// </summary>
+        /// <param name="levelDefense"></param>
+        /// <returns></returns>
+        int GetDefenseDamage(LevelDefense levelDefense);
+
+        /// <summary>
         /// Devuelve el número de celdas que deben ocupar los obstáculos dentro del map map para el nivel de dificultad difficultLevel.
         /// </summary>
         /// <param name="map">Mapa</param>

@@ -30,4 +30,11 @@
         VeryDifficult,
         God
     }
+
+    public enum GameMode : int
+    {
+        UserAlien,
+        UserHuman,
+        UserVsUser
+    }
 }

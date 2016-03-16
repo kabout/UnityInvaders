@@ -53,7 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Controllers\UTDifficultController.cs" />
-    <Compile Include="Model\UTObjectGenerator.cs" />
+    <Compile Include="Model\UTObjectManager.cs" />
     <Compile Include="Model\UTDefense.cs" />
     <Compile Include="Model\UTMap.cs" />
     <Compile Include="Model\UTObstacle.cs" />

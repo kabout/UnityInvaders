@@ -54,9 +54,9 @@
     <Compile Include="Interfaces\IDefense.cs" />
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\Enums.cs" />
-    <Compile Include="Interfaces\IObjectGenerator.cs" />
+    <Compile Include="Interfaces\IObjectManager.cs" />
     <Compile Include="Model\Map.cs" />
-    <Compile Include="Model\ObjectGenerator.cs" />
+    <Compile Include="Model\ObjectManager.cs" />
     <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Position.cs" />
     <Compile Include="Program.cs" />

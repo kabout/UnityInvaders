@@ -19,7 +19,7 @@ namespace UnityInvaders.Interfaces
         /// <summary>
         /// Nivel de daño que genera la defensa
         /// </summary>
-        DamageType Damage { get; }
+        int Damage { get; }
         /// <summary>
         /// Rango de alcance de la defensa desde cada uno de sus bordes
         /// </summary>
@@ -36,7 +36,7 @@ namespace UnityInvaders.Interfaces
         /// Resta salud a la defensa indicado por damage
         /// </summary>
         /// <param name="damage"></param>
-        void TakeDamage(DamageType damage);
+        void TakeDamage(int damage);
         /// <summary>
         /// Cambia la posición de la defensa
         /// </summary>
