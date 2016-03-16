@@ -16,5 +16,10 @@ namespace UnityInvaders.Interfaces
         /// Posición del obstaculo en el mapa
         /// </summary>
         Position Position { get; }
+        /// <summary>
+        /// CAmbia la posición del obstáculo
+        /// </summary>
+        /// <param name="position">Buena posición</param>
+        void ChangePosition(Position position);
     }
 }

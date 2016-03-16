@@ -25,7 +25,7 @@ namespace UnityInvaders.Model
 
         #region Constructors
 
-        public Defense(int health, int defenseSize, int defaultRange, LevelDefense level, DamageType damage, Position position)
+        public Defense(int health, int defenseSize, LevelDefense level, DamageType damage, Position position)
         {
             Health = health;
             Width = defenseSize;
@@ -33,7 +33,7 @@ namespace UnityInvaders.Model
             Level = level;
             Damage = damage;
             Position = position;
-            Range = defaultRange + (int)level;
+            Range = (int)level;
         }
 
         #endregion
@@ -50,7 +50,10 @@ namespace UnityInvaders.Model
                 Health -= damageNumeric;
         }
 
-
+        public void ChangePosition(Position position)
+        {
+            Position = position;
+        }
 
         #endregion
     }

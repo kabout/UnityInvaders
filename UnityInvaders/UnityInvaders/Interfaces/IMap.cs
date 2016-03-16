@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityInvaders.Model;
 
 namespace UnityInvaders.Interfaces
 {
@@ -18,19 +17,27 @@ namespace UnityInvaders.Interfaces
         /// </summary>
         IReadOnlyList<IObstacle> Obstacles { get; }
         /// <summary>
+        /// Lista de sólo lectura de las defensas del mapa
+        /// </summary>
+        IReadOnlyList<IDefense> Defenses { get; }
+        /// <summary>
         /// Añade un obstáculo al mapa
         /// </summary>
         /// <param name="obstacle">Obstáculo que se añade al mapa</param>
         /// <returns>Devuelve true si lo puede añadir o false en caso contrario</returns>
         bool AddObstacle(IObstacle obstacle);
         /// <summary>
-        /// Indica si la posición está disponible en el mapa para un objeto
+        /// Indica si el obstáculo está en una posición válida del mapa.
         /// </summary>
-        /// <param name="position">Posición de la esquina izquierda del objeto</param>
-        /// <param name="width">Longitud del objecto en el eje x</param>
-        /// <param name="height">Longitud del objecto en el eje y</param>
+        /// <param name="obstacle">Obstáculo</param>
         /// <returns>Devuelve true si la posición es correcta o false en caso contrario</returns>
-        bool IsValidPosition(Position position, int width, int height);
+        bool IsValidPosition(IObstacle obstacle);
+        /// <summary>
+        /// Indica si la defensa está en una posición válida del mapa.
+        /// </summary>
+        /// <param name="defense">Defensa</param>
+        /// <returns>Devuelve true si la posición es correcta o false en caso contrario</returns>
+        bool IsValidPosition(IDefense defense);
         /// <summary>
         /// Añade una defensa al mapa
         /// </summary>

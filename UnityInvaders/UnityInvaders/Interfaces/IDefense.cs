@@ -37,5 +37,10 @@ namespace UnityInvaders.Interfaces
         /// </summary>
         /// <param name="damage"></param>
         void TakeDamage(DamageType damage);
+        /// <summary>
+        /// Cambia la posición de la defensa
+        /// </summary>
+        /// <param name="position"></param>
+        void ChangePosition(Position position);
     }
 }

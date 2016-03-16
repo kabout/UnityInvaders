@@ -14,7 +14,15 @@ namespace UnityInvadersTests.Model
             IMap map = new Map(200, 200);
             IObjectGenerator objectGenerator = new ObjectGenerator();
             IObstacle obstacle = objectGenerator.GenerateObstacle(60, map);
-            Assert.IsTrue(map.IsValidPosition(obstacle.Position, obstacle.Width, obstacle.Height));
+            Assert.IsTrue(map.IsValidPosition(obstacle));
+        }
+        [TestMethod]
+        public void Generate_Defense()
+        {
+            IMap map = new Map(200, 200);
+            IObjectGenerator objectGenerator = new ObjectGenerator();
+            IDefense defense = objectGenerator.GenerateDefense(Constants.DEFENSE_SIZE, DifficultLevel.Easy, map);
+            Assert.IsTrue(map.IsValidPosition(defense));
         }
     }
 }

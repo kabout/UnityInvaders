@@ -1,4 +1,6 @@
-﻿namespace UnityInvaders.Interfaces
+﻿using UnityInvaders.Model;
+
+namespace UnityInvaders.Interfaces
 {
     public interface IObjectGenerator
     {
@@ -16,6 +18,6 @@
         /// <param name="sizeDefense">Anchura de la defensa</param>
         /// <param name="map">Mapa</param>
         /// <returns>Devuelve una defensa en una posición del mapa.</returns>
-        IDefense GenerateDefense(int sizeDefense, IMap map);
+        IDefense GenerateDefense(int sizeDefense, DifficultLevel difficulLevel, IMap map);
     }
 }

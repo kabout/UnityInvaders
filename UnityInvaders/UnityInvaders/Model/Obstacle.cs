@@ -1,4 +1,5 @@
-﻿using UnityInvaders.Interfaces;
+﻿using System;
+using UnityInvaders.Interfaces;
 
 namespace UnityInvaders.Model
 {
@@ -32,6 +33,15 @@ namespace UnityInvaders.Model
         {
             Width = width;
             Height = height;
+            Position = position;
+        }
+
+        #endregion
+
+        #region Methods
+
+        public void ChangePosition(Position position)
+        {
             Position = position;
         }
 

@@ -43,7 +43,7 @@ namespace UnityInvaders.Controllers
 
             while (numDefenses > 0)
             {
-                IDefense defense = objectGenerator.GenerateDefense(Constants.DEFENSE_SIZE, map);
+                IDefense defense = objectGenerator.GenerateDefense(Constants.DEFENSE_SIZE, difficultLevel, map);
                 map.AddDefense(defense);
             }
         }
