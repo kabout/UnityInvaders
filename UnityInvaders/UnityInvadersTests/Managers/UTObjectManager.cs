@@ -1,10 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
 using UnityInvaders.Controllers;
+using UnityInvaders.Managers;
 
-namespace UnityInvadersTests.Model
+namespace UnityInvadersTests.Managers
 {
     [TestClass]
     public class UTObjectManager

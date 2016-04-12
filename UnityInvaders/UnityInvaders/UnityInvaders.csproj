@@ -39,6 +39,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DifficultController.cs" />
@@ -50,17 +53,22 @@
     <Compile Include="Interfaces\IGameController.cs" />
     <Compile Include="Interfaces\IMap.cs" />
     <Compile Include="Interfaces\IObstacle.cs" />
+    <Compile Include="Model\UnityMap.cs" />
     <Compile Include="Model\Defense.cs" />
     <Compile Include="Interfaces\IDefense.cs" />
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Interfaces\IObjectManager.cs" />
     <Compile Include="Model\Map.cs" />
-    <Compile Include="Model\ObjectManager.cs" />
+    <Compile Include="Managers\ObjectManager.cs" />
     <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Position.cs" />
+    <Compile Include="Model\UnityObstacle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transforms\MapToUnity.cs" />
+    <Compile Include="Transforms\ObstacleToUnity.cs" />
+    <Compile Include="Utils\RandomManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

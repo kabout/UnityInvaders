@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
+using UnityInvaders.Utils;
 
 namespace UnityInvaders.Controllers
 {
@@ -38,57 +39,6 @@ namespace UnityInvaders.Controllers
                 case DifficultLevel.VeryDifficult: return (int)(numCells * 0.8);
                 case DifficultLevel.God: return numCells;
                 default: return 0;
-            }
-        }
-
-        public DamageType GetDamageType(DifficultLevel difficulLevel)
-        {
-            int minLevel = 0;
-            int maxLevel = 0;
-
-            switch (difficulLevel)
-            {
-                case DifficultLevel.VeryEasy:
-                    {
-                        minLevel = 0;
-                        maxLevel = 0;
-                    }
-                    break;
-                case DifficultLevel.Easy:
-                    {
-                        minLevel = 0;
-                        maxLevel = 1;
-                    }
-                    break;
-                case DifficultLevel.Normal:
-                    {
-                        minLevel = 1;
-                        maxLevel = 1;
-                    }
-                    break;
-                case DifficultLevel.Difficult:
-                    {
-                        minLevel = 1;
-                        maxLevel = 2;
-                    }
-                    break;
-                case DifficultLevel.VeryDifficult:
-                case DifficultLevel.God:
-                    {
-                        minLevel = 2;
-                        maxLevel = 2;
-                    }
-                    break;
-            }
-
-            Random random = new Random(DateTime.Now.Millisecond);
-
-            switch (random.Next(minLevel, maxLevel))
-            {
-                case 0: return DamageType.Low;
-                case 1: return DamageType.Medium;
-                case 2: return DamageType.High;
-                default: return DamageType.Low;
             }
         }
 
@@ -137,8 +87,8 @@ namespace UnityInvaders.Controllers
                     break;
             }
 
-            Random random = new Random(DateTime.Now.Millisecond);
-            return (LevelDefense)random.Next(minLevel, maxLevel);
+            RandomManager.Seed = DateTime.Now.Millisecond;
+            return (LevelDefense)RandomManager.GetRandomNumber(minLevel, maxLevel);
         }
 
         public int GetNumbersOfUcosForDefenses(DifficultLevel difficultLevel)

@@ -8,16 +8,16 @@ namespace UnityInvaders.Controllers
         #region Fields
 
         IDifficultController difficultController;
-        IObjectManager objectGenerator;
+        IObjectManager objectManager;
 
         #endregion
 
         #region Constructors
 
-        public MapController(IDifficultController difficultController, IObjectManager objectGenerator)
+        public MapController(IDifficultController difficultController, IObjectManager objectManager)
         {
             this.difficultController = difficultController;
-            this.objectGenerator = objectGenerator;
+            this.objectManager = objectManager;
         }
 
         #endregion
@@ -43,7 +43,7 @@ namespace UnityInvaders.Controllers
 
             while (numDefenses > 0)
             {
-                IDefense defense = objectGenerator.GenerateDefense(Constants.DEFENSE_SIZE, difficultLevel, map);
+                IDefense defense = objectManager.GenerateDefense(Constants.DEFENSE_SIZE, difficultLevel, map);
                 map.AddDefense(defense);
             }
         }
@@ -54,7 +54,7 @@ namespace UnityInvaders.Controllers
 
             while (numCellsOfObstacles > 0)
             {
-                IObstacle obstacle = objectGenerator.GenerateObstacle(numCellsOfObstacles, map);
+                IObstacle obstacle = objectManager.GenerateObstacle(numCellsOfObstacles, map);
                 map.AddObstacle(obstacle);
 
                 numCellsOfObstacles -= obstacle.Width * obstacle.Height;
