@@ -26,11 +26,11 @@ namespace UnityInvaders.Model
         /// <summary>
         /// Lista de sólo lectura de los obstáculos del mapa
         /// </summary>
-        public IReadOnlyList<UnityObstacle> Obstacles { get { return (IReadOnlyList<UnityObstacle>)obstacles; } }
+        public IList<UnityObstacle> Obstacles { get { return obstacles; } }
         /// <summary>
         /// Lista de sólo lectura de las defensas del mapa
         /// </summary>
-        public IReadOnlyList<IDefense> Defenses { get; }
+		public IList<IDefense> Defenses { get; set;}
 
         #endregion
 

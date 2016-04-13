@@ -9,15 +9,17 @@ namespace UnityInvaders.Controllers
 
         IDifficultController difficultController;
         IObjectManager objectManager;
+        IDefenseController defenseController;
 
         #endregion
 
         #region Constructors
 
-        public MapController(IDifficultController difficultController, IObjectManager objectManager)
+        public MapController(IDefenseController defenseController, IDifficultController difficultController, IObjectManager objectManager)
         {
             this.difficultController = difficultController;
             this.objectManager = objectManager;
+            this.defenseController = defenseController;
         }
 
         #endregion
@@ -32,21 +34,8 @@ namespace UnityInvaders.Controllers
         public void InitMap(IMap map, DifficultLevel difficultLevel)
         {
             PlaceObstacles(map, difficultLevel);
-            PlaceDefenses(map, difficultLevel);
-        }
-
-        private void PlaceDefenses(IMap map, DifficultLevel difficultLevel)
-        {
-            int numCellsOfDefenses = difficultController.GetNumberCellsOfDefenses(map, Constants.DEFENSE_SIZE, difficultLevel);
-
-            int numDefenses = numCellsOfDefenses / (Constants.DEFENSE_SIZE * Constants.DEFENSE_SIZE);
-
-            while (numDefenses > 0)
-            {
-                IDefense defense = objectManager.GenerateDefense(Constants.DEFENSE_SIZE, difficultLevel, map);
-                map.AddDefense(defense);
-            }
-        }
+            defenseController.PlaceDefenses(map, difficultLevel);
+        }       
 
         private void PlaceObstacles(IMap map, DifficultLevel difficultLevel)
         {

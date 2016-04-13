@@ -16,8 +16,8 @@ namespace UnityInvaders.Model
 
         #region Properties
 
-        public IReadOnlyList<IObstacle> Obstacles { get { return obstacles; } }
-        public IReadOnlyList<IDefense> Defenses { get { return defenses; } }
+        public IList<IObstacle> Obstacles { get { return obstacles; } }
+        public IList<IDefense> Defenses { get { return defenses; } }
         public int Width { get; private set; }
         public int Height { get; private set; }
 
@@ -58,7 +58,19 @@ namespace UnityInvaders.Model
 
         public bool AddDefense(IDefense defense)
         {
-            throw new NotImplementedException();
+            if (!IsValidPosition(defense))
+                return false;
+
+            int xEnd = defense.Position.X + defense.Width;
+            int yEnd = defense.Position.Y + defense.Height;
+
+            for (int x = defense.Position.X; x < xEnd; x++)
+                for (int y = defense.Position.Y; y < yEnd; y++)
+                    map[x, y] = 2;
+
+            defenses.Add(defense);
+
+            return true;
         }
 
         public bool IsValidPosition(IDefense defense)

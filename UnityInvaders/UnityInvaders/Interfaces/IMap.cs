@@ -15,11 +15,11 @@ namespace UnityInvaders.Interfaces
         /// <summary>
         /// Lista de sólo lectura de los obstáculos del mapa
         /// </summary>
-        IReadOnlyList<IObstacle> Obstacles { get; }
+        IList<IObstacle> Obstacles { get; }
         /// <summary>
         /// Lista de sólo lectura de las defensas del mapa
         /// </summary>
-        IReadOnlyList<IDefense> Defenses { get; }
+        IList<IDefense> Defenses { get; }
         /// <summary>
         /// Añade un obstáculo al mapa
         /// </summary>
