@@ -12,6 +12,15 @@ namespace UnityInvaders.Transforms
 
         #endregion
 
+        #region Constructors
+
+        public ObstacleToUnity(GameObject modelObstacle)
+        {
+            this.modelObstacle = modelObstacle;
+        }
+
+        #endregion
+        
         #region Methods
 
         public UnityObstacle Convert(IObstacle obstacle)

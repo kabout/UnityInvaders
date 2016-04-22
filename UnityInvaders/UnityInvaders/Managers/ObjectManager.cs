@@ -15,6 +15,7 @@ namespace UnityInvaders.Managers
 
         public ObjectManager(IDifficultController difficultController)
         {
+            RandomManager.Seed = DateTime.Now.Millisecond;
             this.difficultController = difficultController;
         }
 
@@ -50,9 +51,12 @@ namespace UnityInvaders.Managers
         /// <returns></returns>
         public IObstacle GenerateObstacle(int numCellsOfObstacles, IMap map, int maxUcos = int.MaxValue)
         {
-            RandomManager.Seed = DateTime.Now.Millisecond;
             int numCellsObstacle = RandomManager.GetRandomNumber(1, Math.Min(map.Width / 2, numCellsOfObstacles));
-            int width = RandomManager.GetRandomNumber(1, numCellsObstacle);
+
+            if (numCellsObstacle == 1)
+                return null;
+
+            int width = RandomManager.GetRandomNumber(1, numCellsObstacle / 2);
             int height = 1;
 
             numCellsObstacle -= width;

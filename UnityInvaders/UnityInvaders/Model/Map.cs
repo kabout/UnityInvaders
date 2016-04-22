@@ -94,15 +94,22 @@ namespace UnityInvaders.Model
             if (!IsValidLimits(obstacle.Position.X, obstacle.Position.Y))
                 return false;
 
+            int emptyCells = 0;
+
             int xEnd = obstacle.Position.X + obstacle.Width;
             int yEnd = obstacle.Position.Y + obstacle.Height;
 
             for (int x = obstacle.Position.X; x < xEnd; x++)
                 for (int y = obstacle.Position.Y; y < yEnd; y++)
+                {
+                    if (map[x, y] == 0)
+                        emptyCells++;
+
                     if (map[x, y] != 0 && map[x, y] != 1)
                         return false;
+                }
 
-            return true;
+            return emptyCells > 0;
         }
 
         #endregion

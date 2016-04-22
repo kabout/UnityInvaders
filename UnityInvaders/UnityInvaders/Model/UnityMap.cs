@@ -8,7 +8,7 @@ namespace UnityInvaders.Model
     {
         #region Fields
 
-        Terrain terrain;
+        GameObject floor;
         IList<UnityObstacle> obstacles;
 
         #endregion
@@ -18,11 +18,11 @@ namespace UnityInvaders.Model
         /// <summary>
         /// Anchura del mapa
         /// </summary>
-        public int Width { get { return (int)terrain.transform.localScale.x; } }
+        public int Width { get { return (int)floor.transform.localScale.x; } }
         /// <summary>
         /// Altura del mapa
         /// </summary>
-        public int Height { get { return (int)terrain.transform.localScale.z; } }
+        public int Height { get { return (int)floor.transform.localScale.z; } }
         /// <summary>
         /// Lista de sólo lectura de los obstáculos del mapa
         /// </summary>
@@ -36,9 +36,9 @@ namespace UnityInvaders.Model
 
         #region Constructors
 
-        public UnityMap(IList<UnityObstacle> obstacles, Terrain terrain)
+        public UnityMap(IList<UnityObstacle> obstacles, GameObject floor)
         {
-            this.terrain = terrain;
+            this.floor = floor;
             this.obstacles = obstacles;
         }
 

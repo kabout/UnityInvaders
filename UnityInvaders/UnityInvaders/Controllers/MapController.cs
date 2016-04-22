@@ -44,6 +44,10 @@ namespace UnityInvaders.Controllers
             while (numCellsOfObstacles > 0)
             {
                 IObstacle obstacle = objectManager.GenerateObstacle(numCellsOfObstacles, map);
+
+                if (obstacle == null)
+                    return;
+
                 map.AddObstacle(obstacle);
 
                 numCellsOfObstacles -= obstacle.Width * obstacle.Height;
