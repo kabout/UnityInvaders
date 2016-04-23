@@ -7,47 +7,62 @@ namespace UnityInvaders.Controllers
 {
     public class DifficultController : IDifficultController
     {
+        #region Fields
+
+        DifficultLevel difficultLevel;
+
+        #endregion
+
+        #region Constructors
+
+        public DifficultController(DifficultLevel difficultLevel)
+        {
+            this.difficultLevel = difficultLevel;
+        }
+
+        #endregion
+
         #region Methods
 
-        public int GetNumberCellsOfDefenses(IMap map, int sizeDefense, DifficultLevel difficultLevel)
+        public int GetNumberOfDefenses(IMap map)
         {
-            int numCellsDefense = sizeDefense * sizeDefense;
+            int numCellsDefense = Constants.DEFENSE_SIZE * Constants.DEFENSE_SIZE;
             int numDefenses = (map.Width * map.Height) / (4 * numCellsDefense);
 
             switch (difficultLevel)
             {
-                case DifficultLevel.VeryEasy: return (int)(numDefenses * 0.1) * numCellsDefense;
-                case DifficultLevel.Easy: return (int)(numDefenses * 0.3) * numCellsDefense;
-                case DifficultLevel.Normal: return (int)(numDefenses * 0.4) * numCellsDefense;
-                case DifficultLevel.Difficult: return (int)(numDefenses * 0.5) * numCellsDefense;
-                case DifficultLevel.VeryDifficult: return (int)(numDefenses * 0.6) * numCellsDefense;
-                case DifficultLevel.God: return (int)(numDefenses * 0.7) * numCellsDefense;
+                case DifficultLevel.VeryEasy: return (int)(numDefenses * 0.1);
+                case DifficultLevel.Easy: return (int)(numDefenses * 0.3);
+                case DifficultLevel.Normal: return (int)(numDefenses * 0.4);
+                case DifficultLevel.Difficult: return (int)(numDefenses * 0.5);
+                case DifficultLevel.VeryDifficult: return (int)(numDefenses * 0.6);
+                case DifficultLevel.God: return (int)(numDefenses * 0.7);
                 default: return 0;
             }
         }
 
-        public int GetNumberCellsOfObstacles(IMap map, DifficultLevel difficultLevel)
+        public int GetNumberOfObstacles(IMap map)
         {
-            int numCells = (map.Width * map.Height) / 4;
+            int numObstacles = (map.Width * map.Height) / 100;
 
             switch (difficultLevel)
             {
-                case DifficultLevel.VeryEasy: return (int)(numCells * 0.2);
-                case DifficultLevel.Easy: return (int)(numCells * 0.4);
-                case DifficultLevel.Normal: return (int)(numCells * 0.5);
-                case DifficultLevel.Difficult: return (int)(numCells * 0.6);
-                case DifficultLevel.VeryDifficult: return (int)(numCells * 0.8);
-                case DifficultLevel.God: return numCells;
+                case DifficultLevel.VeryEasy: return (int)(numObstacles * 0.1);
+                case DifficultLevel.Easy: return (int)(numObstacles * 0.3);
+                case DifficultLevel.Normal: return (int)(numObstacles * 0.5);
+                case DifficultLevel.Difficult: return (int)(numObstacles * 0.6);
+                case DifficultLevel.VeryDifficult: return (int)(numObstacles * 0.8);
+                case DifficultLevel.God: return numObstacles;
                 default: return 0;
             }
         }
 
-        public LevelDefense GetLevelDefense(DifficultLevel difficulLevel)
+        public LevelDefense GetLevelDefense()
         {
             int minLevel = 0;
             int maxLevel = 0;
 
-            switch (difficulLevel)
+            switch (difficultLevel)
             {
                 case DifficultLevel.VeryEasy:
                     {
@@ -91,7 +106,7 @@ namespace UnityInvaders.Controllers
             return (LevelDefense)RandomManager.GetRandomNumber(minLevel, maxLevel);
         }
 
-        public int GetNumbersOfUcosForDefenses(DifficultLevel difficultLevel)
+        public int GetNumbersOfUcosForDefenses()
         {
             switch(difficultLevel)
             {
@@ -106,7 +121,7 @@ namespace UnityInvaders.Controllers
             return 0;
         }
 
-        public int GetNumbersOfUcosForAliens(DifficultLevel difficultLevel)
+        public int GetNumbersOfUcosForAliens()
         {
             switch (difficultLevel)
             {
@@ -134,6 +149,34 @@ namespace UnityInvaders.Controllers
                 case LevelDefense.Brilliant: return 40;
                 case LevelDefense.Unearthly: return 45;
                 case LevelDefense.Divine: return 50;
+                default: return 0;
+            }
+        }
+
+        public int GetMinSizeObstacle()
+        {
+            switch (difficultLevel)
+            {
+                case DifficultLevel.VeryEasy: return 6;
+                case DifficultLevel.Easy: return 5;
+                case DifficultLevel.Normal: return 4;
+                case DifficultLevel.Difficult: return 3;
+                case DifficultLevel.VeryDifficult: return 2;
+                case DifficultLevel.God: return 2;
+                default: return 0;
+            }
+        }
+
+        public int GetMaxSizeObstacle()
+        {
+            switch (difficultLevel)
+            {
+                case DifficultLevel.VeryEasy: return 17;
+                case DifficultLevel.Easy: return 15;
+                case DifficultLevel.Normal: return 13;
+                case DifficultLevel.Difficult: return 10;
+                case DifficultLevel.VeryDifficult: return 7;
+                case DifficultLevel.God: return 5;
                 default: return 0;
             }
         }

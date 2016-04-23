@@ -31,26 +31,26 @@ namespace UnityInvaders.Controllers
             return new Map(width, height);
         }
 
-        public void InitMap(IMap map, DifficultLevel difficultLevel)
+        public void InitMap(IMap map)
         {
-            PlaceObstacles(map, difficultLevel);
-            defenseController.PlaceDefenses(map, difficultLevel);
+            PlaceObstacles(map);
+            defenseController.PlaceDefenses(map);
         }       
 
-        private void PlaceObstacles(IMap map, DifficultLevel difficultLevel)
+        private void PlaceObstacles(IMap map)
         {
-            int numCellsOfObstacles = difficultController.GetNumberCellsOfObstacles(map, difficultLevel);
+            int numOfObstacles = difficultController.GetNumberOfObstacles(map);
 
-            while (numCellsOfObstacles > 0)
+            while (numOfObstacles > 0)
             {
-                IObstacle obstacle = objectManager.GenerateObstacle(numCellsOfObstacles, map);
+                IObstacle obstacle = objectManager.GenerateObstacle(map);
 
                 if (obstacle == null)
                     return;
 
                 map.AddObstacle(obstacle);
 
-                numCellsOfObstacles -= obstacle.Width * obstacle.Height;
+                numOfObstacles--;
             }
         }
 

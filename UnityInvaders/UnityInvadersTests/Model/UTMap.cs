@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnityInvaders.Model;
 using UnityInvaders.Interfaces;
+using System.Collections.Generic;
 
 namespace UnityInvadersTests.Model
 {
@@ -10,7 +11,7 @@ namespace UnityInvadersTests.Model
         [TestMethod]
         public void Create_Map()
         {
-            Map map = new Map(300, 200);
+            IMap map = new Map(300, 200);
 
             Assert.IsTrue(map.Width == 300);
             Assert.IsTrue(map.Width == 300);
@@ -20,7 +21,7 @@ namespace UnityInvadersTests.Model
         [TestMethod]
         public void Add_Obstacle_Ok()
         {
-            Map map = new Map(300, 200);
+            IMap map = new Map(300, 200);
 
             IObstacle obstacle = new Obstacle(10, 10, new Position(0, 0));
 
@@ -31,7 +32,7 @@ namespace UnityInvadersTests.Model
         [TestMethod]
         public void Add_Obstacle_Over_Width()
         {
-            Map map = new Map(300, 200);
+            IMap map = new Map(300, 200);
 
             IObstacle obstacle = new Obstacle(10, 10, new Position(300, 0));
 
@@ -42,7 +43,7 @@ namespace UnityInvadersTests.Model
         [TestMethod]
         public void Add_Obstacle_Over_Height()
         {
-            Map map = new Map(300, 200);
+            IMap map = new Map(300, 200);
 
             IObstacle obstacle = new Obstacle(10, 10, new Position(0, 200));
 
@@ -53,7 +54,7 @@ namespace UnityInvadersTests.Model
         [TestMethod]
         public void Add_Obstacle_Overlap_Other_Obstacle()
         {
-            Map map = new Map(300, 200);
+            IMap map = new Map(300, 200);
 
             IObstacle obstacle1 = new Obstacle(10, 10, new Position(0, 0));
 
@@ -62,6 +63,38 @@ namespace UnityInvadersTests.Model
             IObstacle obstacle2 = new Obstacle(10, 10, new Position(5, 5));
 
             Assert.IsTrue(map.AddObstacle(obstacle2));
+        }
+
+        [TestMethod]
+        public void Get_Free_Positions_For_Obstacles()
+        {
+            IMap map = new Map(30, 20);
+
+            IObstacle obstacle1 = new Obstacle(10, 10, new Position(0, 0));
+            map.AddObstacle(obstacle1);
+            List<Position> positions = map.GetFreePositionsForObstacle(10, 10) as List<Position>;
+
+            for(int x = 0; x < map.Width - obstacle1.Width; x++)
+                for(int y = 0; y < map.Height - obstacle1.Height; y++)
+                {
+                    if (x == 0 && y == 0)
+                        Assert.IsFalse(positions.Exists(p => p.X == x && p.Y == y), string.Format("{0}, {1}", x, y));
+                    else
+                        Assert.IsTrue(positions.Exists(p => p.X == x && p.Y == y), string.Format("{0}, {1}", x, y));
+                }
+
+            IObstacle obstacle2 = new Obstacle(10, 10, new Position(5, 5));
+            map.AddObstacle(obstacle2);
+            positions = map.GetFreePositionsForObstacle(10, 10) as List<Position>;
+
+            for (int x = 0; x < map.Width - obstacle2.Width; x++)
+                for (int y = 0; y < map.Height - obstacle2.Height; y++)
+                {
+                    if ((x == 0 && y == 0) || (x == 5 && y == 5))
+                        Assert.IsFalse(positions.Exists(p => p.X == x && p.Y == y), string.Format("{0}, {1}", x, y));
+                    else
+                        Assert.IsTrue(positions.Exists(p => p.X == x && p.Y == y), string.Format("{0}, {1}", x, y));
+                }
         }
     }
 }

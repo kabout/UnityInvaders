@@ -13,12 +13,12 @@ namespace UnityInvadersTests.Controllers
         [TestMethod]
         public void Init_Map_Correct()
         {
-            IDifficultController difficultController = new DifficultController();
+            IDifficultController difficultController = new DifficultController(DifficultLevel.Normal);
             IObjectManager objectManager = new ObjectManager(difficultController);
             IDefenseController defenseController = new DefenseController(difficultController);
             IMapController mapController = new MapController(defenseController, difficultController, objectManager);
             IMap map = mapController.GetEmptyMap(300, 400);
-            mapController.InitMap(map, DifficultLevel.Normal);
+            mapController.InitMap(map);
             Assert.IsTrue(map.Obstacles.Count > 0);
             Assert.IsTrue(map.Defenses.Count > 0);
         }

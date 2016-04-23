@@ -9,40 +9,27 @@ namespace UnityInvadersTests.Controllers
     public class UTDifficultController
     {
         [TestMethod]
-        public void Get_Num_Cells_Obstacles()
+        public void Get_Num_Obstacles()
         {
             IMap map = new Map(200, 200);
-            IDifficultController difficultController = new DifficultController();
-            int numCells = difficultController.GetNumberCellsOfObstacles(map, DifficultLevel.VeryEasy);
-            Assert.AreEqual(numCells, 2000);
-            numCells = difficultController.GetNumberCellsOfObstacles(map, DifficultLevel.Easy);
-            Assert.AreEqual(numCells, 4000);
-            numCells = difficultController.GetNumberCellsOfObstacles(map, DifficultLevel.Normal);
-            Assert.AreEqual(numCells, 5000);
-            numCells = difficultController.GetNumberCellsOfObstacles(map, DifficultLevel.Difficult);
-            Assert.AreEqual(numCells, 6000);
-            numCells = difficultController.GetNumberCellsOfObstacles(map, DifficultLevel.VeryDifficult);
-            Assert.AreEqual(numCells, 8000);
-            numCells = difficultController.GetNumberCellsOfObstacles(map, DifficultLevel.God);
-            Assert.AreEqual(numCells, 10000);
-        }
-        [TestMethod]
-        public void Get_Num_Cells_Defenses()
-        {
-            IMap map = new Map(200, 200);
-            IDifficultController difficultController = new DifficultController();
-            int numCells = difficultController.GetNumberCellsOfDefenses(map, Constants.DEFENSE_SIZE, DifficultLevel.VeryEasy);
-            Assert.AreEqual(numCells, 1000);
-            numCells = difficultController.GetNumberCellsOfDefenses(map, Constants.DEFENSE_SIZE, DifficultLevel.Easy);
-            Assert.AreEqual(numCells, 3000);
-            numCells = difficultController.GetNumberCellsOfDefenses(map, Constants.DEFENSE_SIZE, DifficultLevel.Normal);
-            Assert.AreEqual(numCells, 4000);
-            numCells = difficultController.GetNumberCellsOfDefenses(map, Constants.DEFENSE_SIZE, DifficultLevel.Difficult);
-            Assert.AreEqual(numCells, 5000);
-            numCells = difficultController.GetNumberCellsOfDefenses(map, Constants.DEFENSE_SIZE, DifficultLevel.VeryDifficult);
-            Assert.AreEqual(numCells, 6000);
-            numCells = difficultController.GetNumberCellsOfDefenses(map, Constants.DEFENSE_SIZE, DifficultLevel.God);
-            Assert.AreEqual(numCells, 7000);
+            IDifficultController difficultController = new DifficultController(DifficultLevel.VeryEasy);
+            int numCells = difficultController.GetNumberOfObstacles(map);
+            Assert.AreEqual(numCells, 20);
+            difficultController = new DifficultController(DifficultLevel.Easy);
+            numCells = difficultController.GetNumberOfObstacles(map);
+            Assert.AreEqual(numCells, 40);
+            difficultController = new DifficultController(DifficultLevel.Normal);
+            numCells = difficultController.GetNumberOfObstacles(map);
+            Assert.AreEqual(numCells, 50);
+            difficultController = new DifficultController(DifficultLevel.Difficult);
+            numCells = difficultController.GetNumberOfObstacles(map);
+            Assert.AreEqual(numCells, 60);
+            difficultController = new DifficultController(DifficultLevel.VeryDifficult);
+            numCells = difficultController.GetNumberOfObstacles(map);
+            Assert.AreEqual(numCells, 80);
+            difficultController = new DifficultController(DifficultLevel.God);
+            numCells = difficultController.GetNumberOfObstacles(map);
+            Assert.AreEqual(numCells, 100);
         }
     }
 }

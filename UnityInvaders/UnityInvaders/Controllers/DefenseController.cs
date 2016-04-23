@@ -23,21 +23,19 @@ namespace UnityInvaders.Controllers
 
         #region Methods
 
-        public void PlaceDefenses(IMap map, DifficultLevel difficultLevel)
+        public void PlaceDefenses(IMap map)
         {
-            int numCellsOfDefenses = difficultController.GetNumberCellsOfDefenses(map, Constants.DEFENSE_SIZE, difficultLevel);
-
-            int numDefenses = numCellsOfDefenses / (Constants.DEFENSE_SIZE * Constants.DEFENSE_SIZE);
+            int numDefenses = difficultController.GetNumberOfDefenses(map);
 
             while (numDefenses > 0)
             {
-                IDefense defense = GenerateDefense(Constants.DEFENSE_SIZE, difficultLevel, map);
+                IDefense defense = GenerateDefense(Constants.DEFENSE_SIZE, map);
                 map.AddDefense(defense);
                 numDefenses--;
             }
         }
 
-        private IDefense GenerateDefense(int sizeDefense, DifficultLevel difficulLevel, IMap map, int maxUcos = int.MaxValue)
+        private IDefense GenerateDefense(int sizeDefense, IMap map, int maxUcos = int.MaxValue)
         {
             Random random = new Random(DateTime.Now.Millisecond);
 
@@ -47,7 +45,7 @@ namespace UnityInvaders.Controllers
             int minWidth = minHeight;
 
             Position position = new Position(random.Next(minWidth, maxWidth), random.Next(minHeight, maxHeight));
-            LevelDefense levelDefense = difficultController.GetLevelDefense(difficulLevel);
+            LevelDefense levelDefense = difficultController.GetLevelDefense();
             IDefense defense = new Defense(Constants.DEFENSE_HEALTH, sizeDefense, levelDefense,
                 difficultController.GetDefenseDamage(levelDefense), position);
 

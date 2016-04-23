@@ -15,32 +15,33 @@ namespace UnityInvadersTests.Managers
         public void Generate_Obstacle()
         {
             IMap map = new Map(200, 200);
-            IDifficultController difficultController = new DifficultController();
+            IDifficultController difficultController = new DifficultController(DifficultLevel.Easy);
             IObjectManager objectManager = new ObjectManager(difficultController);
-            IObstacle obstacle = objectManager.GenerateObstacle(60, map);
+            IObstacle obstacle = objectManager.GenerateObstacle(map);
             Assert.IsTrue(map.IsValidPosition(obstacle));
         }
 
         [TestMethod]
         public void Generate_Obstacles_In_Different_Positions()
         {
-            IMap map = new Map(200, 200);
-            IDifficultController difficultController = new DifficultController();
+            IMap map = new Map(20, 20);
+            IDifficultController difficultController = new DifficultController(DifficultLevel.Easy);
             IObjectManager objectManager = new ObjectManager(difficultController);
 
-            List<IObstacle> obstacles = new List<IObstacle>();
+            List<Position> positions = new List<Position>();
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 40; i++)
             {
-                IObstacle obstacle = objectManager.GenerateObstacle(60, map);
+                IObstacle obstacle = objectManager.GenerateObstacle(map);
 
                 if (obstacle == null)
                     return;
 
-                if (obstacles.Exists(x => x.Position.X == obstacle.Position.X && x.Position.Y == obstacle.Position.Y))
+                if (positions.Exists(p => p.X == obstacle.Position.X && p.Y == obstacle.Position.Y))
                     throw new Exception("Incorrect Position");
 
-                obstacles.Add(obstacle);
+                positions.Add(obstacle.Position);
+                map.AddObstacle(obstacle);
             }
         }
 
@@ -48,9 +49,9 @@ namespace UnityInvadersTests.Managers
         public void Generate_Defense()
         {
             IMap map = new Map(200, 200);
-            IDifficultController difficultController = new DifficultController();
+            IDifficultController difficultController = new DifficultController(DifficultLevel.Easy);
             IObjectManager objectManager = new ObjectManager(difficultController);
-            IDefense defense = objectManager.GenerateDefense(Constants.DEFENSE_SIZE, DifficultLevel.Easy, map);
+            IDefense defense = objectManager.GenerateDefense(map);
             Assert.IsTrue(map.IsValidPosition(defense));
         }
     }

@@ -18,6 +18,6 @@ namespace UnityInvaders.Interfaces
         /// </summary>
         /// <param name="map">Mapa a inicializar</param>
         /// <param name="difficultLevel">Nivel de dificultad</param>
-        void InitMap(IMap map, DifficultLevel difficultLevel);
+        void InitMap(IMap map);
     }
 }

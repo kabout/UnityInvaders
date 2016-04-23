@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityInvaders.Model;
 
 namespace UnityInvaders.Interfaces
 {
@@ -44,5 +45,14 @@ namespace UnityInvaders.Interfaces
         /// <param name="defense">Defensa que se añade al mapa</param>
         /// <returns>Devuelve true si la puede añadir o false en caso contrario</returns>
         bool AddDefense(IDefense defense);
+        /// <summary>
+        /// Devuelve las posiciones libres para poner un obstáculo.
+        /// </summary>
+        /// <param name="width">Anchura del obstáculo</param>
+        /// <param name="height">Altura del obstáculo</param>
+        /// <returns></returns>
+        IList<Position> GetFreePositionsForObstacle(int width, int height);
+
+        IList<Position> GetFreePositionsForDefense();
     }
 }

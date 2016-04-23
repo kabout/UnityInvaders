@@ -52,13 +52,13 @@ namespace UnityInvaders.Utils
         }
 
         /// <summary>
-        /// Devuelve un número entre a y b
+        /// Devuelve un número entre [a y b)
         /// </summary>
         /// <param name="a">Intervalo inferior</param>
         /// <param name="b">Intervalo superior</param>
         public static int GetRandomNumber(int a, int b)
         {
-            return (int)(a + r.NextDouble() * (b - a));
+            return r.Next(a, b);
         }
 
         /// <summary>

@@ -4,6 +4,6 @@ namespace UnityInvaders.Interfaces
 {
     public interface IDefenseController
     {
-        void PlaceDefenses(IMap map, DifficultLevel difficultLevel);
+        void PlaceDefenses(IMap map);
     }
 }

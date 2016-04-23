@@ -5,33 +5,29 @@ namespace UnityInvaders.Interfaces
     public interface IDifficultController
     {
         /// <summary>
-        /// Devuelve el número de celdas que deben ocupar las defensas dentro del mapa map para
+        /// Devuelve el número de defensas dentro del mapa map para
         /// el nivel de dificultad difficultLevel.
         /// </summary>
         /// <param name="map">Mapa</param>
-        /// <param name="sizeDefense">Anchura de la defensa</param>
-        /// <param name="difficultLevel">Nivel de dificultad</param>
         /// <returns>Devuelve el número de celdas que ocupan las defensas o 0 si algo sale mal</returns>
-        int GetNumberCellsOfDefenses(IMap map, int sizeDefense, DifficultLevel difficultLevel);
+        int GetNumberOfDefenses(IMap map);
 
         /// <summary>
         /// Devuelve el número de recursos para crear defensas para un nivel de dificultad difficultLevel
         /// </summary>
-        /// <param name="difficultLevel">Nivel de dificultad</param>
-        int GetNumbersOfUcosForDefenses(DifficultLevel difficultLevel);
+        int GetNumbersOfUcosForDefenses();
 
         /// <summary>
         /// Devuelve el número de recursos para crear aliens para un nivel de dificultad difficultLevel
         /// </summary>
         /// <param name="difficultLevel">Nivel de dificultad</param>
-        int GetNumbersOfUcosForAliens(DifficultLevel difficultLevel);
+        int GetNumbersOfUcosForAliens();
 
         /// <summary>
         /// Devuelve el nivel de defensa según la dificultad del juego.
         /// </summary>
-        /// <param name="difficultLevel">Nivel de dificultad</param>
         /// <returns></returns>
-        LevelDefense GetLevelDefense(DifficultLevel difficultLevel);
+        LevelDefense GetLevelDefense();
 
         /// <summary>
         /// Devuelve el daño que genera la defensa en función del nivel d
@@ -41,11 +37,20 @@ namespace UnityInvaders.Interfaces
         int GetDefenseDamage(LevelDefense levelDefense);
 
         /// <summary>
-        /// Devuelve el número de celdas que deben ocupar los obstáculos dentro del map map para el nivel de dificultad difficultLevel.
+        /// Devuelve el número de obstaculos a situar dentro del map map para el nivel de dificultad difficultLevel.
         /// </summary>
         /// <param name="map">Mapa</param>
-        /// <param name="difficultLevel">Nivel de dificultad</param>
         /// <returns>Devuelve el número de celdas que ocupan los obstáculos o 0 si algo sale mal</returns>
-        int GetNumberCellsOfObstacles(IMap map,  DifficultLevel difficultLevel);
+        int GetNumberOfObstacles(IMap map);
+
+        /// <summary>
+        /// Devuelve el tamaño mínimo de los obstáculos según el nivel de dificultad.
+        /// <returns></returns>
+        int GetMinSizeObstacle();
+
+        /// <summary>
+        /// Devuelve el tamaño mínimo de los obstáculos según el nivel de dificultad.
+        /// </summary>
+        int GetMaxSizeObstacle();
     }
 }

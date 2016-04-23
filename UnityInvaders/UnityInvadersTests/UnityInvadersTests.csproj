@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controllers\UTGameController.cs" />
     <Compile Include="Controllers\UTMapController.cs" />
     <Compile Include="Controllers\UTDifficultController.cs" />
     <Compile Include="Managers\UTObjectManager.cs" />
