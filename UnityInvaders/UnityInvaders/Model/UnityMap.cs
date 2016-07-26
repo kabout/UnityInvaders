@@ -8,8 +8,9 @@ namespace UnityInvaders.Model
     {
         #region Fields
 
-        GameObject floor;
-        IList<UnityObstacle> obstacles;
+        private GameObject floor;
+        private IList<UnityObstacle> obstacles;
+        private IList<UnityDefense> defenses;
 
         #endregion
 
@@ -30,16 +31,17 @@ namespace UnityInvaders.Model
         /// <summary>
         /// Lista de sólo lectura de las defensas del mapa
         /// </summary>
-		public IList<IDefense> Defenses { get; set;}
+		public IList<UnityDefense> Defenses { get { return defenses; } }
 
         #endregion
 
         #region Constructors
 
-        public UnityMap(IList<UnityObstacle> obstacles, GameObject floor)
+        public UnityMap(IList<UnityObstacle> obstacles, IList<UnityDefense> defenses, GameObject floor)
         {
             this.floor = floor;
             this.obstacles = obstacles;
+            this.defenses = defenses;
         }
 
         #endregion

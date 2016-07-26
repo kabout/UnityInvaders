@@ -45,5 +45,19 @@ namespace UnityInvadersTests.Model
 
             Assert.IsTrue(defense.Health == 0);
         }
+
+        [TestMethod]
+        public void Defense_Change_Position()
+        {
+            Position position = new Position(0, 1);
+            Defense defense = new Defense(Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE,
+                LevelDefense.Incredible, 20, position);
+
+            defense.ChangePosition(new Position(1, 0));
+
+            Assert.IsTrue(defense.Position.X == 1);
+            Assert.IsTrue(defense.Position.Y == 0);
+        }
+
     }
 }

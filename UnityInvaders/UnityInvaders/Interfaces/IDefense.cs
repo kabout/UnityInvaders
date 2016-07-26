@@ -42,5 +42,10 @@ namespace UnityInvaders.Interfaces
         /// </summary>
         /// <param name="position"></param>
         void ChangePosition(Position position);
+        /// <summary>
+        /// Indica si la defensa tiene aún vida
+        /// </summary>
+        /// <returns>Devuelve true si tiene vida o false en caso contrario</returns>
+        bool IsAlive();
     }
 }

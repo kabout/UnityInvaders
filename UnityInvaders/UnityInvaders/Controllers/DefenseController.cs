@@ -9,14 +9,16 @@ namespace UnityInvaders.Controllers
         #region Fields
 
         IDifficultController difficultController;
+        IObjectManager objectManager;
 
         #endregion
 
         #region Constructors
 
-        public DefenseController(IDifficultController difficultController)
+        public DefenseController(IDifficultController difficultController, IObjectManager objectManager)
         {
             this.difficultController = difficultController;
+            this.objectManager = objectManager;
         }
 
         #endregion
@@ -29,33 +31,15 @@ namespace UnityInvaders.Controllers
 
             while (numDefenses > 0)
             {
-                IDefense defense = GenerateDefense(Constants.DEFENSE_SIZE, map);
+                IDefense defense = objectManager.GenerateDefense(map);
+
+                if (defense == null)
+                    return;
+
                 map.AddDefense(defense);
+
                 numDefenses--;
             }
-        }
-
-        private IDefense GenerateDefense(int sizeDefense, IMap map, int maxUcos = int.MaxValue)
-        {
-            Random random = new Random(DateTime.Now.Millisecond);
-
-            int maxHeight = map.Height - sizeDefense;
-            int maxWidth = map.Width - sizeDefense;
-            int minHeight = 0 + sizeDefense;
-            int minWidth = minHeight;
-
-            Position position = new Position(random.Next(minWidth, maxWidth), random.Next(minHeight, maxHeight));
-            LevelDefense levelDefense = difficultController.GetLevelDefense();
-            IDefense defense = new Defense(Constants.DEFENSE_HEALTH, sizeDefense, levelDefense,
-                difficultController.GetDefenseDamage(levelDefense), position);
-
-            while (!map.IsValidPosition(defense))
-            {
-                position = new Position(random.Next(minWidth, maxWidth), random.Next(minHeight, maxHeight));
-                defense.ChangePosition(position);
-            }
-
-            return defense;
         }
 
         #endregion

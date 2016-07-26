@@ -15,7 +15,7 @@ namespace UnityInvadersTests.Controllers
         {
             IDifficultController difficultController = new DifficultController(DifficultLevel.Normal);
             IObjectManager objectManager = new ObjectManager(difficultController);
-            IDefenseController defenseController = new DefenseController(difficultController);
+            IDefenseController defenseController = new DefenseController(difficultController, objectManager);
             IMapController mapController = new MapController(defenseController, difficultController, objectManager);
             IMap map = mapController.GetEmptyMap(300, 400);
             mapController.InitMap(map);

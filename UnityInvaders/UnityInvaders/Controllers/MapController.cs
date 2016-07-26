@@ -35,6 +35,7 @@ namespace UnityInvaders.Controllers
         {
             PlaceObstacles(map);
             defenseController.PlaceDefenses(map);
+
         }       
 
         private void PlaceObstacles(IMap map)
@@ -51,6 +52,23 @@ namespace UnityInvaders.Controllers
                 map.AddObstacle(obstacle);
 
                 numOfObstacles--;
+            }
+        }
+
+        private void PlaceDefenses(IMap map)
+        {
+            int numDefenses = difficultController.GetNumberOfDefenses(map);
+
+            while (numDefenses > 0)
+            {
+                IDefense defense = objectManager.GenerateDefense(map);
+
+                if (defense == null)
+                    return;
+
+                map.AddDefense(defense);
+
+                numDefenses--;
             }
         }
 

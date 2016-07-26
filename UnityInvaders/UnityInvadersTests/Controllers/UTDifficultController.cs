@@ -11,25 +11,25 @@ namespace UnityInvadersTests.Controllers
         [TestMethod]
         public void Get_Num_Obstacles()
         {
-            IMap map = new Map(200, 200);
+            IMap map = new Map(400, 400);
             IDifficultController difficultController = new DifficultController(DifficultLevel.VeryEasy);
             int numCells = difficultController.GetNumberOfObstacles(map);
-            Assert.AreEqual(numCells, 20);
+            Assert.AreEqual(numCells, 16);
             difficultController = new DifficultController(DifficultLevel.Easy);
             numCells = difficultController.GetNumberOfObstacles(map);
-            Assert.AreEqual(numCells, 40);
+            Assert.AreEqual(numCells, 48);
             difficultController = new DifficultController(DifficultLevel.Normal);
             numCells = difficultController.GetNumberOfObstacles(map);
-            Assert.AreEqual(numCells, 50);
+            Assert.AreEqual(numCells, 80);
             difficultController = new DifficultController(DifficultLevel.Difficult);
             numCells = difficultController.GetNumberOfObstacles(map);
-            Assert.AreEqual(numCells, 60);
+            Assert.AreEqual(numCells, 96);
             difficultController = new DifficultController(DifficultLevel.VeryDifficult);
             numCells = difficultController.GetNumberOfObstacles(map);
-            Assert.AreEqual(numCells, 80);
+            Assert.AreEqual(numCells, 128);
             difficultController = new DifficultController(DifficultLevel.God);
             numCells = difficultController.GetNumberOfObstacles(map);
-            Assert.AreEqual(numCells, 100);
+            Assert.AreEqual(numCells, 160);
         }
     }
 }

@@ -57,7 +57,11 @@ namespace UnityInvaders.Model
         {
             if (!IsValidPosition(obstacle))
                 return false;
-            
+
+            obstacles.Add(obstacle);
+
+            #region Update defense free positions
+
             int xEnd = obstacle.Position.X + obstacle.Width;
             int yEnd = obstacle.Position.Y + obstacle.Height;
 
@@ -68,16 +72,25 @@ namespace UnityInvaders.Model
                     freePositions[ObjectType.Defense].RemoveAll(p => p.X == x && p.Y == y);
                 }
 
-            for(int x = obstacle.Position.X - Constants.DEFENSE_SIZE; x < obstacle.Position.X; x++)
+            for (int x = Math.Max(0, obstacle.Position.X - (Constants.DEFENSE_SIZE - 1)); x < obstacle.Position.X; x++)
                 for (int y = obstacle.Position.Y; y < yEnd; y++)
                     freePositions[ObjectType.Defense].RemoveAll(p => p.X == x && p.Y == y);
 
             for (int x = obstacle.Position.X; x < xEnd; x++)
-                for (int y = obstacle.Position.Y - Constants.DEFENSE_SIZE; y < yEnd; y++)
+                for (int y = Math.Max(0, obstacle.Position.Y - (Constants.DEFENSE_SIZE - 1)); y < yEnd; y++)
                     freePositions[ObjectType.Defense].RemoveAll(p => p.X == x && p.Y == y);
 
-            obstacles.Add(obstacle);
+            for (int x = Math.Max(0, obstacle.Position.X - (Constants.DEFENSE_SIZE - 1)); x < obstacle.Position.X; x++)
+                for (int y = Math.Max(0, obstacle.Position.Y - (Constants.DEFENSE_SIZE - 1)); y < yEnd; y++)
+                    freePositions[ObjectType.Defense].RemoveAll(p => p.X == x && p.Y == y);
+
+            #endregion
+
+            #region Update obstacle free positions
+
             freePositions[ObjectType.Obstacle].RemoveAll(p => p.X == obstacle.Position.X && p.Y == obstacle.Position.Y);
+
+            #endregion
 
             return true;
         }
@@ -96,7 +109,11 @@ namespace UnityInvaders.Model
 
             defenses.Add(defense);
 
+            #region Update obstacle free positions
+
             freePositions[ObjectType.Obstacle].RemoveAll(p => p.X >= defense.Position.X && p.X < xEnd && p.Y >= defense.Position.Y && p.Y < yEnd);
+
+            #endregion
 
             return true;
         }
@@ -124,7 +141,9 @@ namespace UnityInvaders.Model
                 {
                     map[x, y] = 0;
                     freePositions[ObjectType.Obstacle].Add(new Position(x, y));
-                    freePositions[ObjectType.Defense].Add(new Position(x, y));
+
+                    if ((x + Constants.DEFENSE_SIZE) <= width && (y + Constants.DEFENSE_SIZE) <= height)
+                        freePositions[ObjectType.Defense].Add(new Position(x, y));
                 }           
         }
 

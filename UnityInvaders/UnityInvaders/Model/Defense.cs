@@ -53,6 +53,11 @@ namespace UnityInvaders.Model
             Position = position;
         }
 
+        public bool IsAlive()
+        {
+            return Health > 0;
+        }
+
         #endregion
     }
 }

@@ -96,5 +96,26 @@ namespace UnityInvadersTests.Model
                         Assert.IsTrue(positions.Exists(p => p.X == x && p.Y == y), string.Format("{0}, {1}", x, y));
                 }
         }
+
+        [TestMethod]
+        public void Get_Free_Positions_For_Defenses()
+        {
+            IMap map = new Map(10, 10); 
+            IObstacle obstacle1 = new Obstacle(4, 4, new Position(2, 2));
+            map.AddObstacle(obstacle1);
+            List<Position> positions = map.GetFreePositionsForDefense() as List<Position>;
+
+            Assert.IsTrue(positions.Count == 0);
+
+            map = new Map(11, 11);
+            IObstacle obstacle2 = new Obstacle(2, 7, new Position(5, 0));
+            map.AddObstacle(obstacle2);
+            IObstacle obstacle3 = new Obstacle(7, 2, new Position(0, 5));
+            map.AddObstacle(obstacle3);
+            positions = map.GetFreePositionsForDefense() as List<Position>;
+
+            Assert.IsTrue(positions.Count == 1);
+            Assert.IsTrue(positions[0].X == 0 && positions[0].Y == 0);
+        }
     }
 }

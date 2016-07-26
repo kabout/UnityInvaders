@@ -11,15 +11,17 @@ namespace UnityInvaders.Transforms
 
         public GameObject floor;
         private GameObject obstacleModel;
+        private GameObject defenseModel;
 
         #endregion
 
         #region Constructors
 
-        public MapToUnity(GameObject floor, GameObject obstacleModel)
+        public MapToUnity(GameObject floor, GameObject obstacleModel, GameObject defenseModel)
         {
             this.floor = floor;
             this.obstacleModel = obstacleModel;
+            this.defenseModel = defenseModel;
         }
 
         #endregion
@@ -35,6 +37,8 @@ namespace UnityInvaders.Transforms
 
             List<UnityObstacle> obstacles = new List<UnityObstacle>();
             ObstacleToUnity obstacleToUnity = new ObstacleToUnity(obstacleModel);
+            List<UnityDefense> defenses = new List<UnityDefense>();
+            DefenseToUnity defenseToUnity = new DefenseToUnity(defenseModel);
 
             foreach (IObstacle obstacle in map.Obstacles)
             {
@@ -42,7 +46,13 @@ namespace UnityInvaders.Transforms
                 obstacles.Add(unityObstacle);
             }
 
-            unityMap = new UnityMap(obstacles, floorUnity);
+            foreach(IDefense defense in map.Defenses)
+            {
+                UnityDefense unityDefense = defenseToUnity.Convert(defense);
+                defenses.Add(unityDefense);
+            }
+
+            unityMap = new UnityMap(obstacles, defenses, floorUnity);
 
             return unityMap;
         }
