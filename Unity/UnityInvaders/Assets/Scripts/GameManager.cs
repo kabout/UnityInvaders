@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 	public GameObject obstacle;
 	public GameObject defense;
 	public GameObject floor;
+	public GameObject alien;
 	public GameObject spaceCamera;
 
 	private const int MIN_OBSTACLE_RADIO = 15;

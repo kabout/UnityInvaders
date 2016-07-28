@@ -58,6 +58,7 @@
     <Compile Include="Controllers\UTMapController.cs" />
     <Compile Include="Controllers\UTDifficultController.cs" />
     <Compile Include="Managers\UTObjectManager.cs" />
+    <Compile Include="Model\UTAlien.cs" />
     <Compile Include="Model\UTDefense.cs" />
     <Compile Include="Model\UTMap.cs" />
     <Compile Include="Model\UTObstacle.cs" />

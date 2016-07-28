@@ -35,12 +35,12 @@ namespace UnityInvaders.Interfaces
         /// <summary>
         /// Resta salud a la defensa indicado por damage
         /// </summary>
-        /// <param name="damage"></param>
+        /// <param name="damage">Puntos de vida a restar</param>
         void TakeDamage(int damage);
         /// <summary>
         /// Cambia la posición de la defensa
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="position">Nueva posición de la defensa</param>
         void ChangePosition(Position position);
         /// <summary>
         /// Indica si la defensa tiene aún vida

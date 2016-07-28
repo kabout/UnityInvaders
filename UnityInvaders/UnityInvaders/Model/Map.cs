@@ -154,12 +154,6 @@ namespace UnityInvaders.Model
 
             List<Position> positions = new List<Position>(freePositions[ObjectType.Obstacle].Where(x => x.X < maxWidth && x.Y < maxHeight));
 
-            // Mejoras
-            //foreach(IDefense defense in defenses)
-            //{
-
-            //}
-
             return positions;
         }
 

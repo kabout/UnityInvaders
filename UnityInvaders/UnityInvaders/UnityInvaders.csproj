@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Controllers\DefenseController.cs" />
     <Compile Include="Controllers\DifficultController.cs" />
+    <Compile Include="Interfaces\IAlien.cs" />
     <Compile Include="Interfaces\IDefenseController.cs" />
     <Compile Include="Interfaces\IDifficultController.cs" />
     <Compile Include="Interfaces\IMapController.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Interfaces\IGameController.cs" />
     <Compile Include="Interfaces\IMap.cs" />
     <Compile Include="Interfaces\IObstacle.cs" />
+    <Compile Include="Model\Alien.cs" />
+    <Compile Include="Model\UnityAlien.cs" />
     <Compile Include="Model\UnityMap.cs" />
     <Compile Include="Model\Defense.cs" />
     <Compile Include="Interfaces\IDefense.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Model\UnityObstacle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transforms\AlienToUnity.cs" />
     <Compile Include="Transforms\MapToUnity.cs" />
     <Compile Include="Transforms\DefenseToUnity.cs" />
     <Compile Include="Transforms\ObstacleToUnity.cs" />
