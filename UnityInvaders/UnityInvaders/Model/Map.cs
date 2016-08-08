@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityInvaders.Interfaces;
 
 namespace UnityInvaders.Model
@@ -13,7 +12,8 @@ namespace UnityInvaders.Model
         private enum ObjectType
         {
             Obstacle = 0,
-            Defense = 1
+            Defense = 1,
+            Alien = 2
         }
 
         #endregion
@@ -23,6 +23,7 @@ namespace UnityInvaders.Model
         private int[,] map;
         private List<IObstacle> obstacles;
         private List<IDefense> defenses;
+        private List<IAlien> aliens;
         private Dictionary<ObjectType, List<Position>> freePositions = new Dictionary<ObjectType, List<Position>>();
 
         #endregion
@@ -33,6 +34,7 @@ namespace UnityInvaders.Model
         public IList<IDefense> Defenses { get { return defenses; } }
         public int Width { get; private set; }
         public int Height { get; private set; }
+        public IList<IAlien> Aliens { get { return aliens; } }
 
         #endregion
 
@@ -44,8 +46,10 @@ namespace UnityInvaders.Model
             Height = height;
             obstacles = new List<IObstacle>();
             defenses = new List<IDefense>();
+            aliens = new List<IAlien>();
             freePositions.Add(ObjectType.Obstacle, new List<Position>());
             freePositions.Add(ObjectType.Defense, new List<Position>());
+            freePositions.Add(ObjectType.Alien, new List<Position>());
 
             InitMap(width, height);
         }
@@ -60,22 +64,33 @@ namespace UnityInvaders.Model
                 return false;
 
             obstacles.Add(obstacle);
-
-            #region Update defense free positions
-
+            
             int xEnd = obstacle.Position.X + obstacle.Width;
             int yEnd = obstacle.Position.Y + obstacle.Height;
 
-            for (int x = obstacle.Position.X; x <= xEnd; x++)
-                for (int y = obstacle.Position.Y; y <= yEnd; y++)
-                {
+            for (int x = obstacle.Position.X; x < xEnd; x++)
+                for (int y = obstacle.Position.Y; y < yEnd; y++)
                     map[x, y] = 1;
-                    freePositions[ObjectType.Defense].RemoveAll(p => p.X == x && p.Y == y);
-                }
 
-            for (int x = Math.Max(0, obstacle.Position.X - (Constants.DEFENSE_SIZE - 1)); x <= xEnd; x++)
-                for (int y = Math.Max(0, obstacle.Position.Y - (Constants.DEFENSE_SIZE - 1)); y <= yEnd; y++)
-                    freePositions[ObjectType.Defense].RemoveAll(p => p.X == x && p.Y == y);
+            #region Update defense free positions
+
+            freePositions[ObjectType.Defense].RemoveAll(p => p.X >= obstacle.Position.X && p.X < xEnd && p.Y >= obstacle.Position.Y && p.Y < yEnd);
+            
+            // Si por debajo no hay espacio, eliminamos esas posiciones
+            if (obstacle.Position.X - Constants.DEFENSE_SIZE < 0)
+                freePositions[ObjectType.Defense].RemoveAll(p => p.X <= obstacle.Position.X && p.Y >= obstacle.Position.Y && p.Y < yEnd);
+
+            // Si por el lado izquierdo no hay espacio, eliminamos esas posiciones
+            if (obstacle.Position.Y - Constants.DEFENSE_SIZE < 0)
+                freePositions[ObjectType.Defense].RemoveAll(p => p.Y <= obstacle.Position.Y && p.X >= obstacle.Position.X && p.X < xEnd);
+
+            // Si por arriba no hay espacio, eliminamos esas posiciones
+            if (xEnd + Constants.DEFENSE_SIZE > Width)
+                freePositions[ObjectType.Defense].RemoveAll(p => p.X >= xEnd && p.Y >= obstacle.Position.Y && p.Y < yEnd);
+
+            // Si por el lado derecho no hay espacio, eliminamos esas posiciones
+            if (yEnd + Constants.DEFENSE_SIZE > Height)
+                freePositions[ObjectType.Defense].RemoveAll(p => p.Y >= yEnd && p.X >= obstacle.Position.X && p.X < xEnd);
 
             #endregion
 
@@ -102,23 +117,44 @@ namespace UnityInvaders.Model
 
             defenses.Add(defense);
 
-            #region Update obstacle free positions
+            #region Update defense free positions
 
-            freePositions[ObjectType.Obstacle].RemoveAll(p => p.X >= defense.Position.X && p.X <= xEnd && p.Y >= defense.Position.Y && p.Y <= yEnd);
+            // Eliminamos las posiciones que coinciden con la defensa
+            freePositions[ObjectType.Defense].RemoveAll(p => p.X >= defense.Position.X && p.X < xEnd && p.Y >= defense.Position.Y && p.Y < yEnd);
+
+            // Si por debajo no hay espacio, eliminamos esas posiciones
+            if (defense.Position.X - Constants.DEFENSE_SIZE < 0)
+                freePositions[ObjectType.Defense].RemoveAll(p => p.X <= defense.Position.X && p.Y >= defense.Position.Y && p.Y < yEnd);
+
+            // Si por el lado izquierdo no hay espacio, eliminamos esas posiciones
+            if(defense.Position.Y - Constants.DEFENSE_SIZE < 0)
+                freePositions[ObjectType.Defense].RemoveAll(p => p.Y <= defense.Position.Y && p.X >= defense.Position.X && p.X < xEnd);
+
+            // Si por arriba no hay espacio, eliminamos esas posiciones
+            if(xEnd + Constants.DEFENSE_SIZE > Width)
+                freePositions[ObjectType.Defense].RemoveAll(p => p.X >= xEnd && p.Y >= defense.Position.Y && p.Y < yEnd);
+
+            // Si por el lado derecho no hay espacio, eliminamos esas posiciones
+            if (yEnd + Constants.DEFENSE_SIZE > Height)
+                freePositions[ObjectType.Defense].RemoveAll(p => p.Y >= yEnd && p.X >= defense.Position.X && p.X < xEnd);
+
 
             #endregion
 
-            #region Update defense free positions
+            #region Update obstacle free positions
 
-            freePositions[ObjectType.Defense].RemoveAll(p => p.X >= defense.Position.X && p.X <= xEnd && p.Y >= defense.Position.Y && p.Y <= yEnd);
-
-            for (int x = Math.Max(0, defense.Position.X - (Constants.DEFENSE_SIZE - 1)); x <= xEnd; x++)
-                for (int y = Math.Max(0, defense.Position.Y - (Constants.DEFENSE_SIZE - 1)); y <= yEnd; y++)
-                    freePositions[ObjectType.Defense].RemoveAll(p => p.X == x && p.Y == y);
+            // Eliminamos las posiciones de Objecto que coinciden con la defensa
+            // Realmente esto se podría ahorrar ya que no se van a poner obstáculos después de las defensas.
+            freePositions[ObjectType.Obstacle].RemoveAll(p => p.X >= defense.Position.X && p.X < xEnd && p.Y >= defense.Position.Y && p.Y < yEnd);
 
             #endregion
 
             return true;
+        }
+
+        public bool AddAlien(IAlien alien)
+        {
+            return false;
         }
 
         public bool IsValidPosition(IDefense defense)
@@ -131,26 +167,7 @@ namespace UnityInvaders.Model
             return freePositions[ObjectType.Obstacle].Exists(p => p.X == obstacle.Position.X && p.Y == obstacle.Position.Y);
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private void InitMap(int width, int height)
-        {
-            map = new int[width, height];
-
-            for (int x = 0; x < width; x++)
-                for (int y = 0; y < height; y++)
-                {
-                    map[x, y] = 0;
-                    freePositions[ObjectType.Obstacle].Add(new Position(x, y));
-
-                    if ((x + Constants.DEFENSE_SIZE) < width && (y + Constants.DEFENSE_SIZE) < height)
-                        freePositions[ObjectType.Defense].Add(new Position(x, y));
-                }           
-        }
-
-        public IList<Position> GetFreePositionsForObstacle(int width, int height)
+        public IList<Position> GetFreePositionsForObstacle (int width, int height)
         {
             int maxWidth = Width - width;
             int maxHeight = Height - height;
@@ -160,42 +177,40 @@ namespace UnityInvaders.Model
             return positions;
         }
 
-        public IList<Position> GetFreePositionsForDefense()
+        public IList<Position> GetFreePositionsForDefense ()
         {
             return freePositions[ObjectType.Defense];
         }
 
-        public string PrintMap()
+        public IList<Position> GetFreePositionsForAlien ()
         {
-            StringBuilder sb = new StringBuilder();
+            throw new NotImplementedException();
+        }
 
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                    sb.AppendFormat("{0} ", map[x, y]);
+        #endregion
 
-                sb.AppendLine();
-            }
+        #region Private Methods
 
-            sb.AppendLine();
-            sb.AppendLine("Defenses:");
+        private void InitMap(int width, int height)
+        {
+            map = new int[width, height];
+            int margin = Constants.ALIEN_SIZE + 10;
 
-            foreach (IDefense defense in defenses)
-            {
-                sb.AppendFormat("{0}: x={1} y={2} width={3} height={4}", defense.Id, defense.Position.X, defense.Position.Y, defense.Width, defense.Height);
-                sb.AppendLine();
-            }
-            sb.AppendLine();
-            sb.AppendLine("Obstacles:");
+            for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
+                {
+                    if (x == 0 || y == 0 || y == (height - 1) || x == (width - 1))
+                        freePositions[ObjectType.Alien].Add(new Position(x, y));
 
-            foreach (IObstacle obstacle in obstacles)
-            {
-                sb.AppendFormat("{0}: x={1} y={2} width={3} height={4}", obstacle.Id, obstacle.Position.X, obstacle.Position.Y, obstacle.Width, obstacle.Height);
-                sb.AppendLine();
-            }
+                    map[x, y] = 0;
 
-            return sb.ToString();
+                    if(x >= margin && y >= margin && x <= (width - margin) && y <= (height - margin))
+                        freePositions[ObjectType.Obstacle].Add(new Position(x, y));
 
+                    if (x >= margin && y >= margin && x <= (width - margin) && y <= (height - margin) &&
+                       (x + Constants.DEFENSE_SIZE) <= width && (y + Constants.DEFENSE_SIZE) <= height)
+                        freePositions[ObjectType.Defense].Add(new Position(x, y));
+                }           
         }
 
         #endregion

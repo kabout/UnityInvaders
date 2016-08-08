@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
 
@@ -40,6 +41,25 @@ namespace UnityInvaders.Controllers
 
                 numDefenses--;
             }
+        }
+
+        public IList<IAlien> GetAliensInRange (IMap map, IDefense defense)
+        {
+            int x = defense.Position.X;
+            int xEnd = x + defense.Range;
+            int y = defense.Position.Y;
+            int yEnd = y + defense.Range;
+
+            IList<IAlien> aliens = new List<IAlien>();
+
+            foreach(IAlien alien in map.Aliens)
+            {
+                if (alien.Position.X >= x && alien.Position.X < xEnd &&
+                   alien.Position.Y >= y && alien.Position.Y < yEnd)
+                    aliens.Add(alien);
+            }
+
+            return aliens;
         }
 
         #endregion

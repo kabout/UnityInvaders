@@ -1,4 +1,5 @@
-﻿using UnityInvaders.Interfaces;
+﻿using System;
+using UnityInvaders.Interfaces;
 
 namespace UnityInvaders.Model
 {
@@ -19,6 +20,11 @@ namespace UnityInvaders.Model
         public int Height { get; private set; }
 
         public int Health { get; private set; }
+
+        public int Cost
+        {
+            get { return (int)Level * 10; }
+        }
 
         #endregion
 

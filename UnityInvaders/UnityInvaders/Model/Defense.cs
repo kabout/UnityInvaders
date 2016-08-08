@@ -21,15 +21,17 @@ namespace UnityInvaders.Model
 
         public int Health { get; private set; }
 
-        public int Id { get; private set; }
+        public int Cost
+        {
+            get { return (int)Level * 10; }
+        }
 
         #endregion
 
         #region Constructors
 
-        public Defense(int id, int health, int defenseSize, LevelDefense level, int damage, Position position)
+        public Defense(int health, int defenseSize, LevelDefense level, int damage, Position position)
         {
-            Id = id;
             Health = health;
             Width = defenseSize;
             Height = defenseSize;

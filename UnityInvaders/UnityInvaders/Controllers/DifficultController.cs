@@ -27,7 +27,7 @@ namespace UnityInvaders.Controllers
         public int GetNumberOfDefenses(IMap map)
         {
             int numCellsDefense = Constants.DEFENSE_SIZE * Constants.DEFENSE_SIZE;
-            int numDefenses = (map.Width * map.Height) / (10 * numCellsDefense);
+            int numDefenses = (map.Width * map.Height) / (20 * numCellsDefense);
 
             switch (difficultLevel)
             {
@@ -43,7 +43,7 @@ namespace UnityInvaders.Controllers
 
         public int GetNumberOfObstacles(IMap map)
         {
-            int numObstacles = (map.Width * map.Height) / 100;
+            int numObstacles = (map.Width * map.Height) / 250;
 
             switch (difficultLevel)
             {
