@@ -29,6 +29,10 @@ namespace UnityInvaders.Interfaces
         /// </summary>
         LevelAlien Level { get; }
         /// <summary>
+        /// Coste del alien según su nivel
+        /// </summary>
+        int Cost { get; }
+        /// <summary>
         /// Salud de la defensa
         /// </summary>
         int Health { get; }

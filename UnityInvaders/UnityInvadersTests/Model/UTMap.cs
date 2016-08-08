@@ -108,9 +108,9 @@ namespace UnityInvadersTests.Model
             Assert.IsTrue(positions.Count == 0);
 
             map = new Map(11, 11);
-            IObstacle obstacle2 = new Obstacle(2, 7, new Position(5, 0));
+            IObstacle obstacle2 = new Obstacle(2, 7, new Position(6, 0));
             map.AddObstacle(obstacle2);
-            IObstacle obstacle3 = new Obstacle(7, 2, new Position(0, 5));
+            IObstacle obstacle3 = new Obstacle(7, 2, new Position(0, 6));
             map.AddObstacle(obstacle3);
             positions = map.GetFreePositionsForDefense() as List<Position>;
 

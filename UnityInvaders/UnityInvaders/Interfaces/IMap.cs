@@ -22,11 +22,27 @@ namespace UnityInvaders.Interfaces
         /// </summary>
         IList<IDefense> Defenses { get; }
         /// <summary>
+        /// Lista de sólo lectura de los aliens del mapa
+        /// </summary>
+        IList<IAlien> Aliens { get; }
+        /// <summary>
         /// Añade un obstáculo al mapa
         /// </summary>
         /// <param name="obstacle">Obstáculo que se añade al mapa</param>
         /// <returns>Devuelve true si lo puede añadir o false en caso contrario</returns>
         bool AddObstacle(IObstacle obstacle);
+        /// <summary>
+        /// Añade una defensa al mapa
+        /// </summary>
+        /// <param name="defense">Defensa que se añade al mapa</param>
+        /// <returns>Devuelve true si la puede añadir o false en caso contrario</returns>
+        bool AddDefense (IDefense defense);
+        /// <summary>
+        /// Añade un alien al mapa
+        /// </summary>
+        /// <param name="alien">Alien que se añade al mapa</param>
+        /// <returns>Devuelve true si lo puede añadir o false en caso contrario</returns>
+        bool AddAlien (IAlien alien);
         /// <summary>
         /// Indica si el obstáculo está en una posición válida del mapa.
         /// </summary>
@@ -40,19 +56,19 @@ namespace UnityInvaders.Interfaces
         /// <returns>Devuelve true si la posición es correcta o false en caso contrario</returns>
         bool IsValidPosition(IDefense defense);
         /// <summary>
-        /// Añade una defensa al mapa
-        /// </summary>
-        /// <param name="defense">Defensa que se añade al mapa</param>
-        /// <returns>Devuelve true si la puede añadir o false en caso contrario</returns>
-        bool AddDefense(IDefense defense);
-        /// <summary>
         /// Devuelve las posiciones libres para poner un obstáculo.
         /// </summary>
         /// <param name="width">Anchura del obstáculo</param>
         /// <param name="height">Altura del obstáculo</param>
-        /// <returns></returns>
         IList<Position> GetFreePositionsForObstacle(int width, int height);
-
+        /// <summary>
+        /// Devuelve las posiciones libres para poner una defensa.
+        /// </summary>
         IList<Position> GetFreePositionsForDefense();
+        /// <summary>
+        /// Devuelve las posiciones libres para poner un alien.
+        /// </summary>
+        /// <returns></returns>
+        IList<Position> GetFreePositionsForAlien();
     }
 }

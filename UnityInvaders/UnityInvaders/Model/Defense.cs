@@ -21,6 +21,11 @@ namespace UnityInvaders.Model
 
         public int Health { get; private set; }
 
+        public int Cost
+        {
+            get { return (int)Level * 10; }
+        }
+
         #endregion
 
         #region Constructors

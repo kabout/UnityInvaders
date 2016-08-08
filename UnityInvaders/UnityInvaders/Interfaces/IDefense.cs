@@ -29,6 +29,10 @@ namespace UnityInvaders.Interfaces
         /// </summary>
         LevelDefense Level { get; }
         /// <summary>
+        /// Coste de la Defensa, según su nivel.
+        /// </summary>
+        int Cost { get; }
+        /// <summary>
         /// Salud de la defensa
         /// </summary>
         int Health { get; }

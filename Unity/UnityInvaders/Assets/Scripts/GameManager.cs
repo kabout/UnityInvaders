@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        IDifficultController difficultController = new DifficultController(UnityInvaders.Model.DifficultLevel.Normal);
+        IDifficultController difficultController = new DifficultController(UnityInvaders.Model.DifficultLevel.God);
         IObjectManager objectManager = new ObjectManager(difficultController);
 		IDefenseController defenseController = new DefenseController(difficultController, objectManager);
         IMapController mapController = new MapController(defenseController, difficultController, objectManager);
