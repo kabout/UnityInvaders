@@ -10,7 +10,7 @@ namespace UnityInvadersTests.Model
         public void Create_Defense()
         {
             Position position = new Position(0, 1);
-            Defense defense = new Defense(Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE,
+            Defense defense = new Defense(1, Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE,
                 LevelDefense.Incredible, 50, position);
 
             Assert.IsTrue(defense.Level == LevelDefense.Incredible);
@@ -25,7 +25,7 @@ namespace UnityInvadersTests.Model
         public void Defense_Take_Damage()
         {
             Position position = new Position(0, 1);
-            Defense defense = new Defense(Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE, 
+            Defense defense = new Defense(1, Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE, 
                 LevelDefense.Incredible, 20, position);
 
             int health = defense.Health;
@@ -38,7 +38,7 @@ namespace UnityInvadersTests.Model
         public void Defense_Take_Damage_More_Than_Health()
         {
             Position position = new Position(0, 1);
-            Defense defense = new Defense(20, Constants.DEFENSE_SIZE, 
+            Defense defense = new Defense(1, 20, Constants.DEFENSE_SIZE, 
                 LevelDefense.Incredible, 20, position);
             
             defense.TakeDamage(30);
@@ -50,7 +50,7 @@ namespace UnityInvadersTests.Model
         public void Defense_Change_Position()
         {
             Position position = new Position(0, 1);
-            Defense defense = new Defense(Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE,
+            Defense defense = new Defense(1, Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE,
                 LevelDefense.Incredible, 20, position);
 
             defense.ChangePosition(new Position(1, 0));

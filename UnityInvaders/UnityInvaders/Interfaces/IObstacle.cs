@@ -5,6 +5,10 @@ namespace UnityInvaders.Interfaces
     public interface IObstacle
     {
         /// <summary>
+        /// Identificador del obstáculo
+        /// </summary>
+        int Id { get; }
+        /// <summary>
         /// Longitud del obstáculo en el eje x
         /// </summary>
         int Width { get; }

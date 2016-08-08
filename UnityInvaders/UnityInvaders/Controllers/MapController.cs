@@ -35,7 +35,6 @@ namespace UnityInvaders.Controllers
         {
             PlaceObstacles(map);
             defenseController.PlaceDefenses(map);
-
         }       
 
         private void PlaceObstacles(IMap map)

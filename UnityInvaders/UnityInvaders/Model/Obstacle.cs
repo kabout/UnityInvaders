@@ -25,12 +25,19 @@ namespace UnityInvaders.Model
             private set;
         }
 
+        public int Id
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region Constructors
 
-        public Obstacle(int width, int height, Position position)
+        public Obstacle(int id, int width, int height, Position position)
         {
+            Id = id;
             Width = width;
             Height = height;
             Position = position;

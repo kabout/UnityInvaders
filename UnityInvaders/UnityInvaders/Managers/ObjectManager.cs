@@ -11,6 +11,8 @@ namespace UnityInvaders.Managers
         #region Fields
 
         IDifficultController difficultController;
+        private static int nextDefenseId = 1;
+        private static int nextObstacleId = 1;
 
         #endregion
 
@@ -28,8 +30,10 @@ namespace UnityInvaders.Managers
             int index = RandomManager.GetRandomNumber(0, availablePositions.Count);
             Position position = availablePositions[index];
 
-            IDefense defense = new Defense(Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE, levelDefense,
+            IDefense defense = new Defense(nextDefenseId, Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE, levelDefense,
                 difficultController.GetDefenseDamage(levelDefense), position);
+
+            nextDefenseId++;
 
             return defense;
         }
@@ -46,7 +50,9 @@ namespace UnityInvaders.Managers
             int index = RandomManager.GetRandomNumber(0, availablePositions.Count);
             Position position = availablePositions[index];
 
-            IObstacle obstacle = new Obstacle(width, height, position);
+            IObstacle obstacle = new Obstacle(nextObstacleId, width, height, position);
+
+            nextObstacleId++;
 
             return obstacle;
         }

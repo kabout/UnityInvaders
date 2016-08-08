@@ -5,6 +5,10 @@ namespace UnityInvaders.Interfaces
     public interface IDefense
     {
         /// <summary>
+        /// Identificador de la defensa
+        /// </summary>
+        int Id { get; }
+        /// <summary>
         /// Longitud de la defensa en el eje x
         /// </summary>
         int Width { get; }

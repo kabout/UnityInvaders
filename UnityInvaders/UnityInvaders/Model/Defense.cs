@@ -21,12 +21,15 @@ namespace UnityInvaders.Model
 
         public int Health { get; private set; }
 
+        public int Id { get; private set; }
+
         #endregion
 
         #region Constructors
 
-        public Defense(int health, int defenseSize, LevelDefense level, int damage, Position position)
+        public Defense(int id, int health, int defenseSize, LevelDefense level, int damage, Position position)
         {
+            Id = id;
             Health = health;
             Width = defenseSize;
             Height = defenseSize;

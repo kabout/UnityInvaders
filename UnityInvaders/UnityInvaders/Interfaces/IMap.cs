@@ -54,5 +54,7 @@ namespace UnityInvaders.Interfaces
         IList<Position> GetFreePositionsForObstacle(int width, int height);
 
         IList<Position> GetFreePositionsForDefense();
+
+        string PrintMap();
     }
 }
