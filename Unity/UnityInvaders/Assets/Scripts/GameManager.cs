@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
         mapController.InitMap(map);
         MapToUnity mapToUnity = new MapToUnity(floor, obstacle, defense);
         UnityMap unityMap = mapToUnity.Convert(map);
-		Debug.Log(map.PrintMap());
     }
 	
 	// Update is called once per frame
