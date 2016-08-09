@@ -10,10 +10,9 @@ namespace UnityInvadersTests.Model
         public void Create_Obstacle()
         {
             Position position = new Position(0,1);
-            Obstacle obstacle = new Obstacle(1, 10, 20, position);
+            Obstacle obstacle = new Obstacle(1, 10, position);
 
-            Assert.IsTrue(obstacle.Width == 10);
-            Assert.IsTrue(obstacle.Height == 20);
+            Assert.IsTrue(obstacle.Radius == 10);
             Assert.IsTrue(obstacle.Position.X == 0);
             Assert.IsTrue(obstacle.Position.Y == 1);
         }

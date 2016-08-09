@@ -25,7 +25,7 @@ namespace UnityInvaders.Transforms
 
         public  UnityAlien Convert(IAlien alien)
         {
-            GameObject gameObjectDefense = (GameObject)Object.Instantiate(modelAlien,
+            GameObject gameObjectDefense = (GameObject)GameObject.Instantiate(modelAlien,
                 new Vector3(alien.Position.X + (alien.Width / 2), 0, alien.Position.Y + (alien.Height / 2)), Quaternion.identity);
             gameObjectDefense.transform.localScale += new Vector3(alien.Width, 0, alien.Height);
             return new UnityAlien(gameObjectDefense, alien);

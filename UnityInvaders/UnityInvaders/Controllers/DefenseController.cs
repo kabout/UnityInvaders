@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
 
@@ -32,7 +33,7 @@ namespace UnityInvaders.Controllers
 
             while (numDefenses > 0)
             {
-                IDefense defense = objectManager.GenerateDefense(map);
+                IDefense defense = objectManager.GenerateDefense(map, Constants.DEFAULT_DEFENSE_RADIO);
 
                 if (defense == null)
                     return;
@@ -41,6 +42,8 @@ namespace UnityInvaders.Controllers
 
                 numDefenses--;
             }
+
+            Debug.Assert(map.Defenses.Count > 0);
         }
 
         public IList<IAlien> GetAliensInRange (IMap map, IDefense defense)

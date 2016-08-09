@@ -55,16 +55,15 @@ namespace UnityInvaders.Controllers
             Console.WriteLine("¡Empieza el juego controlando a los Aliens!");
 
             // Escoger Dificultad y Tamaño del mapa.
-            DifficultLevel difficultLevel = SelectDifficult();
             int width = SelectMapWidth();
             int height = SelectMapHeight();
 
-            IDifficultController difficultController = new DifficultController(difficultLevel);
+            IDifficultController difficultController = new DifficultController(153);
             IObjectManager objectManager = new ObjectManager(difficultController);
             IDefenseController defenseController = new DefenseController(difficultController, objectManager);
             IMapController mapController = new MapController(defenseController, difficultController, objectManager);
 
-            IMap map = mapController.GetEmptyMap(width, height);
+            IMap map = mapController.GetEmptyMap(width);
             mapController.InitMap(map);
 
             bool finish = false;
@@ -87,11 +86,6 @@ namespace UnityInvaders.Controllers
         private int SelectMapWidth ()
         {
             return 100;
-        }
-
-        private DifficultLevel SelectDifficult ()
-        {
-            return DifficultLevel.Normal;
         }
 
         private void UpdateWorld (ref bool finish)

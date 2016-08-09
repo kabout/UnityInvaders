@@ -32,8 +32,8 @@ namespace UnityInvaders.Transforms
         {
             UnityMap unityMap;
 
-            GameObject floorUnity = (GameObject)GameObject.Instantiate(floor, new Vector3(map.Width / 2, 0, map.Height / 2), Quaternion.identity);
-            floorUnity.transform.localScale += new Vector3(map.Width, 1, map.Height);
+            GameObject floorUnity = (GameObject)GameObject.Instantiate(floor, new Vector3(map.Size / 2, 0, map.Size / 2), Quaternion.identity);
+            floorUnity.transform.localScale += new Vector3(map.Size, 1, map.Size);
 
             List<UnityObstacle> obstacles = new List<UnityObstacle>();
             ObstacleToUnity obstacleToUnity = new ObstacleToUnity(obstacleModel);

@@ -2,36 +2,24 @@
 
 namespace UnityInvaders.Interfaces
 {
-    public interface IDefense
+    public interface IDefense : IEntity
     {
-        /// <summary>
-        /// Identificador de la defensa
-        /// </summary>
-        int Id { get; }
-        /// <summary>
-        /// Longitud de la defensa en el eje x
-        /// </summary>
-        int Width { get; }
-        /// <summary>
-        /// Longitud de la defensa en el eje y
-        /// </summary>
-        int Height { get; }
-        /// <summary>
-        /// Posición de la defensa dentro del mapa
-        /// </summary>
-        Position Position { get; }
         /// <summary>
         /// Nivel de daño que genera la defensa
         /// </summary>
         int Damage { get; }
         /// <summary>
+        /// Dispersión del disparo de la defensa
+        /// </summary>
+        int Dispersion { get; }
+        /// <summary>
         /// Rango de alcance de la defensa desde cada uno de sus bordes
         /// </summary>
         int Range { get; }
         /// <summary>
-        /// Nivel de la defensa. Se utiliza para calcular el Rango de alcance.
+        /// Ataques de la defensa por segundo
         /// </summary>
-        LevelDefense Level { get; }
+        float AttacksPerSecond { get; }
         /// <summary>
         /// Coste de la Defensa, según su nivel.
         /// </summary>
@@ -40,6 +28,10 @@ namespace UnityInvaders.Interfaces
         /// Salud de la defensa
         /// </summary>
         int Health { get; }
+        /// <summary>
+        /// Tipo de defensa
+        /// </summary>
+        int Type { get; }
         /// <summary>
         /// Resta salud a la defensa indicado por damage
         /// </summary>

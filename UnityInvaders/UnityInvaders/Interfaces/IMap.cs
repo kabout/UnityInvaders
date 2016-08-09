@@ -6,13 +6,9 @@ namespace UnityInvaders.Interfaces
     public interface IMap
     {
         /// <summary>
-        /// Anchura del mapa
+        /// Dimensión del mapa, siendo un mapa de Size x Size
         /// </summary>
-        int Width { get; }
-        /// <summary>
-        /// Altura del mapa
-        /// </summary>
-        int Height { get; }
+        int Size { get; }
         /// <summary>
         /// Lista de sólo lectura de los obstáculos del mapa
         /// </summary>
@@ -25,6 +21,10 @@ namespace UnityInvaders.Interfaces
         /// Lista de sólo lectura de los aliens del mapa
         /// </summary>
         IList<IAlien> Aliens { get; }
+        /// <summary>
+        /// Devuelve el margen del mapa
+        /// </summary>
+        int Margin { get; }
         /// <summary>
         /// Añade un obstáculo al mapa
         /// </summary>
@@ -58,9 +58,8 @@ namespace UnityInvaders.Interfaces
         /// <summary>
         /// Devuelve las posiciones libres para poner un obstáculo.
         /// </summary>
-        /// <param name="width">Anchura del obstáculo</param>
-        /// <param name="height">Altura del obstáculo</param>
-        IList<Position> GetFreePositionsForObstacle(int width, int height);
+        /// <param name="radius">Radio del obstáculo</param>
+        IList<Position> GetFreePositionsForObstacle(int radius);
         /// <summary>
         /// Devuelve las posiciones libres para poner una defensa.
         /// </summary>

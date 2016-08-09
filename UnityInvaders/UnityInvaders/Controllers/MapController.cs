@@ -26,9 +26,9 @@ namespace UnityInvaders.Controllers
 
         #region Methods
 
-        public IMap GetEmptyMap(int width, int height)
+        public IMap GetEmptyMap(int size)
         {
-            return new Map(width, height);
+            return new Map(size);
         }
 
         public void InitMap(IMap map)
@@ -43,7 +43,7 @@ namespace UnityInvaders.Controllers
 
             while (numOfObstacles > 0)
             {
-                IObstacle obstacle = objectManager.GenerateObstacle(map);
+                IObstacle obstacle = objectManager.GenerateObstacle(map, Constants.MIN_OBSTACLE_RADIUS, Constants.MAX_OBSTACLE_RADIUS);
 
                 if (obstacle == null)
                     return;
@@ -60,7 +60,7 @@ namespace UnityInvaders.Controllers
 
             while (numDefenses > 0)
             {
-                IDefense defense = objectManager.GenerateDefense(map);
+                IDefense defense = objectManager.GenerateDefense(map, Constants.DEFAULT_DEFENSE_RADIO);
 
                 if (defense == null)
                     return;

@@ -28,16 +28,6 @@
         Divine
     }
 
-    public enum DifficultLevel : int
-    {
-        VeryEasy,
-        Easy,
-        Normal,
-        Difficult,
-        VeryDifficult,
-        God
-    }
-
     public enum GameMode : int
     {
         UserAlien,

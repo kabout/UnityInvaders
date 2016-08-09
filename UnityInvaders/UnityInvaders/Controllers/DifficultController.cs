@@ -9,13 +9,13 @@ namespace UnityInvaders.Controllers
     {
         #region Fields
 
-        DifficultLevel difficultLevel;
+        int difficultLevel;
 
         #endregion
 
         #region Constructors
 
-        public DifficultController(DifficultLevel difficultLevel)
+        public DifficultController(int difficultLevel)
         {
             this.difficultLevel = difficultLevel;
         }
@@ -26,159 +26,27 @@ namespace UnityInvaders.Controllers
 
         public int GetNumberOfDefenses(IMap map)
         {
-            int numCellsDefense = Constants.DEFENSE_SIZE * Constants.DEFENSE_SIZE;
-            int numDefenses = (map.Width * map.Height) / (20 * numCellsDefense);
-
-            switch (difficultLevel)
-            {
-                case DifficultLevel.VeryEasy: return (int)(numDefenses * 0.1);
-                case DifficultLevel.Easy: return (int)(numDefenses * 0.3);
-                case DifficultLevel.Normal: return (int)(numDefenses * 0.4);
-                case DifficultLevel.Difficult: return (int)(numDefenses * 0.5);
-                case DifficultLevel.VeryDifficult: return (int)(numDefenses * 0.6);
-                case DifficultLevel.God: return (int)(numDefenses * 0.7);
-                default: return 0;
-            }
+            return (int)Math.Round(map.Size * map.Size * Constants.MAX_OBSTACLES_PER_AREA_UNIT * (difficultLevel / 999.0f));
         }
 
         public int GetNumberOfObstacles(IMap map)
         {
-            int numObstacles = (map.Width * map.Height) / 250;
-
-            switch (difficultLevel)
-            {
-                case DifficultLevel.VeryEasy: return (int)(numObstacles * 0.1);
-                case DifficultLevel.Easy: return (int)(numObstacles * 0.3);
-                case DifficultLevel.Normal: return (int)(numObstacles * 0.5);
-                case DifficultLevel.Difficult: return (int)(numObstacles * 0.6);
-                case DifficultLevel.VeryDifficult: return (int)(numObstacles * 0.8);
-                case DifficultLevel.God: return numObstacles;
-                default: return 0;
-            }
+            return (int)Math.Round(map.Size * map.Size * Constants.MAX_OBSTACLES_PER_AREA_UNIT * (difficultLevel / 999.0f));
         }
 
-        public LevelDefense GetLevelDefense()
+        public int GetNumberOfDefenseTypes(int numDefenses)
         {
-            int minLevel = 0;
-            int maxLevel = 0;
-
-            switch (difficultLevel)
-            {
-                case DifficultLevel.VeryEasy:
-                    {
-                        minLevel = 0;
-                        maxLevel = 3;
-                    }
-                    break;
-                case DifficultLevel.Easy:
-                    {
-                        minLevel = 1;
-                        maxLevel = 4;
-                    }
-                    break;
-                case DifficultLevel.Normal:
-                    {
-                        minLevel = 2;
-                        maxLevel = 5;
-                    }
-                    break;
-                case DifficultLevel.Difficult:
-                    {
-                        minLevel = 4;
-                        maxLevel = 7;
-                    }
-                    break;
-                case DifficultLevel.VeryDifficult:
-                    {
-                        minLevel = 5;
-                        maxLevel = 9;
-                    }
-                    break;
-                case DifficultLevel.God:
-                    {
-                        minLevel = 7;
-                        maxLevel = 9;
-                    }
-                    break;
-            }
-
-            RandomManager.Seed = DateTime.Now.Millisecond;
-            return (LevelDefense)RandomManager.GetRandomNumber(minLevel, maxLevel);
+            return (int)(numDefenses * Constants.DEFENSE_TYPES_PER_DEFENSE) + 1;
         }
 
-        public int GetNumbersOfUcosForDefenses()
+        public int GetMinRadiusOfObstacle()
         {
-            switch(difficultLevel)
-            {
-                case DifficultLevel.VeryEasy: return 10000;
-                case DifficultLevel.Easy: return 8000;
-                case DifficultLevel.Normal: return 7000;
-                case DifficultLevel.Difficult: return 5000;
-                case DifficultLevel.VeryDifficult: return 4000;
-                case DifficultLevel.God: return 2000;                
-            }
-
-            return 0;
+            return Constants.MIN_OBSTACLE_RADIUS;
         }
 
-        public int GetNumbersOfUcosForAliens()
+        public int GetMaxRadiusOfObstacle ()
         {
-            switch (difficultLevel)
-            {
-                case DifficultLevel.VeryEasy: return 5000;
-                case DifficultLevel.Easy: return 3000;
-                case DifficultLevel.Normal: return 2000;
-                case DifficultLevel.Difficult: return 1000;
-                case DifficultLevel.VeryDifficult: return 800;
-                case DifficultLevel.God: return 500;
-                default: return 0;
-            }
-        }
-
-        public int GetDefenseDamage(LevelDefense levelDefense)
-        {
-            switch(levelDefense)
-            {
-                case LevelDefense.Tragic: return 5;
-                case LevelDefense.Poor: return 10;
-                case LevelDefense.Weak: return 15;
-                case LevelDefense.Good: return 20;
-                case LevelDefense.Excellent: return 25;
-                case LevelDefense.Formidable: return 30;
-                case LevelDefense.Incredible: return 35;
-                case LevelDefense.Brilliant: return 40;
-                case LevelDefense.Unearthly: return 45;
-                case LevelDefense.Divine: return 50;
-                default: return 0;
-            }
-        }
-
-        public int GetMinSizeObstacle()
-        {
-            switch (difficultLevel)
-            {
-                case DifficultLevel.VeryEasy: return 6;
-                case DifficultLevel.Easy: return 5;
-                case DifficultLevel.Normal: return 4;
-                case DifficultLevel.Difficult: return 3;
-                case DifficultLevel.VeryDifficult: return 2;
-                case DifficultLevel.God: return 2;
-                default: return 0;
-            }
-        }
-
-        public int GetMaxSizeObstacle()
-        {
-            switch (difficultLevel)
-            {
-                case DifficultLevel.VeryEasy: return 17;
-                case DifficultLevel.Easy: return 15;
-                case DifficultLevel.Normal: return 13;
-                case DifficultLevel.Difficult: return 10;
-                case DifficultLevel.VeryDifficult: return 7;
-                case DifficultLevel.God: return 5;
-                default: return 0;
-            }
+            return Constants.MAX_OBSTACLE_RADIUS;
         }
 
         #endregion

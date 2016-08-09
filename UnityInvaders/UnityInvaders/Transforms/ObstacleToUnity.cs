@@ -25,9 +25,9 @@ namespace UnityInvaders.Transforms
 
         public UnityObstacle Convert(IObstacle obstacle)
         {
-            GameObject gameObjectObstacle = (GameObject)GameObject.Instantiate(modelObstacle,
-                new Vector3(obstacle.Position.X + (obstacle.Width / 2), 0, obstacle.Position.Y + (obstacle.Height / 2)), Quaternion.identity);
-            gameObjectObstacle.transform.localScale += new Vector3(obstacle.Width, 0, obstacle.Height);
+            GameObject gameObjectObstacle = (GameObject)Object.Instantiate(modelObstacle,
+                new Vector3(obstacle.Position.X + obstacle.Radius, 0, obstacle.Position.Y + obstacle.Radius), Quaternion.Euler(-180, 90, 0));
+            gameObjectObstacle.transform.localScale += new Vector3((obstacle.Radius * 2), obstacle.Radius, (obstacle.Radius * 2));
             return new UnityObstacle(gameObjectObstacle);
         }
 

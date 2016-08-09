@@ -16,26 +16,27 @@ namespace UnityInvaders.Model
 
         public int Damage { get { return defenseObject.Damage; } }
 
-        public LevelDefense Level { get { return defenseObject.Level; } }
-
         public int Range { get { return defenseObject.Range; } }
 
         public int Health { get { return defenseObject.Health; } }
 
-        public int Width
+        public int Radius
         {
-            get { return (int)defense.transform.localScale.x; }
-        }
-
-        public int Height
-        {
-            get { return (int)defense.transform.localScale.z; }
+            get { return defenseObject.Radius; }
         }
 
         public Position Position
         {
             get { return new Position((int)defense.transform.localPosition.x, (int)defense.transform.localPosition.z); }
         }
+
+        public int Cost { get { return defenseObject.Cost; } }
+
+        public int Dispersion { get { return defenseObject.Dispersion; } }
+
+        public float AttacksPerSecond { get { return defenseObject.AttacksPerSecond; } }
+
+        public int Type { get { return defenseObject.Type; } }
 
         #endregion
 

@@ -12,14 +12,9 @@ namespace UnityInvaders.Model
 
         #region Properties
 
-        public int Width
+        public int Radius
         {
-            get { return (int)obstacle.transform.localScale.x; }
-        }
-
-        public int Height
-        {
-            get { return (int)obstacle.transform.localScale.z; }
+            get { return (int)(obstacle.transform.localScale.x / 2); }
         }
 
         public Position Position

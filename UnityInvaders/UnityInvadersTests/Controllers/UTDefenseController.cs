@@ -12,8 +12,8 @@ namespace UnityInvadersTests.Controllers
         [TestMethod]
         public void Place_Defenses_In_Map()
         {
-            IMap map = new Map(200, 200);
-            IDifficultController difficultController = new DifficultController(DifficultLevel.VeryEasy);
+            IMap map = new Map(200);
+            IDifficultController difficultController = new DifficultController(153);
             IDefenseController defenseController = new DefenseController(difficultController, new ObjectManager(difficultController));
             defenseController.PlaceDefenses(map);
 
@@ -23,8 +23,8 @@ namespace UnityInvadersTests.Controllers
         [TestMethod]
         public void Place_Defenses_In_Map_Empty()
         {
-            IMap map = new Map(0, 0);
-            IDifficultController difficultController = new DifficultController(DifficultLevel.VeryEasy);
+            IMap map = new Map(0);
+            IDifficultController difficultController = new DifficultController(153);
             IDefenseController defenseController = new DefenseController(difficultController, new ObjectManager(difficultController));
             defenseController.PlaceDefenses(map);
 

@@ -26,8 +26,8 @@ namespace UnityInvaders.Transforms
         public  UnityDefense Convert(IDefense defense)
         {
             GameObject gameObjectDefense = (GameObject)Object.Instantiate(modelDefense,
-                new Vector3(defense.Position.X + (defense.Width / 2), 0, defense.Position.Y + (defense.Height / 2)), Quaternion.identity);
-            gameObjectDefense.transform.localScale += new Vector3(defense.Width, 0, defense.Height);
+                new Vector3(defense.Position.X + defense.Radius, 0, defense.Position.Y + defense.Radius), Quaternion.identity);
+            gameObjectDefense.transform.localScale += new Vector3((defense.Radius * 2) - 2, 0, (defense.Radius * 2) - 2);
             return new UnityDefense(gameObjectDefense, defense);
         }
 

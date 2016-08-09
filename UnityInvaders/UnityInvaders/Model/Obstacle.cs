@@ -3,44 +3,17 @@ using UnityInvaders.Interfaces;
 
 namespace UnityInvaders.Model
 {
-    public class Obstacle : IObstacle
+    public class Obstacle : Entity, IObstacle
     {
         #region Properties
-
-        public int Width
-        {
-            get;
-            private set;
-        }
-
-        public int Height
-        {
-            get;
-            private set;
-        }
-
-        public Position Position
-        {
-            get;
-            private set;
-        }
-
-        public int Id
-        {
-            get;
-            private set;
-        }
 
         #endregion
 
         #region Constructors
 
-        public Obstacle(int id, int width, int height, Position position)
+        public Obstacle(int id, int radius, Position position) : 
+            base(id, position, radius)
         {
-            Id = id;
-            Width = width;
-            Height = height;
-            Position = position;
         }
 
         #endregion

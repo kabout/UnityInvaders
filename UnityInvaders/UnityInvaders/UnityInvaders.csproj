@@ -58,8 +58,10 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Interfaces\IGameController.cs" />
     <Compile Include="Interfaces\IMap.cs" />
+    <Compile Include="Interfaces\IObject.cs" />
     <Compile Include="Interfaces\IObstacle.cs" />
     <Compile Include="Model\Alien.cs" />
+    <Compile Include="Model\Object.cs" />
     <Compile Include="Model\UnityAlien.cs" />
     <Compile Include="Model\UnityMap.cs" />
     <Compile Include="Model\Defense.cs" />

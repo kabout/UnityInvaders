@@ -22,35 +22,41 @@ namespace UnityInvaders.Managers
             this.difficultController = difficultController;
         }
 
-        public IDefense GenerateDefense(IMap map)
+        public IDefense GenerateDefense(IMap map, int radiusDefense)
         {
             IList<Position> availablePositions = map.GetFreePositionsForDefense();
 
-            LevelDefense levelDefense = difficultController.GetLevelDefense();
+            if (availablePositions.Count == 0)
+                return null;
+            
             int index = RandomManager.GetRandomNumber(0, availablePositions.Count);
             Position position = availablePositions[index];
 
-            IDefense defense = new Defense(nextDefenseId, Constants.DEFENSE_HEALTH, Constants.DEFENSE_SIZE, levelDefense,
-                difficultController.GetDefenseDamage(levelDefense), position);
+            IDefense defense = new Defense(nextDefenseId, 0, Constants.DEFENSE_HEALTH, radiusDefense, Constants.DEFAULT_DEFENSE_DAMAGE,
+                Constants.DEFAULT_DEFENSE_RANGE, Constants.DEFAULT_DEFENSE_DISPERSION, Constants.DEFAULT_DEFENSE_ATTACKS_PER_SECOND,
+                Constants.DEFAULT_DEFENSE_COST, position);
 
             nextDefenseId++;
 
             return defense;
         }
         
-        public IObstacle GenerateObstacle(IMap map)
+        public IObstacle GenerateObstacle(IMap map, int minRadius, int maxRadius)
         {
-            int minSize = difficultController.GetMinSizeObstacle();
-            int maxSize = difficultController.GetMaxSizeObstacle();
+            //int minRadius = difficultController.GetMinRadiusOfObstacle();
+            //int maxRadius = difficultController.GetMaxRadiusOfObstacle();
 
-            int width = RandomManager.GetRandomNumber(minSize, maxSize);
-            int height = RandomManager.GetRandomNumber(minSize, maxSize);
+            int radius = RandomManager.GetRandomNumber(minRadius, maxRadius);
 
-            IList<Position> availablePositions = map.GetFreePositionsForObstacle(width, height);
+            IList<Position> availablePositions = map.GetFreePositionsForObstacle(radius);
+
+            if (availablePositions.Count == 0)
+                return null;
+
             int index = RandomManager.GetRandomNumber(0, availablePositions.Count);
             Position position = availablePositions[index];
 
-            IObstacle obstacle = new Obstacle(nextObstacleId, width, height, position);
+            IObstacle obstacle = new Obstacle(nextObstacleId, radius, position);
 
             nextObstacleId++;
 
