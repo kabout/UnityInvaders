@@ -69,5 +69,13 @@ namespace UnityInvaders.Interfaces
         /// </summary>
         /// <returns></returns>
         IList<Position> GetFreePositionsForAlien();
+        /// <summary>
+        /// Devuelve el mapa en forma de matriz
+        /// 0: Espacio en blanco
+        /// 1: Obstáculo
+        /// 2: Defensa
+        /// </summary>
+        int[,] GetMap ();
+        void CorrectCellUnReachables ();
     }
 }

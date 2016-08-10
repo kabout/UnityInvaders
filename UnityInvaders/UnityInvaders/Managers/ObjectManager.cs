@@ -24,17 +24,22 @@ namespace UnityInvaders.Managers
 
         public IDefense GenerateDefense(IMap map, int radiusDefense)
         {
-            IList<Position> availablePositions = map.GetFreePositionsForDefense();
+            IDefense defense = null;
 
-            if (availablePositions.Count == 0)
-                return null;
-            
-            int index = RandomManager.GetRandomNumber(0, availablePositions.Count);
-            Position position = availablePositions[index];
+            do
+            {
+                IList<Position> availablePositions = map.GetFreePositionsForDefense();
 
-            IDefense defense = new Defense(nextDefenseId, 0, Constants.DEFENSE_HEALTH, radiusDefense, Constants.DEFAULT_DEFENSE_DAMAGE,
-                Constants.DEFAULT_DEFENSE_RANGE, Constants.DEFAULT_DEFENSE_DISPERSION, Constants.DEFAULT_DEFENSE_ATTACKS_PER_SECOND,
-                Constants.DEFAULT_DEFENSE_COST, position);
+                if (availablePositions.Count == 0)
+                    return defense;
+
+                int index = RandomManager.GetRandomNumber(0, availablePositions.Count);
+                Position position = availablePositions[index];
+
+                defense = new Defense(nextDefenseId, 0, Constants.DEFENSE_HEALTH, radiusDefense, Constants.DEFAULT_DEFENSE_DAMAGE,
+                    Constants.DEFAULT_DEFENSE_RANGE, Constants.DEFAULT_DEFENSE_DISPERSION, Constants.DEFAULT_DEFENSE_ATTACKS_PER_SECOND,
+                    Constants.DEFAULT_DEFENSE_COST, position);
+            } while (!map.IsValidPosition(defense));
 
             nextDefenseId++;
 

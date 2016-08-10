@@ -1,4 +1,5 @@
-﻿using UnityInvaders.Model;
+﻿using System.Drawing;
+using UnityInvaders.Model;
 
 namespace UnityInvaders.Interfaces
 {

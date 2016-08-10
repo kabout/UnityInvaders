@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UnityInvaders.Interfaces;
+using UnityInvaders.Utils;
 
 namespace UnityInvaders.Model
 {
@@ -21,11 +23,13 @@ namespace UnityInvaders.Model
         #region Fields
 
         private int[,] map;
+        private char[,] correctedMap;
         private int marginBetweenObjects;
         private List<IObstacle> obstacles;
         private List<IDefense> defenses;
         private List<IAlien> aliens;
         private Dictionary<ObjectType, List<Position>> freePositions = new Dictionary<ObjectType, List<Position>>();
+        private List<Position> positionsUnReachables;
         private int defenseSize;
 
         #endregion
@@ -48,6 +52,7 @@ namespace UnityInvaders.Model
             obstacles = new List<IObstacle>();
             defenses = new List<IDefense>();
             aliens = new List<IAlien>();
+            positionsUnReachables = new List<Position>();
             freePositions.Add(ObjectType.Obstacle, new List<Position>());
             freePositions.Add(ObjectType.Defense, new List<Position>());
             freePositions.Add(ObjectType.Alien, new List<Position>());
@@ -73,7 +78,10 @@ namespace UnityInvaders.Model
 
             for (int x = obstacle.Position.X; x < xEnd; x++)
                 for (int y = obstacle.Position.Y; y < yEnd; y++)
+                {
                     map[x, y] = 1;
+                    correctedMap[x, y] = 'x';
+                }
 
             #region Update defense free positions
             
@@ -103,7 +111,172 @@ namespace UnityInvaders.Model
 
             #endregion
 
+            UpdateCorrectedMap(obstacle);
+
             return true;
+        }
+
+        private void UpdateCorrectedMap (IObstacle obstacle)
+        {
+            Position position = obstacle.Position;
+
+            int xEnd = obstacle.Position.X + (obstacle.Radius * 2);
+            int yEnd = obstacle.Position.Y + (obstacle.Radius * 2);
+            
+            for (int y = position.Y; y < yEnd; y++)
+                for (int x = xEnd; x < (Size - Margin); x++)
+                {
+                    if (correctedMap[x, y] == 'x')
+                    {
+                        for (int i = x - 1; i >= xEnd; i--)
+                            if (correctedMap[i, y] != 'x')
+                                correctedMap[i, y] = 'a';
+
+                        continue;
+                    }
+                }
+            
+            for (int y = position.Y; y < yEnd; y++)
+                for (int x = position.X - 1; x >= Margin; x--)
+                {
+                    if (correctedMap[x, y] == 'x')
+                    {
+                        for (int i = x + 1; i < position.X; i++)
+                            if (correctedMap[i, y] != 'x')
+                                correctedMap[i, y] = 'a';
+
+                        continue;
+                    }
+                }
+            
+            for (int x = position.X; x < xEnd; x++)
+                for (int y = position.Y - 1; y >= Margin; y--)
+                {
+                    if (correctedMap[x, y] == 'x')
+                    {
+                        for (int i = y + 1; i < position.Y; i++)
+                            if (correctedMap[x, i] != 'x')
+                                correctedMap[x, i] = 'a';
+
+                        continue;
+                    }
+                }
+            
+            for (int x = position.X; x < xEnd; x++)
+                for (int y = yEnd; y < (Size - Margin); y++)
+                {
+                    if (correctedMap[x, y] == 'x')
+                    {
+                        for (int i = y - 1; i >= yEnd; i--)
+                            if (correctedMap[x,i] != 'x')
+                                correctedMap[x, i] = 'a';
+
+                        continue;
+                    }
+                }
+        }
+
+        public void CorrectCellUnReachables()
+        {
+            using (Bitmap image = new Bitmap(Size, Size))
+            {
+                for (int y = 0; y < Size; y++)
+                    for (int x = 0; x < Size; x++)
+                    {
+                        char value = correctedMap[x, y];
+
+                        switch (value)
+                        {
+                            case ' ':
+                            image.SetPixel(x, y, Color.Gray);
+                            break;
+                            case 'x':
+                            image.SetPixel(x, y, Color.Black);
+                            break;
+                            default:
+                            image.SetPixel(x, y, Color.Red);
+                            break;
+                        }
+                    }
+
+                image.Save(@"C:\temp\Correctedmap.bmp");
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+
+                for (int x = 1; x < Size - 1; x++)
+                    for (int y = 1; y < Size - 1; y++)
+                    {
+                        char value = correctedMap[x, y];
+
+                        if (value != ' ' && value != 'x')
+                        {
+                            if (correctedMap[x - 1, y] == ' ' ||
+                                correctedMap[x + 1, y] == ' ' ||
+                                correctedMap[x, y + 1] == ' ' ||
+                                correctedMap[x, y - 1] == ' ')
+                                correctedMap[x, y] = ' ';
+                        }
+                    }
+
+                for (int x = Size - 1; x > 1; x--)
+                    for (int y = Size - 1; y > 1; y--)
+                    {
+                        char value = correctedMap[x, y];
+
+                        if (value != ' ' && value != 'x')
+                        {
+                            if (correctedMap[x - 1, y] == ' ' ||
+                                correctedMap[x + 1, y] == ' ' ||
+                                correctedMap[x, y + 1] == ' ' ||
+                                correctedMap[x, y - 1] == ' ')
+                                correctedMap[x, y] = ' ';
+                        }
+                    }
+
+                for (int x = 1; x < Size - 1; x++)
+                    for (int y = Size - 1; y > 1; y--)
+                    {
+                        char value = correctedMap[x, y];
+
+                        if (value != ' ' && value != 'x')
+                        {
+                            if (correctedMap[x - 1, y] == ' ' ||
+                                correctedMap[x + 1, y] == ' ' ||
+                                correctedMap[x, y + 1] == ' ' ||
+                                correctedMap[x, y - 1] == ' ')
+                                correctedMap[x, y] = ' ';
+                        }
+                    }
+
+                for (int x = Size - 1; x > 1; x--)
+                    for (int y = 1; y < Size - 1; y++)
+                    {
+                        char value = correctedMap[x, y];
+
+                        if (value != ' ' && value != 'x')
+                        {
+                            if (correctedMap[x - 1, y] == ' ' ||
+                                correctedMap[x + 1, y] == ' ' ||
+                                correctedMap[x, y + 1] == ' ' ||
+                                correctedMap[x, y - 1] == ' ')
+                                correctedMap[x, y] = ' ';
+                        }
+                    }
+
+                Bitmap image = ExportMapToImage.Instance.ConvertToBitMap(correctedMap, Size);
+                image.Save(@"C:\temp\Correctedmap.bmp");
+
+                for (int x = 1; x < Size - 1; x++)
+                    for (int y = 1; y < Size - 1; y++)
+                    {
+                        char value = correctedMap[x, y];
+
+                        if (value != ' ' && value != 'x')
+                            positionsUnReachables.Add(new Position(x, y));
+                    }
+            }
         }
 
         public bool AddDefense(IDefense defense)
@@ -116,7 +289,11 @@ namespace UnityInvaders.Model
 
             for (int x = defense.Position.X; x < xEnd; x++)
                 for (int y = defense.Position.Y; y < yEnd; y++)
+                {
+                    if(map[x,y] != 0)
+                    { }
                     map[x, y] = 2;
+                }
 
             defenses.Add(defense);
 
@@ -161,7 +338,13 @@ namespace UnityInvaders.Model
 
         public bool IsValidPosition(IDefense defense)
         {
-            return freePositions[ObjectType.Defense].Exists(p => p.X == defense.Position.X && p.Y == defense.Position.Y);
+            if (positionsUnReachables.Contains(defense.Position))
+            {
+                freePositions[ObjectType.Defense].Remove(defense.Position);
+                return false;
+            }
+
+            return true;
         }
 
         public bool IsValidPosition(IObstacle obstacle)
@@ -191,6 +374,11 @@ namespace UnityInvaders.Model
             return freePositions[ObjectType.Alien];
         }
 
+        public int[,] GetMap ()
+        {
+            return map;
+        }
+
         #endregion
 
         #region Private Methods
@@ -198,6 +386,7 @@ namespace UnityInvaders.Model
         private void InitMap()
         {
             map = new int[Size, Size];
+            correctedMap = new char[Size, Size];
             Margin = Constants.ALIEN_SIZE + 10;
 
             for (int x = 0; x < Size; x++)
@@ -207,8 +396,9 @@ namespace UnityInvaders.Model
                         freePositions[ObjectType.Alien].Add(new Position(x, y));
 
                     map[x, y] = 0;
+                    correctedMap[x,y] = ' ';
 
-                    if(x >= Margin && y >= Margin && x <= (Size - Margin) && y <= (Size - Margin))
+                    if (x >= Margin && y >= Margin && x <= (Size - Margin) && y <= (Size - Margin))
                         freePositions[ObjectType.Obstacle].Add(new Position(x, y));
 
                     if (x >= Margin && y >= Margin && x <= (Size - Margin) && y <= (Size - Margin) &&

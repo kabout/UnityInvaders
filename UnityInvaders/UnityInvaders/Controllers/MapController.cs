@@ -1,5 +1,9 @@
-﻿using UnityInvaders.Interfaces;
+﻿using System;
+using System.Drawing;
+using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
+using UnityInvaders.Utils;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace UnityInvaders.Controllers
 {
@@ -34,8 +38,12 @@ namespace UnityInvaders.Controllers
         public void InitMap(IMap map)
         {
             PlaceObstacles(map);
+            map.CorrectCellUnReachables();
             defenseController.PlaceDefenses(map);
+            Bitmap image = ExportMapToImage.Instance.ConvertToBitMap(map.GetMap(), map.Size);
+            image.Save(@"C:\temp\map.bmp");
         }       
+      
 
         private void PlaceObstacles(IMap map)
         {
@@ -64,6 +72,8 @@ namespace UnityInvaders.Controllers
 
                 if (defense == null)
                     return;
+
+
 
                 map.AddDefense(defense);
 

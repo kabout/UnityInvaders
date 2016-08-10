@@ -58,6 +58,9 @@
  <Reference Include="UnityInvaders">
  <HintPath>C:/Users/dsanchezd/Source/Repos/UnityInvaders/Unity/UnityInvaders/Assets/Plugins/UnityInvaders.dll</HintPath>
  </Reference>
+ <Reference Include="System.Drawing">
+ <HintPath>C:/Users/dsanchezd/Source/Repos/UnityInvaders/Unity/UnityInvaders/Assets/Plugins/System.Drawing.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
