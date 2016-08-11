@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
+using UnityInvaders.Utils;
 
 namespace UnityInvaders.Controllers
 {
@@ -65,6 +67,62 @@ namespace UnityInvaders.Controllers
             }
 
             return inversePath.ToList();
+        }
+
+        public List<Position> CalculePath (Position source, Position target, int[,] map)
+        {
+            int size = (int)Math.Sqrt(map.Length);
+
+            int numCellForRow = size / 10;
+
+            int[,] simplyMap = new int[numCellForRow, numCellForRow];
+                
+            int newX = 0, newY = 0;
+            bool isSource = false;
+            bool isTarget = false;
+
+            for (int x = 0; x < numCellForRow; x++)
+            {
+                for (int y = 0; y < numCellForRow; y++)
+                {
+                    int cont = 0;
+
+                    for (int i = newX; i < newX + 10; i++)
+                        for (int j = newY; j < newY + 10; j++)
+                        {
+                            if (source.X == i && source.Y == j)
+                                isSource = true;
+
+                            if (target.X == i && target.Y == j)
+                                isTarget = true;
+
+                            cont = map[i, j];
+                        }
+
+                    if (isSource)
+                    {
+                        simplyMap[x, y] = 2;
+                        isSource = false;
+                    }
+                    else if (isTarget)
+                    {
+                        simplyMap[x, y] = 3;
+                        isTarget = false;
+                    }
+                    else
+                        simplyMap[x, y] = cont == 0 ? 0 : 1;
+
+                    newY += 10;
+                }
+
+                newX += 10;
+                newY = 0;
+            }
+
+            Bitmap image = ExportMapToImage.Instance.ConvertToBitMap(simplyMap, numCellForRow);
+            image.Save(@"C:\temp\mapSimply.bmp");
+
+            return new List<Position>();
         }
 
         private void CheckNewAStarNode (AStar node, Position newPosition,Position target, List<AStar> positionWithValue, List<AStar> path)

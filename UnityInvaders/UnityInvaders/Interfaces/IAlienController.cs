@@ -16,5 +16,6 @@ namespace UnityInvaders.Interfaces
         /// <param name="map">Mapa por donde se mueve el alien</param>
         /// <returns>Devuelve una lista ordenada de posiciones por las que tiene que pasar el alien</returns>
         List<Position> CalculePath (Position source, Position target, IMap map);
+        List<Position> CalculePath (Position source, Position target, int[,] map);
     }
 }
