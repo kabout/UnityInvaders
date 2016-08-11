@@ -50,9 +50,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AlienController.cs" />
     <Compile Include="Controllers\DefenseController.cs" />
     <Compile Include="Controllers\DifficultController.cs" />
     <Compile Include="Interfaces\IAlien.cs" />
+    <Compile Include="Interfaces\IAlienController.cs" />
     <Compile Include="Interfaces\IDefenseController.cs" />
     <Compile Include="Interfaces\IDifficultController.cs" />
     <Compile Include="Interfaces\IMapController.cs" />

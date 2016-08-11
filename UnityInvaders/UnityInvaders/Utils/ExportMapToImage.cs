@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using UnityInvaders.Interfaces;
+using UnityInvaders.Model;
 
 namespace UnityInvaders.Utils
 {
@@ -47,6 +48,82 @@ namespace UnityInvaders.Utils
                 {
                     case 0:
                     image.SetPixel(x, y, Color.Gray);
+                    break;
+                    case 1:
+                    image.SetPixel(x, y, Color.Black);
+                    break;
+                    case 2:
+                    image.SetPixel(x, y, Color.Red);
+                    break;
+                }
+
+                if (x == size - 1)
+                {
+                    x = 0;
+                    y++;
+                }
+                else
+                    x++;
+            }
+
+            return image;
+        }
+
+        public Bitmap ConvertToBitMap (int[,] map, int size, List<Position> path)
+        {
+            Bitmap image = new Bitmap(size, size);
+
+            int x = 0;
+            int y = 0;
+
+            foreach (int point in map)
+            {
+                switch (point)
+                {
+                    case 0:
+                        if(path.Contains(new Position(y,x)))
+                            image.SetPixel(x, y, Color.Blue);
+                        else
+                            image.SetPixel(x, y, Color.Gray);
+                    break;
+                    case 1:
+                    image.SetPixel(x, y, Color.Black);
+                    break;
+                    case 2:
+                    image.SetPixel(x, y, Color.Red);
+                    break;
+                }
+
+                if (x == size - 1)
+                {
+                    x = 0;
+                    y++;
+                }
+                else
+                    x++;
+            }
+
+            return image;
+        }
+
+        public Bitmap ConvertToBitMap (int[,] map, int size, Position source, Position target)
+        {
+            Bitmap image = new Bitmap(size, size);
+
+            int x = 0;
+            int y = 0;
+
+            foreach (int point in map)
+            {
+                switch (point)
+                {
+                    case 0:
+                    if (source.Equals(new Position(y, x)))
+                        image.SetPixel(x, y, Color.White);
+                    else if (target.Equals(new Position(y, x)))
+                        image.SetPixel(x, y, Color.Yellow);
+                    else
+                        image.SetPixel(x, y, Color.Gray);
                     break;
                     case 1:
                     image.SetPixel(x, y, Color.Black);
