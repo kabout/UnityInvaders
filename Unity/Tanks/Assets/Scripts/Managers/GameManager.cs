@@ -5,26 +5,26 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public int m_NumRoundsToWin = 5;        
-    public float m_StartDelay = 3f;         
-    public float m_EndDelay = 3f;           
-    public CameraControl m_CameraControl;   
-    public Text m_MessageText;              
-    public GameObject m_TankPrefab;         
-    public TankManager[] m_Tanks;           
+    public int NumRoundsToWin = 5;        
+    public float StartDelay = 3f;         
+    public float EndDelay = 3f;           
+    public CameraControl CameraControl;   
+    public Text MessageText;              
+    public GameObject TankPrefab;         
+    public TankManager[] Tanks;           
 
 
-    private int m_RoundNumber;              
-    private WaitForSeconds m_StartWait;     
-    private WaitForSeconds m_EndWait;       
+    private int RoundNumber;              
+    private WaitForSeconds StartWait;     
+    private WaitForSeconds EndWait;       
 /*    private TankManager m_RoundWinner;
     private TankManager m_GameWinner;       
 */
 
     private void Start()
     {
-        m_StartWait = new WaitForSeconds(m_StartDelay);
-        m_EndWait = new WaitForSeconds(m_EndDelay);
+        StartWait = new WaitForSeconds(StartDelay);
+        EndWait = new WaitForSeconds(EndDelay);
 
         SpawnAllTanks();
         SetCameraTargets();
@@ -35,26 +35,24 @@ public class GameManager : MonoBehaviour
 
     private void SpawnAllTanks()
     {
-        for (int i = 0; i < m_Tanks.Length; i++)
+        for (int i = 0; i < Tanks.Length; i++)
         {
-            m_Tanks[i].m_Instance =
-                Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
-            m_Tanks[i].m_PlayerNumber = i + 1;
-            m_Tanks[i].Setup();
+            Tanks[i].Instance =
+                Instantiate(TankPrefab, Tanks[i].SpawnPoint.position, Tanks[i].SpawnPoint.rotation) as GameObject;
+            Tanks[i].PlayerNumber = i + 1;
+            Tanks[i].Setup();
         }
     }
 
 
     private void SetCameraTargets()
     {
-        Transform[] targets = new Transform[m_Tanks.Length];
+        Transform[] targets = new Transform[Tanks.Length];
 
         for (int i = 0; i < targets.Length; i++)
-        {
-            targets[i] = m_Tanks[i].m_Instance.transform;
-        }
+            targets[i] = Tanks[i].Instance.transform;
 
-        m_CameraControl.Targets = targets;
+        CameraControl.Targets = targets;
     }
 
 
@@ -65,19 +63,15 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(RoundEnding());
 
 /*        if (m_GameWinner != null)
-        {
             SceneManager.LoadScene(0);
-        }
         else
-        {
             StartCoroutine(GameLoop());
-        }
 */    }
 
 
     private IEnumerator RoundStarting()
     {
-        yield return m_StartWait;
+        yield return StartWait;
     }
 
 
@@ -89,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RoundEnding()
     {
-        yield return m_EndWait;
+        yield return EndWait;
     }
 
 
@@ -97,11 +91,9 @@ public class GameManager : MonoBehaviour
     {
         int numTanksLeft = 0;
 
-        for (int i = 0; i < m_Tanks.Length; i++)
-        {
-            if (m_Tanks[i].m_Instance.activeSelf)
+        for (int i = 0; i < Tanks.Length; i++)
+            if (Tanks[i].Instance.activeSelf)
                 numTanksLeft++;
-        }
 
         return numTanksLeft <= 1;
     }
@@ -154,27 +146,21 @@ public class GameManager : MonoBehaviour
 
     private void ResetAllTanks()
     {
-        for (int i = 0; i < m_Tanks.Length; i++)
-        {
-            m_Tanks[i].Reset();
-        }
+        for (int i = 0; i < Tanks.Length; i++)
+            Tanks[i].Reset();
     }
 
 
     private void EnableTankControl()
     {
-        for (int i = 0; i < m_Tanks.Length; i++)
-        {
-            m_Tanks[i].EnableControl();
-        }
+        for (int i = 0; i < Tanks.Length; i++)
+            Tanks[i].EnableControl();
     }
 
 
     private void DisableTankControl()
     {
-        for (int i = 0; i < m_Tanks.Length; i++)
-        {
-            m_Tanks[i].DisableControl();
-        }
+        for (int i = 0; i < Tanks.Length; i++)
+            Tanks[i].DisableControl();
     }
 }
