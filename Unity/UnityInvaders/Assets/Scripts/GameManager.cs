@@ -52,6 +52,6 @@ public class GameManager : MonoBehaviour
 
     public void OnGUI()
     {
-        GUILayout.Button("Nex state");    
+        //GUILayout.Button("Nex state");    
     }
 }

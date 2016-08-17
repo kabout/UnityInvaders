@@ -74,7 +74,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Barra.cs" />
     <Compile Include="Assets\Scripts\Bloque.cs" />
+    <Compile Include="Assets\Scripts\BotonSalir.cs" />
+    <Compile Include="Assets\Scripts\EmpezarPartida.cs" />
     <Compile Include="Assets\Scripts\Pelota.cs" />
+    <Compile Include="Assets\Scripts\Puntos.cs" />
+    <Compile Include="Assets\Scripts\SiguienteNivel.cs" />
     <Compile Include="Assets\Scripts\Suelo.cs" />
     <Compile Include="Assets\Scripts\Vidas.cs" />
   </ItemGroup>

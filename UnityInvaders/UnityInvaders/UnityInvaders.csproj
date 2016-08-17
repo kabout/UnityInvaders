@@ -68,6 +68,7 @@
     <Compile Include="Model\Alien.cs" />
     <Compile Include="Model\Object.cs" />
     <Compile Include="Model\UnityAlien.cs" />
+    <Compile Include="Model\UnityDefense.cs" />
     <Compile Include="Model\UnityMap.cs" />
     <Compile Include="Model\Defense.cs" />
     <Compile Include="Interfaces\IDefense.cs" />
@@ -78,7 +79,6 @@
     <Compile Include="Managers\ObjectManager.cs" />
     <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Position.cs" />
-    <Compile Include="Model\UnityDefense.cs" />
     <Compile Include="Model\UnityObstacle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

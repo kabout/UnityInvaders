@@ -8,12 +8,11 @@ public class Pelota : MonoBehaviour {
     Rigidbody rigidBody;
     bool inGame = false;
     Vector3 initPosition;
-    Transform parentTransform;
+    public Transform parentTransform;
 
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
-        parentTransform = GetComponentInParent<Transform>();
     }
 
 	// Use this for initialization
