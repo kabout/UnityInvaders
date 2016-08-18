@@ -3,50 +3,39 @@ using UnityInvaders.Interfaces;
 
 namespace UnityInvaders.Model
 {
-    public class UnityDefense
+    public class UnityDefense: MonoBehaviour
     {
         #region Fields
-
-        public GameObject defense;
-        private IDefense defenseObject;
+        
+        public IDefense defense;
 
         #endregion
 
         #region Properties
 
-        public int Damage { get { return defenseObject.Damage; } }
+        public int Damage { get { return defense.Damage; } }
 
-        public int Range { get { return defenseObject.Range; } }
+        public int Range { get { return defense.Range; } }
 
-        public int Health { get { return defenseObject.Health; } }
+        public int Health { get { return defense.Health; } }
 
         public int Radius
         {
-            get { return defenseObject.Radius; }
+            get { return defense.Radius; }
         }
 
         public Position Position
         {
-            get { return new Position((int)defense.transform.localPosition.x, (int)defense.transform.localPosition.z); }
+            get { return new Position((int)gameObject.transform.localPosition.x, (int)gameObject.transform.localPosition.z); }
         }
 
-        public int Cost { get { return defenseObject.Cost; } }
+        public int Cost { get { return defense.Cost; } }
 
-        public int Dispersion { get { return defenseObject.Dispersion; } }
+        public int Dispersion { get { return defense.Dispersion; } }
 
-        public float AttacksPerSecond { get { return defenseObject.AttacksPerSecond; } }
+        public float AttacksPerSecond { get { return defense.AttacksPerSecond; } }
 
-        public int Type { get { return defenseObject.Type; } }
-
-        #endregion
-
-        #region Constructors
-
-        public UnityDefense(GameObject defense, IDefense defenseObject)
-        {
-            this.defense = defense;
-            this.defenseObject = defenseObject;
-        }
+        public int Type { get { return defense.Type; } }
 
         #endregion
 
@@ -54,17 +43,17 @@ namespace UnityInvaders.Model
 
         public void ChangePosition(Position position)
         {
-            defense.transform.localScale += new Vector3(position.X, 0, position.Y);
+            gameObject.transform.localScale += new Vector3(position.X, 0, position.Y);
         }
 
         public void TakeDamage(int damage)
         {
-            defenseObject.TakeDamage(damage);
+            defense.TakeDamage(damage);
         }
 
         public bool IsAlive()
         {
-            return defenseObject.IsAlive();
+            return defense.IsAlive();
         }
 
         #endregion
