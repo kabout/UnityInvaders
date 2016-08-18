@@ -1,101 +1,146 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityInvaders.Interfaces;
-using UnityInvaders.Model;
+using UnityInvaders.Managers;
+using UnityStandardAssets.Cameras;
 
-public class UnityDefense : MonoBehaviour
+namespace UnityInvaders.Model
 {
-    #region Fields
-
-    public IDefense defense;
-    private float maxHealth = 100f;
-    public GameObject healthBar;
-    float maxBarX;
-
-    #endregion
-
-    #region Properties
-
-    public int Damage { get { return defense.Damage; } }
-
-    public int Range { get { return defense.Range; } }
-
-    public int Health { get { return defense.Health; } }
-
-    public int Radius
+    public class UnityDefense : MonoBehaviour, IDefense, ISelectable
     {
-        get { return defense.Radius; }
-    }
+        #region Fields
 
-    public Position Position
-    {
-        get { return new Position((int)gameObject.transform.localPosition.x, (int)gameObject.transform.localPosition.z); }
-    }
+        public bool selected;
+        public GameObject healthBar;
+        public GameObject destructionEffect;
+        public SelectionManager selectionManager;
 
-    public int Cost { get { return defense.Cost; } }
+        public int id;
+        public float damage;
+        public int range;
+        public int health;
+        public int radius;
+        public int cost;
+        public int dispersion;
+        public float attackPerSecond;
+        public int type;
 
-    public int Dispersion { get { return defense.Dispersion; } }
+        private bool died = false;
+        private float maxHealth;
+        private float maxBarX;
+        private GameObject defenseFloor;
 
-    public float AttacksPerSecond { get { return defense.AttacksPerSecond; } }
+        #endregion
 
-    public int Type { get { return defense.Type; } }
+        #region Properties
 
-    #endregion
+        public int Id { get { return id; } }
 
-    #region Unity Methods
+        public float Damage { get { return damage; } }
 
-    void Awake ()
-    {
-        GUIElement[] elements = GetComponentsInChildren<GUIElement>();
+        public int Range { get { return range; } }
 
-        foreach (GUIElement element in elements)
+        public int Health { get { return health; } }
+
+        public int Radius { get { return radius; } }
+
+        public int Cost { get { return cost; } }
+
+        public int Dispersion { get { return dispersion; } }
+
+        public float AttacksPerSecond { get { return attackPerSecond; } }
+
+        public int Type { get { return type; } }
+
+        public bool Selected
         {
-            if (element.name == "Bar")
+            get { return selected; }
+
+            set
             {
-                healthBar = element.gameObject;
-                break;
+                selected = value;
+                defenseFloor.SetActive(value);
+
+                if(selected)
+                    selectionManager.SelectGameObject(this);
             }
         }
+
+        #endregion
+
+        #region Unity Methods
+
+        void Awake()
+        {
+            defenseFloor = this.transform.Find("DefenseFloor").gameObject;
+        }
+
+        // Use this for initialization
+        void Start ()
+        {
+            maxHealth = Health;
+            maxBarX = healthBar.transform.localScale.x;
+            selected = false;
+            //InvokeRepeating("DecreaseHealth", 1f, 1f);
+        }
+
+        void Update ()
+        {
+            //if (Input.GetMouseButtonDown(0))
+            //    Selected = true;
+        }
+
+        void OnMouseDown()
+        {
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<UnityDefense>().Id == this.Id)
+                {
+                    Debug.Log("Selected" + this.Id);
+                    Selected = true;
+                    Camera.main.GetComponent<TargetFieldOfView>().SetTarget(transform);
+                }
+        }
+
+        void DecreaseHealth ()
+        {
+            if(!died)
+                TakeDamage(10);
+        }
+
+        public void SetHealthBar (float myHealth)
+        {
+            healthBar.transform.localScale = new Vector3((myHealth * maxBarX) / maxHealth,
+                healthBar.transform.localScale.y,
+                healthBar.transform.localScale.z);
+        }
+
+        #endregion
+
+        #region Methods
+
+        public void TakeDamage (int damage)
+        {
+            if (damage > Health)
+            {
+                health = 0;
+                died = true;
+                ParticleSystem particleSystem = ((GameObject)Instantiate(destructionEffect, transform)).GetComponent<ParticleSystem>();
+                particleSystem.Play();
+                Destroy(gameObject);
+            }
+            else
+                health -= damage;
+
+            SetHealthBar(Health);
+        }
+
+        public bool IsAlive ()
+        {
+            return !died;
+        }
+
+        #endregion
     }
-
-    // Use this for initialization
-    void Start ()
-    {
-        maxHealth = Health;
-        maxBarX = healthBar.transform.localScale.x;
-        InvokeRepeating("DecreaseHealth", 1f, 1f);
-    }
-    void DecreaseHealth ()
-    {
-        defense.TakeDamage(2);
-        SetHealthBar(Health);
-    }
-
-    public void SetHealthBar (float myHealth)
-    {
-        healthBar.transform.localScale = new Vector3((myHealth * maxBarX) / maxHealth,
-            healthBar.transform.localScale.y,
-            healthBar.transform.localScale.z);
-    }
-
-    #endregion
-
-    #region Methods
-
-    public void ChangePosition (Position position)
-    {
-        gameObject.transform.localScale += new Vector3(position.X, 0, position.Y);
-    }
-
-    public void TakeDamage (int damage)
-    {
-        defense.TakeDamage(damage);
-    }
-
-    public bool IsAlive ()
-    {
-        return defense.IsAlive();
-    }
-
-    #endregion
 }
