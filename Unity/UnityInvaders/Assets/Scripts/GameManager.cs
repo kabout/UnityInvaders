@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityInvaders.Model;
 
 namespace UnityInvaders.Managers
@@ -13,6 +14,7 @@ namespace UnityInvaders.Managers
         public GameObject alien;
         public GameObject spaceCamera;
         public SelectionManager selectionManager;
+        public Text timeText;
 
         private const int MIN_OBSTACLE_RADIO = 15;
         private const int MAX_OBSTACLE_RADIO = 30;
@@ -68,7 +70,11 @@ namespace UnityInvaders.Managers
         // Update is called once per frame
         void Update ()
         {
+            float timeInSecond = Time.time;
+            int timeInMinute = (int)(timeInSecond / 60);
+            timeInSecond = timeInSecond % 60;
 
+            timeText.text = string.Format("Time: {0:00}:{1:00}", timeInMinute, timeInSecond);            
         }
 
         public void OnGUI ()

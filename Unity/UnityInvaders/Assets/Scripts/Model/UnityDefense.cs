@@ -99,7 +99,7 @@ namespace UnityInvaders.Model
                 {
                     Debug.Log("Selected" + this.Id);
                     Selected = true;
-                    Camera.main.GetComponent<TargetFieldOfView>().SetTarget(transform);
+                   // Camera.main.GetComponent<TargetFieldOfView>().SetTarget(transform);
                 }
         }
 
