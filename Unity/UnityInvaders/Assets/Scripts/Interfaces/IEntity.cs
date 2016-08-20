@@ -1,4 +1,7 @@
-﻿namespace UnityInvaders.Interfaces
+﻿using UnityEngine;
+using System.Collections;
+
+namespace UnityInvaders.Interfaces
 {
     public interface IEntity
     {

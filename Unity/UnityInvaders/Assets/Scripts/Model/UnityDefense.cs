@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Text;
+using UnityEngine;
 using UnityInvaders.Interfaces;
 using UnityInvaders.Managers;
 using UnityStandardAssets.Cameras;
@@ -12,7 +13,6 @@ namespace UnityInvaders.Model
         public bool selected;
         public GameObject healthBar;
         public GameObject destructionEffect;
-        public SelectionManager selectionManager;
 
         public int id;
         public float damage;
@@ -59,9 +59,6 @@ namespace UnityInvaders.Model
             {
                 selected = value;
                 defenseFloor.SetActive(value);
-
-                if(selected)
-                    selectionManager.SelectGameObject(this);
             }
         }
 
@@ -85,23 +82,7 @@ namespace UnityInvaders.Model
 
         void Update ()
         {
-            //if (Input.GetMouseButtonDown(0))
-            //    Selected = true;
-        }
-
-        void OnMouseDown()
-        {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-                if (hit.collider != null && hit.collider.gameObject.GetComponent<UnityDefense>().Id == this.Id)
-                {
-                    Debug.Log("Selected" + this.Id);
-                    Selected = true;
-                   // Camera.main.GetComponent<TargetFieldOfView>().SetTarget(transform);
-                }
-        }
+        }       
 
         void DecreaseHealth ()
         {
@@ -139,6 +120,20 @@ namespace UnityInvaders.Model
         public bool IsAlive ()
         {
             return !died;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(string.Format("Identifier: {0}", Id));
+            sb.AppendLine(string.Format("Health: {0}", Health));
+            sb.AppendLine(string.Format("Damage: {0}", Damage));
+            sb.AppendLine(string.Format("Dispersion: {0}", Dispersion));
+            sb.AppendLine(string.Format("Range: {0}", Range));
+            sb.AppendLine(string.Format("Cost: {0}", Cost));
+
+            return sb.ToString();
         }
 
         #endregion

@@ -51,7 +51,10 @@ namespace UnityInvaders.Managers
             {
                 unityDefense.id = 1;
                 unityDefense.health = 100;
-                unityDefense.selectionManager = selectionManager;
+                unityDefense.damage = 30;
+                unityDefense.dispersion = 1;
+                unityDefense.range = 10;
+                unityDefense.cost = 100;
             }
 
             position = new Vector3(15, 0, 15);
@@ -62,8 +65,11 @@ namespace UnityInvaders.Managers
             if (unityDefense1 != null)
             {
                 unityDefense1.id = 2;
-                unityDefense1.health = 100;
-                unityDefense1.selectionManager = selectionManager;
+                unityDefense1.health = 150;
+                unityDefense1.damage = 40;
+                unityDefense1.dispersion = 2;
+                unityDefense1.range = 12;
+                unityDefense1.cost = 200;
             }
         }
 
