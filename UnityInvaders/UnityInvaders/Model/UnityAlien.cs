@@ -1,69 +1,93 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityInvaders.Interfaces;
 
 namespace UnityInvaders.Model
 {
-    public class UnityAlien
+    public class UnityAlien : MonoBehaviour, IAlien
     {
         #region Fields
 
-        public GameObject alien;
-        private IAlien alienObject;
+        public float damage;
+        public int range;
+        public float health;
+        public int cost;
+        public int id;
 
         #endregion
 
         #region Properties
 
-        public int Damage { get { return alienObject.Damage; } }
+        public float Damage { get { return damage; } }
 
-        public LevelAlien Level { get { return alienObject.Level; } }
+        public int Range { get { return range; } }
 
-        public int Range { get { return alienObject.Range; } }
-
-        public int Health { get { return alienObject.Health; } }
+        public float Health { get { return health; } }
 
         public int Width
         {
-            get { return (int)alien.transform.localScale.x; }
+            get { return (int)transform.localScale.x; }
         }
 
         public int Height
         {
-            get { return (int)alien.transform.localScale.z; }
+            get { return (int)transform.localScale.z; }
         }
 
-        public Position Position
+        public Vector3 Position
         {
-            get { return new Position((int)alien.transform.localPosition.x, (int)alien.transform.localPosition.z); }
+            get { return transform.position; }
         }
 
-        #endregion
-
-        #region Constructors
-
-        public UnityAlien(GameObject alien, IAlien alienObject)
+        public int Cost
         {
-            this.alien = alien;
-            this.alienObject = alienObject;
+            get
+            {
+                return cost;
+            }
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+        }
+
+        public float Radius
+        {
+            get
+            {
+                return transform.localScale.x / 2;
+            }
         }
 
         #endregion
 
         #region Methods
 
-        public void ChangePosition(Position position)
+        public void ChangePosition(Vector3 position)
         {
-            alien.transform.localScale += new Vector3(position.X, 0, position.Y);
+            transform.position = position;
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
-            alienObject.TakeDamage(damage);
+            if (damage > Health)
+                health = 0;
+            else
+                health -= damage;
         }
 
         public bool IsAlive()
         {
-            return alienObject.IsAlive();
+            return Health > 0;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

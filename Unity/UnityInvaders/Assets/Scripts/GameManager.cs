@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityInvaders.Controllers;
+using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
 
 namespace UnityInvaders.Managers
@@ -31,46 +33,46 @@ namespace UnityInvaders.Managers
         // Use this for initialization
         void Start ()
         {
-            //      IDifficultController difficultController = new DifficultController(700);
-            //      IObjectManager objectManager = new ObjectManager(difficultController);
-            //IDefenseController defenseController = new DefenseController(difficultController, objectManager);
-            //      IMapController mapController = new MapController(defenseController, difficultController, objectManager);
-            //      IMap map = mapController.GetEmptyMap(300);
-            //      mapController.InitMap(map);
-            //      MapToUnity mapToUnity = new MapToUnity(floor, obstacle, defense);
-            //      UnityMap unityMap = mapToUnity.Convert(map);
+            IDifficultController difficultController = new DifficultController(999);
+            IObjectManager objectManager = new ObjectManager(difficultController, defense, obstacle);
+            IDefenseController defenseController = new DefenseController(difficultController, objectManager);
+            IMapController mapController = new MapController(defenseController, difficultController, objectManager, floor);
+            IMap map = mapController.GetEmptyMap(700);
+            mapController.InitMap(map);
+            //MapToUnity mapToUnity = new MapToUnity(floor, obstacle, defense);
+            //UnityMap unityMap = mapToUnity.Convert(map);
 
-            float defenseSize = DEFAULT_DEFENSE_RADIO * 2;
+            //float defenseSize = DEFAULT_DEFENSE_RADIO * 2;
 
-            Vector3 position = new Vector3(5, 0, 5);
-            GameObject gameObject = Instantiate(defense, position, Quaternion.identity) as GameObject;
-            gameObject.transform.localScale = new Vector3(defenseSize, defenseSize, defenseSize);
-            UnityDefense unityDefense = gameObject.GetComponent(typeof(UnityDefense)) as UnityDefense;
+            //Vector3 position = new Vector3(5, 0, 5);
+            //GameObject gameObject = Instantiate(defense, position, Quaternion.identity) as GameObject;
+            //gameObject.transform.localScale = new Vector3(defenseSize, defenseSize, defenseSize);
+            //UnityDefense unityDefense = gameObject.GetComponent(typeof(UnityDefense)) as UnityDefense;
 
-            if (unityDefense != null)
-            {
-                unityDefense.id = 1;
-                unityDefense.health = 100;
-                unityDefense.damage = 30;
-                unityDefense.dispersion = 1;
-                unityDefense.range = 10;
-                unityDefense.cost = 100;
-            }
+            //if (unityDefense != null)
+            //{
+            //    unityDefense.id = 1;
+            //    unityDefense.health = 100;
+            //    unityDefense.damage = 30;
+            //    unityDefense.dispersion = 1;
+            //    unityDefense.range = 10;
+            //    unityDefense.cost = 100;
+            //}
 
-            position = new Vector3(15, 0, 15);
-            GameObject gameObject1 = Instantiate(defense, position, Quaternion.identity) as GameObject;
-            gameObject1.transform.localScale = new Vector3(defenseSize, defenseSize, defenseSize);
-            UnityDefense unityDefense1 = gameObject1.GetComponent(typeof(UnityDefense)) as UnityDefense;
+            //position = new Vector3(15, 0, 15);
+            //GameObject gameObject1 = Instantiate(defense, position, Quaternion.identity) as GameObject;
+            //gameObject1.transform.localScale = new Vector3(defenseSize, defenseSize, defenseSize);
+            //UnityDefense unityDefense1 = gameObject1.GetComponent(typeof(UnityDefense)) as UnityDefense;
 
-            if (unityDefense1 != null)
-            {
-                unityDefense1.id = 2;
-                unityDefense1.health = 150;
-                unityDefense1.damage = 40;
-                unityDefense1.dispersion = 2;
-                unityDefense1.range = 12;
-                unityDefense1.cost = 200;
-            }
+            //if (unityDefense1 != null)
+            //{
+            //    unityDefense1.id = 2;
+            //    unityDefense1.health = 150;
+            //    unityDefense1.damage = 40;
+            //    unityDefense1.dispersion = 2;
+            //    unityDefense1.range = 12;
+            //    unityDefense1.cost = 200;
+            //}
         }
 
         // Update is called once per frame

@@ -1,9 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UnityInvaders.Interfaces;
-using UnityInvaders.Transforms;
-using UnityInvaders.Managers;
-using UnityInvaders.Controllers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnityInvadersTests.Controllers
 {

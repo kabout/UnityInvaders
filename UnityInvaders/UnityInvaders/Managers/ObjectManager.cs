@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
 using UnityInvaders.Utils;
@@ -10,62 +11,94 @@ namespace UnityInvaders.Managers
     {
         #region Fields
 
+        public GameObject defensePrefab;
+        public GameObject obstaclePrefab;
+
         IDifficultController difficultController;
         private static int nextDefenseId = 1;
         private static int nextObstacleId = 1;
 
         #endregion
 
-        public ObjectManager(IDifficultController difficultController)
+        public ObjectManager(IDifficultController difficultController, GameObject defensePrefab, GameObject obstaclePrefab)
         {
             RandomManager.Seed = DateTime.Now.Millisecond;
             this.difficultController = difficultController;
+
+            this.defensePrefab = defensePrefab;
+            this.obstaclePrefab = obstaclePrefab;
         }
 
         public IDefense GenerateDefense(IMap map, int radiusDefense)
         {
-            IDefense defense = null;
+            IList<Vector3> freePositions = map.GetFreePositions(Constants.DEFAULT_DEFENSE_RADIO);
+            Vector3 position;
+            float defenseSize = Constants.DEFAULT_DEFENSE_RADIO * 2;
+            bool validPosition = false;
 
             do
             {
-                IList<Position> availablePositions = map.GetFreePositionsForDefense();
+                int index = RandomManager.GetRandomNumber(0, freePositions.Count);
+                position = freePositions[index];
+                freePositions.RemoveAt(index);
+                validPosition = map.IsValidPosition(position, Constants.DEFAULT_DEFENSE_RADIO);
+            } while (!validPosition && freePositions.Count != 0);
 
-                if (availablePositions.Count == 0)
-                    return defense;
+            if (!validPosition)
+                return null;
 
-                int index = RandomManager.GetRandomNumber(0, availablePositions.Count);
-                Position position = availablePositions[index];
+            //Instanciar la defensa
+            GameObject defense = GameObject.Instantiate(defensePrefab, position, Quaternion.identity) as GameObject;
 
-                defense = new Defense(nextDefenseId, 0, Constants.DEFENSE_HEALTH, radiusDefense, Constants.DEFAULT_DEFENSE_DAMAGE,
-                    Constants.DEFAULT_DEFENSE_RANGE, Constants.DEFAULT_DEFENSE_DISPERSION, Constants.DEFAULT_DEFENSE_ATTACKS_PER_SECOND,
-                    Constants.DEFAULT_DEFENSE_COST, position);
-            } while (!map.IsValidPosition(defense));
+            if (defense == null)
+                return null;
+
+            defense.transform.localScale = new Vector3(defenseSize, defenseSize, defenseSize);
+
+            // Inicializar los valores de la defensa
+            UnityDefense unityDefense = defense.GetComponent(typeof(UnityDefense)) as UnityDefense;
+
+            unityDefense.id = nextDefenseId;
+            unityDefense.cost = Constants.DEFAULT_DEFENSE_COST;
+            unityDefense.damage = Constants.DEFAULT_DEFENSE_DAMAGE;
+            unityDefense.dispersion = Constants.DEFAULT_DEFENSE_DISPERSION;
+            unityDefense.health = Constants.DEFENSE_HEALTH;
+            unityDefense.range = Constants.DEFAULT_DEFENSE_RANGE;
+            unityDefense.selected = false;
+            unityDefense.type = 0;
 
             nextDefenseId++;
 
-            return defense;
+            return unityDefense;
         }
         
         public IObstacle GenerateObstacle(IMap map, int minRadius, int maxRadius)
         {
-            //int minRadius = difficultController.GetMinRadiusOfObstacle();
-            //int maxRadius = difficultController.GetMaxRadiusOfObstacle();
+            float radius = RandomManager.GetRandomNumber(minRadius, maxRadius);
+            float sizeObstacle = radius * 2;
 
-            int radius = RandomManager.GetRandomNumber(minRadius, maxRadius);
+            IList<Vector3> freePositions = map.GetFreePositions(radius);
+            Vector3 position;
+            
+            int index = RandomManager.GetRandomNumber(0, freePositions.Count);
+            position = freePositions[index];
+            freePositions.RemoveAt(index);
 
-            IList<Position> availablePositions = map.GetFreePositionsForObstacle(radius);
+            //Instanciar la obstacle
+            GameObject obstacle = GameObject.Instantiate(obstaclePrefab, position, Quaternion.identity) as GameObject;
 
-            if (availablePositions.Count == 0)
+            if (obstacle == null)
                 return null;
 
-            int index = RandomManager.GetRandomNumber(0, availablePositions.Count);
-            Position position = availablePositions[index];
+            obstacle.transform.localScale = new Vector3(sizeObstacle, sizeObstacle, sizeObstacle);
 
-            IObstacle obstacle = new Obstacle(nextObstacleId, radius, position);
+            // Inicializar los valores de la defensa
+            UnityObstacle unityObstacle = obstacle.GetComponent(typeof(UnityObstacle)) as UnityObstacle;
+            unityObstacle.id = nextObstacleId;
 
             nextObstacleId++;
 
-            return obstacle;
+            return unityObstacle;
         }
     }
 }

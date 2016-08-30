@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using UnityEngine;
 using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
 using UnityInvaders.Utils;
@@ -11,6 +12,7 @@ namespace UnityInvaders.Controllers
     {
         #region Fields
 
+        GameObject mapPrefab;
         IDifficultController difficultController;
         IObjectManager objectManager;
         IDefenseController defenseController;
@@ -19,11 +21,12 @@ namespace UnityInvaders.Controllers
 
         #region Constructors
 
-        public MapController(IDefenseController defenseController, IDifficultController difficultController, IObjectManager objectManager)
+        public MapController(IDefenseController defenseController, IDifficultController difficultController, IObjectManager objectManager, GameObject mapPrefab)
         {
             this.difficultController = difficultController;
             this.objectManager = objectManager;
             this.defenseController = defenseController;
+            this.mapPrefab = mapPrefab;
         }
 
         #endregion
@@ -32,7 +35,19 @@ namespace UnityInvaders.Controllers
 
         public IMap GetEmptyMap(int size)
         {
-            return new Map(size);
+            GameObject map = GameObject.Instantiate(mapPrefab, new Vector3(size / 2, 0, size / 2), Quaternion.identity) as GameObject;
+
+            if (map == null)
+                return null;
+
+            map.transform.localScale = new Vector3(size, 0, size);
+
+            // Inicializar los valores de la defensa
+            UnityMap unityMap = map.GetComponent(typeof(UnityMap)) as UnityMap;
+            unityMap.margin = 15; // Mathf.RoundToInt(size * 0.1f);
+            unityMap.InitMap();
+
+            return unityMap;
         }
 
         public void InitMap(IMap map)
@@ -72,8 +87,6 @@ namespace UnityInvaders.Controllers
 
                 if (defense == null)
                     return;
-
-
 
                 map.AddDefense(defense);
 

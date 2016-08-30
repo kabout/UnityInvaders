@@ -12,7 +12,7 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>GamePlugins:3</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
@@ -69,6 +69,21 @@
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>Assets\Plugins\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Assets\Plugins\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Assets\Plugins\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>Assets\Plugins\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.DataContract">
+      <HintPath>Assets\Plugins\Unity.DataContract.dll</HintPath>
     </Reference>
     <Reference Include="UnityInvaders">
       <HintPath>Assets\Plugins\UnityInvaders.dll</HintPath>

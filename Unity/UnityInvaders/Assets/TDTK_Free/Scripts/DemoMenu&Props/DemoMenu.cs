@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using TDTK;
+using UnityEngine.SceneManagement;
 
 namespace TDTK {
 
@@ -32,14 +33,13 @@ namespace TDTK {
 		void Update () {
 		
 		}
-		
-		public void OnStartButton(GameObject butObj){
-			for(int i=0; i<buttonList.Count; i++){
-				if(buttonList[i].rootObj==butObj){
-					Application.LoadLevel(levelName[i]);
-				}
-			}
-		}
+
+        public void OnStartButton(GameObject butObj)
+        {
+            for (int i = 0; i < buttonList.Count; i++)
+                if (buttonList[i].rootObj == butObj)
+                    SceneManager.LoadScene(levelName[i]);
+        }
 		
 	}
 

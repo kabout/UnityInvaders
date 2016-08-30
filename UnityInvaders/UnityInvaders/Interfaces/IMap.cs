@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityInvaders.Model;
 
 namespace UnityInvaders.Interfaces
@@ -36,13 +37,19 @@ namespace UnityInvaders.Interfaces
         /// </summary>
         /// <param name="defense">Defensa que se añade al mapa</param>
         /// <returns>Devuelve true si la puede añadir o false en caso contrario</returns>
-        bool AddDefense (IDefense defense);
+        bool AddDefense(IDefense defense);
         /// <summary>
         /// Añade un alien al mapa
         /// </summary>
         /// <param name="alien">Alien que se añade al mapa</param>
         /// <returns>Devuelve true si lo puede añadir o false en caso contrario</returns>
-        bool AddAlien (IAlien alien);
+        bool AddAlien(IAlien alien);
+        /// <summary>
+        /// Devuelve las posiciones vacías del mapa para un objeto de radio radius
+        /// </summary>
+        /// <param name="radius">Radio del objeto</param>
+        /// <returns></returns>
+        IList<Vector3> GetFreePositions(float radius);
         /// <summary>
         /// Indica si el obstáculo está en una posición válida del mapa.
         /// </summary>
@@ -50,32 +57,28 @@ namespace UnityInvaders.Interfaces
         /// <returns>Devuelve true si la posición es correcta o false en caso contrario</returns>
         bool IsValidPosition(IObstacle obstacle);
         /// <summary>
+        /// Indica si el objeto con radio radius y posición position está en una posición válida del mapa.
+        /// </summary>
+        /// <param name="position">Posición a comprobar</param>
+        /// <param name="radius">Radio del objeto</param>
+        /// <returns>Devuelve true si la posición es correcta o false en caso contrario</returns>
+        bool IsValidPosition(Vector3 position, float radius);
+        /// <summary>
         /// Indica si la defensa está en una posición válida del mapa.
         /// </summary>
         /// <param name="defense">Defensa</param>
         /// <returns>Devuelve true si la posición es correcta o false en caso contrario</returns>
         bool IsValidPosition(IDefense defense);
         /// <summary>
-        /// Devuelve las posiciones libres para poner un obstáculo.
-        /// </summary>
-        /// <param name="radius">Radio del obstáculo</param>
-        IList<Position> GetFreePositionsForObstacle(int radius);
-        /// <summary>
-        /// Devuelve las posiciones libres para poner una defensa.
-        /// </summary>
-        IList<Position> GetFreePositionsForDefense();
-        /// <summary>
-        /// Devuelve las posiciones libres para poner un alien.
-        /// </summary>
-        /// <returns></returns>
-        IList<Position> GetFreePositionsForAlien();
-        /// <summary>
         /// Devuelve el mapa en forma de matriz
         /// 0: Espacio en blanco
         /// 1: Obstáculo
         /// 2: Defensa
         /// </summary>
-        int[,] GetMap ();
-        void CorrectCellUnReachables ();
+        int[,] GetMap();
+        /// <summary>
+        /// Corregir casillas inalcanzables
+        /// </summary>
+        void CorrectCellUnReachables();
     }
 }

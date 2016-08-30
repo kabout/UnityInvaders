@@ -51,31 +51,31 @@ namespace UnityInvaders.Controllers
 
         private void InitOnePlayerWithAliens ()
         {
-            Console.Clear();
-            Console.WriteLine("¡Empieza el juego controlando a los Aliens!");
+            //Console.Clear();
+            //Console.WriteLine("¡Empieza el juego controlando a los Aliens!");
 
-            // Escoger Dificultad y Tamaño del mapa.
-            int width = SelectMapWidth();
-            int height = SelectMapHeight();
+            //// Escoger Dificultad y Tamaño del mapa.
+            //int width = SelectMapWidth();
+            //int height = SelectMapHeight();
 
-            IDifficultController difficultController = new DifficultController(153);
-            IObjectManager objectManager = new ObjectManager(difficultController);
-            IDefenseController defenseController = new DefenseController(difficultController, objectManager);
-            IMapController mapController = new MapController(defenseController, difficultController, objectManager);
+            //IDifficultController difficultController = new DifficultController(153);
+            //IObjectManager objectManager = new ObjectManager(difficultController);
+            //IDefenseController defenseController = new DefenseController(difficultController, objectManager);
+            //IMapController mapController = new MapController(defenseController, difficultController, objectManager);
 
-            IMap map = mapController.GetEmptyMap(width);
-            mapController.InitMap(map);
+            //IMap map = mapController.GetEmptyMap(width);
+            //mapController.InitMap(map);
 
-            bool finish = false;
+            //bool finish = false;
 
-            while(!finish)
-            {
-                UpdateWorld(ref finish);
-                UpdateAliens();
-                UpdateDefenses();
-                UpdateMenu(ref finish);
+            //while(!finish)
+            //{
+            //    UpdateWorld(ref finish);
+            //    UpdateAliens();
+            //    UpdateDefenses();
+            //    UpdateMenu(ref finish);
 
-            }
+            //}
         }
 
         private int SelectMapHeight ()

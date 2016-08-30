@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityInvaders.Model;
+﻿using UnityEngine;
 
 namespace UnityInvaders.Interfaces
 {
@@ -15,10 +11,10 @@ namespace UnityInvaders.Interfaces
         /// <summary>
         /// Posición del objeto
         /// </summary>
-        Position Position { get; }
+        Vector3 Position { get; }
         /// <summary>
         /// Radio del objeto
         /// </summary>
-        int Radius { get; }
+        float Radius { get; }
     }
 }

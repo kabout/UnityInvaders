@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 using UnityInvaders.Interfaces;
 using UnityInvaders.Model;
 
@@ -47,13 +48,13 @@ namespace UnityInvaders.Utils
                 switch (point)
                 {
                     case 0:
-                    image.SetPixel(x, y, Color.Gray);
+                    image.SetPixel(x, y, System.Drawing.Color.Gray);
                     break;
                     case 1:
-                    image.SetPixel(x, y, Color.Black);
+                    image.SetPixel(x, y, System.Drawing.Color.Black);
                     break;
                     case 2:
-                    image.SetPixel(x, y, Color.Red);
+                    image.SetPixel(x, y, System.Drawing.Color.Red);
                     break;
                 }
 
@@ -69,7 +70,7 @@ namespace UnityInvaders.Utils
             return image;
         }
 
-        public Bitmap ConvertToBitMap (int[,] map, int size, List<Position> path)
+        public Bitmap ConvertToBitMap(int[,] map, int size, List<Vector3> path)
         {
             Bitmap image = new Bitmap(size, size);
 
@@ -81,17 +82,17 @@ namespace UnityInvaders.Utils
                 switch (point)
                 {
                     case 0:
-                        if(path.Contains(new Position(y,x)))
-                            image.SetPixel(x, y, Color.Blue);
+                        if (path.Contains(new Vector3(y, 0, x)))
+                            image.SetPixel(x, y, System.Drawing.Color.Blue);
                         else
-                            image.SetPixel(x, y, Color.Gray);
-                    break;
+                            image.SetPixel(x, y, System.Drawing.Color.Gray);
+                        break;
                     case 1:
-                    image.SetPixel(x, y, Color.Black);
-                    break;
+                        image.SetPixel(x, y, System.Drawing.Color.Black);
+                        break;
                     case 2:
-                    image.SetPixel(x, y, Color.Red);
-                    break;
+                        image.SetPixel(x, y, System.Drawing.Color.Red);
+                        break;
                 }
 
                 if (x == size - 1)
@@ -106,7 +107,7 @@ namespace UnityInvaders.Utils
             return image;
         }
 
-        public Bitmap ConvertToBitMap (int[,] map, int size, Position source, Position target)
+        public Bitmap ConvertToBitMap (int[,] map, int size, Vector3 source, Vector3 target)
         {
             Bitmap image = new Bitmap(size, size);
 
@@ -118,18 +119,18 @@ namespace UnityInvaders.Utils
                 switch (point)
                 {
                     case 0:
-                    if (source.Equals(new Position(y, x)))
-                        image.SetPixel(x, y, Color.White);
-                    else if (target.Equals(new Position(y, x)))
-                        image.SetPixel(x, y, Color.Yellow);
+                    if (source.Equals(new Vector3(y, x)))
+                        image.SetPixel(x, y, System.Drawing.Color.White);
+                    else if (target.Equals(new Vector3(y, x)))
+                        image.SetPixel(x, y, System.Drawing.Color.Yellow);
                     else
-                        image.SetPixel(x, y, Color.Gray);
+                        image.SetPixel(x, y, System.Drawing.Color.Gray);
                     break;
                     case 1:
-                    image.SetPixel(x, y, Color.Black);
+                    image.SetPixel(x, y, System.Drawing.Color.Black);
                     break;
                     case 2:
-                    image.SetPixel(x, y, Color.Red);
+                    image.SetPixel(x, y, System.Drawing.Color.Red);
                     break;
                 }
 
@@ -157,13 +158,13 @@ namespace UnityInvaders.Utils
                 switch (point)
                 {
                     case ' ':
-                    image.SetPixel(x, y, Color.Gray);
+                    image.SetPixel(x, y, System.Drawing.Color.Gray);
                     break;
                     case 'x':
-                    image.SetPixel(x, y, Color.Black);
+                    image.SetPixel(x, y, System.Drawing.Color.Black);
                     break;
                     default:
-                    image.SetPixel(x, y, Color.Red);
+                    image.SetPixel(x, y, System.Drawing.Color.Red);
                     break;
                 }
 

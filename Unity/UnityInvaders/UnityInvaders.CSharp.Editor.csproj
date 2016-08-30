@@ -118,6 +118,21 @@
     <Reference Include="UnityInvaders">
       <HintPath>Assets\Plugins\UnityInvaders.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Assets\Plugins\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>Assets\Plugins\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.DataContract">
+      <HintPath>Assets\Plugins\Unity.DataContract.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Assets\Plugins\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>Assets\Plugins\System.Drawing.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityInvaders.CSharp.Plugins.csproj">

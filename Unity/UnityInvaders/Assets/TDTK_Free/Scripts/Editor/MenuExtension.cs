@@ -4,6 +4,7 @@ using UnityEditor;
 using System.Collections;
 
 using TDTK;
+using UnityEditor.SceneManagement;
 
 namespace TDTK {
 
@@ -22,7 +23,7 @@ namespace TDTK {
 		}
 
 		static void CreateEmptyScene(){
-			EditorApplication.NewScene();
+            EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects);
 			GameObject camObj=Camera.main.gameObject; 	DestroyImmediate(camObj);
 			Light light=GameObject.FindObjectOfType<Light>();
 			if(light!=null) DestroyImmediate(light.gameObject);

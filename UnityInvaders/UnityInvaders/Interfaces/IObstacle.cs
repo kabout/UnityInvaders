@@ -1,4 +1,4 @@
-﻿using UnityInvaders.Model;
+﻿using UnityEngine;
 
 namespace UnityInvaders.Interfaces
 {
@@ -8,6 +8,6 @@ namespace UnityInvaders.Interfaces
         /// CAmbia la posición del obstáculo
         /// </summary>
         /// <param name="position">Buena posición</param>
-        void ChangePosition(Position position);
+        void ChangePosition(Vector3 position);
     }
 }

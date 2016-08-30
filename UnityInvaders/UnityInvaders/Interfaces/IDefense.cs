@@ -1,13 +1,11 @@
-﻿using UnityInvaders.Model;
-
-namespace UnityInvaders.Interfaces
+﻿namespace UnityInvaders.Interfaces
 {
     public interface IDefense : IEntity
     {
         /// <summary>
         /// Nivel de daño que genera la defensa
         /// </summary>
-        int Damage { get; }
+        float Damage { get; }
         /// <summary>
         /// Dispersión del disparo de la defensa
         /// </summary>
@@ -27,7 +25,7 @@ namespace UnityInvaders.Interfaces
         /// <summary>
         /// Salud de la defensa
         /// </summary>
-        int Health { get; }
+        float Health { get; }
         /// <summary>
         /// Tipo de defensa
         /// </summary>
@@ -36,12 +34,7 @@ namespace UnityInvaders.Interfaces
         /// Resta salud a la defensa indicado por damage
         /// </summary>
         /// <param name="damage">Puntos de vida a restar</param>
-        void TakeDamage(int damage);
-        /// <summary>
-        /// Cambia la posición de la defensa
-        /// </summary>
-        /// <param name="position">Nueva posición de la defensa</param>
-        void ChangePosition(Position position);
+        void TakeDamage(float damage);
         /// <summary>
         /// Indica si la defensa tiene aún vida
         /// </summary>

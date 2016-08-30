@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using TDTK;
+using UnityEngine.SceneManagement;
 
 namespace TDTK {
 
@@ -38,7 +39,7 @@ namespace TDTK {
 		}
 		
 		public void OnRestartButton(){
-			Application.LoadLevel(Application.loadedLevelName);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 		
 		public void OnMainMenuButton(){

@@ -1,43 +1,47 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityInvaders.Interfaces;
 
 namespace UnityInvaders.Model
 {
-    public class UnityObstacle
+    public class UnityObstacle : MonoBehaviour, IObstacle
     {
         #region Fields
 
-        public GameObject obstacle;
+        public int id;
 
         #endregion
 
         #region Properties
 
-        public int Radius
+        public float Radius
         {
-            get { return (int)(obstacle.transform.localScale.x / 2); }
+            get { return transform.localScale.x / 2; }
         }
 
-        public Position Position
+        public int Id
         {
-            get { return new Position((int)obstacle.transform.localPosition.x, (int)obstacle.transform.localPosition.z); }
+            get
+            {
+                return id;
+            }
         }
 
-        #endregion
-
-        #region Constructors
-
-        public UnityObstacle(GameObject obstacle)
+        Vector3 IEntity.Position
         {
-            this.obstacle = obstacle;
+            get
+            {
+                return transform.position;
+            }
         }
 
-        #endregion
+        #endregion        
 
         #region Methods
 
-        public void ChangePosition(Position position)
+        public void ChangePosition(Vector3 position)
         {
-            obstacle.transform.localScale += new Vector3(position.X, 0, position.Y);
+            transform.position = position;
         }
 
         #endregion

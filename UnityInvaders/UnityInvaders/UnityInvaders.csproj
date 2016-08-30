@@ -65,34 +65,29 @@
     <Compile Include="Interfaces\IMap.cs" />
     <Compile Include="Interfaces\IObject.cs" />
     <Compile Include="Interfaces\IObstacle.cs" />
-    <Compile Include="Model\Alien.cs" />
-    <Compile Include="Model\Object.cs" />
+    <Compile Include="Interfaces\Selectable.cs" />
+    <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\UnityAlien.cs" />
     <Compile Include="Model\UnityDefense.cs" />
     <Compile Include="Model\UnityMap.cs" />
-    <Compile Include="Model\Defense.cs" />
     <Compile Include="Interfaces\IDefense.cs" />
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Interfaces\IObjectManager.cs" />
-    <Compile Include="Model\Map.cs" />
     <Compile Include="Managers\ObjectManager.cs" />
-    <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Position.cs" />
     <Compile Include="Model\UnityObstacle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transforms\AlienToUnity.cs" />
-    <Compile Include="Transforms\MapToUnity.cs" />
-    <Compile Include="Transforms\DefenseToUnity.cs" />
-    <Compile Include="Transforms\ObstacleToUnity.cs" />
     <Compile Include="Utils\ExportMapToImage.cs" />
     <Compile Include="Utils\RandomManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Transforms\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
