@@ -115,23 +115,29 @@
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
-    <Reference Include="UnityInvaders">
-      <HintPath>Assets\Plugins\UnityInvaders.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>Assets\Plugins\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>Assets\Plugins\ICSharpCode.NRefactory.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.DataContract">
-      <HintPath>Assets\Plugins\Unity.DataContract.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Assets\Plugins\Mono.Cecil.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Assets\Plugins\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="StrategyLocationDefenses">
+      <HintPath>Assets\Plugins\StrategyLocationDefenses.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing">
       <HintPath>Assets\Plugins\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.DataContract">
+      <HintPath>Assets\Plugins\Unity.DataContract.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityInvaders">
+      <HintPath>Assets\Plugins\UnityInvaders.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityInvaders.Types">
+      <HintPath>Assets\Plugins\UnityInvaders.Types.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

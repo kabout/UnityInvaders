@@ -9,8 +9,9 @@ namespace UnityInvaders.Interfaces
         /// Devuelve un mapa vacío con tamaño size x size
         /// </summary>
         /// <param name="size">Tamaño del mapa</param>
+        /// <param name="cellSize">Tamaño de la celda</param>
         /// <returns></returns>
-        IMap GetEmptyMap(int size);
+        IMap GetEmptyMap(int size, int cellSize);
         /// <summary>
         /// Inicializa el mapa map para un nivel de dificultad difficultLevel.
         /// Añade los obstaculos y las defensas.

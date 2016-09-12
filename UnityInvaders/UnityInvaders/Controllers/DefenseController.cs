@@ -27,25 +27,6 @@ namespace UnityInvaders.Controllers
 
         #region Methods
 
-        public void PlaceDefenses(IMap map)
-        {
-            int numDefenses = difficultController.GetNumberOfDefenses(map);
-
-            while (numDefenses > 0)
-            {
-                IDefense defense = objectManager.GenerateDefense(map, Constants.DEFAULT_DEFENSE_RADIO);
-
-                if (defense == null)
-                    return;
-
-                map.AddDefense(defense);
-
-                numDefenses--;
-            }
-
-            Debug.Assert(map.Defenses.Count > 0);
-        }
-
         public IList<IAlien> GetAliensInRange (IMap map, IDefense defense)
         {
             //int x = defense.Position.x;

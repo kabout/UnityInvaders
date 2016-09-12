@@ -29,23 +29,9 @@ namespace UnityInvaders.Managers
             this.obstaclePrefab = obstaclePrefab;
         }
 
-        public IDefense GenerateDefense(IMap map, int radiusDefense)
+        public IDefense GenerateDefense(Vector3 position)
         {
-            IList<Vector3> freePositions = map.GetFreePositions(Constants.DEFAULT_DEFENSE_RADIO);
-            Vector3 position;
             float defenseSize = Constants.DEFAULT_DEFENSE_RADIO * 2;
-            bool validPosition = false;
-
-            do
-            {
-                int index = RandomManager.GetRandomNumber(0, freePositions.Count);
-                position = freePositions[index];
-                freePositions.RemoveAt(index);
-                validPosition = map.IsValidPosition(position, Constants.DEFAULT_DEFENSE_RADIO);
-            } while (!validPosition && freePositions.Count != 0);
-
-            if (!validPosition)
-                return null;
 
             //Instanciar la defensa
             GameObject defense = GameObject.Instantiate(defensePrefab, position, Quaternion.identity) as GameObject;

@@ -1,4 +1,5 @@
-﻿using UnityInvaders.Model;
+﻿using UnityEngine;
+using UnityInvaders.Model;
 
 namespace UnityInvaders.Interfaces
 {
@@ -16,9 +17,8 @@ namespace UnityInvaders.Interfaces
         /// <summary>
         /// Genera una defensa de tamaño sizeDefense en el mapa map. No la añade al mapa map.
         /// </summary>
-        /// <param name="map">Mapa</param>
-        /// <param name="radiusDefense">Radio de la defensa</param>
-        /// <returns>Devuelve una defensa en una posición del mapa.</returns>
-        IDefense GenerateDefense(IMap map, int radiusDefense);
+        /// <param name="position">Posición de la defensa</param>
+        /// <returns>Devuelve una defensa en la posición position del mapa.</returns>
+        IDefense GenerateDefense(Vector3 position);
     }
 }

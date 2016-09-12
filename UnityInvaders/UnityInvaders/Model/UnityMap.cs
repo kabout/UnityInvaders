@@ -13,6 +13,7 @@ namespace UnityInvaders.Model
         #region Fields
 
         public int margin;
+        public int cellSize;
 
         private IList<IObstacle> obstacles;
         private IList<IDefense> defenses;
@@ -45,6 +46,14 @@ namespace UnityInvaders.Model
         public IList<IAlien> Aliens { get { return aliens; } }
 
         public int Margin { get { return margin; } }
+
+        public int CellSize
+        {
+            get
+            {
+                return cellSize;
+            }
+        }
 
         #endregion
 

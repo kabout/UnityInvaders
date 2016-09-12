@@ -10,6 +10,11 @@ namespace UnityInvaders.Interfaces
         /// Dimensión del mapa, siendo un mapa de Size x Size
         /// </summary>
         int Size { get; }
+
+        /// <summary>
+        /// Tamaño de las celdas
+        /// </summary>
+        int CellSize { get; }
         /// <summary>
         /// Lista de sólo lectura de los obstáculos del mapa
         /// </summary>

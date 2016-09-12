@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StrategyLocationDefenses;
+using System;
 using System.Drawing;
 using UnityEngine;
 using UnityInvaders.Interfaces;
@@ -15,17 +16,17 @@ namespace UnityInvaders.Controllers
         GameObject mapPrefab;
         IDifficultController difficultController;
         IObjectManager objectManager;
-        IDefenseController defenseController;
+        IStrategyLocationDefenses strategyLocationDefenses;
 
         #endregion
 
         #region Constructors
 
-        public MapController(IDefenseController defenseController, IDifficultController difficultController, IObjectManager objectManager, GameObject mapPrefab)
+        public MapController(IStrategyLocationDefenses strategyLocationDefenses, IDifficultController difficultController, IObjectManager objectManager, GameObject mapPrefab)
         {
             this.difficultController = difficultController;
             this.objectManager = objectManager;
-            this.defenseController = defenseController;
+            this.strategyLocationDefenses = strategyLocationDefenses;
             this.mapPrefab = mapPrefab;
         }
 
@@ -33,7 +34,7 @@ namespace UnityInvaders.Controllers
 
         #region Methods
 
-        public IMap GetEmptyMap(int size)
+        public IMap GetEmptyMap(int size, int cellSize)
         {
             GameObject map = GameObject.Instantiate(mapPrefab, new Vector3(size / 2, 0, size / 2), Quaternion.identity) as GameObject;
 
@@ -45,6 +46,7 @@ namespace UnityInvaders.Controllers
             // Inicializar los valores de la defensa
             UnityMap unityMap = map.GetComponent(typeof(UnityMap)) as UnityMap;
             unityMap.margin = 15; // Mathf.RoundToInt(size * 0.1f);
+            unityMap.cellSize = cellSize;
             unityMap.InitMap();
 
             return unityMap;
@@ -53,8 +55,10 @@ namespace UnityInvaders.Controllers
         public void InitMap(IMap map)
         {
             PlaceObstacles(map);
-            map.CorrectCellUnReachables();
-            defenseController.PlaceDefenses(map);
+            PlaceDefenses(map);
+
+
+            
             Bitmap image = ExportMapToImage.Instance.ConvertToBitMap(map.GetMap(), map.Size);
             image.Save(@"C:\temp\map.bmp");
         }       
@@ -79,11 +83,14 @@ namespace UnityInvaders.Controllers
 
         private void PlaceDefenses(IMap map)
         {
+            strategyLocationDefenses.InitStrategy(map.Obstacles, Constants.DEFAULT_DEFENSE_RADIO, map.Size, map.CellSize);
+
             int numDefenses = difficultController.GetNumberOfDefenses(map);
 
             while (numDefenses > 0)
             {
-                IDefense defense = objectManager.GenerateDefense(map, Constants.DEFAULT_DEFENSE_RADIO);
+                Vector3 position = strategyLocationDefenses.GetPositionForDefense(map.Defenses);
+                IDefense defense = objectManager.GenerateDefense(position);
 
                 if (defense == null)
                     return;

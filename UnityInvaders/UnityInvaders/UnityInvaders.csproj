@@ -63,14 +63,11 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Interfaces\IGameController.cs" />
     <Compile Include="Interfaces\IMap.cs" />
-    <Compile Include="Interfaces\IObject.cs" />
-    <Compile Include="Interfaces\IObstacle.cs" />
     <Compile Include="Interfaces\Selectable.cs" />
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\UnityAlien.cs" />
     <Compile Include="Model\UnityDefense.cs" />
     <Compile Include="Model\UnityMap.cs" />
-    <Compile Include="Interfaces\IDefense.cs" />
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Interfaces\IObjectManager.cs" />
@@ -87,6 +84,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Transforms\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StrategyLocationDefenses\StrategyLocationDefenses.csproj">
+      <Project>{33e3ec98-85f1-43eb-863d-525402eb5cba}</Project>
+      <Name>StrategyLocationDefenses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnityInvaders.Types\UnityInvaders.Types.csproj">
+      <Project>{dd418970-1042-4b12-83cc-fc36e5c5bdcd}</Project>
+      <Name>UnityInvaders.Types</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
