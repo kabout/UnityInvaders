@@ -35,6 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StrategyAlienAttack">
+      <HintPath>..\StrategyAlienAttack\bin\Release\StrategyAlienAttack.dll</HintPath>
+    </Reference>
+    <Reference Include="StrategyLocationDefenses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\StrategyLocationDefenses\bin\Release\StrategyLocationDefenses.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing">
@@ -50,11 +57,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AlienController.cs" />
+    <Compile Include="Controllers\BulletController.cs" />
     <Compile Include="Controllers\DefenseController.cs" />
     <Compile Include="Controllers\DifficultController.cs" />
     <Compile Include="Interfaces\IAlien.cs" />
-    <Compile Include="Interfaces\IAlienController.cs" />
     <Compile Include="Interfaces\IDefenseController.cs" />
     <Compile Include="Interfaces\IDifficultController.cs" />
     <Compile Include="Interfaces\IMapController.cs" />
@@ -86,10 +92,6 @@
     <Folder Include="Transforms\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StrategyLocationDefenses\StrategyLocationDefenses.csproj">
-      <Project>{33e3ec98-85f1-43eb-863d-525402eb5cba}</Project>
-      <Name>StrategyLocationDefenses</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UnityInvaders.Types\UnityInvaders.Types.csproj">
       <Project>{dd418970-1042-4b12-83cc-fc36e5c5bdcd}</Project>
       <Name>UnityInvaders.Types</Name>

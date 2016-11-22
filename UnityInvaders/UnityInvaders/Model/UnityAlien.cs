@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using UnityEngine;
 using UnityInvaders.Interfaces;
 
@@ -7,12 +8,23 @@ namespace UnityInvaders.Model
     public class UnityAlien : MonoBehaviour, IAlien
     {
         #region Fields
-
+        
+        public Transform Target;
+        public GameObject HealthBar;
+        public GameObject Bullet;
+        public GameObject BulletPos;
         public float damage;
         public int range;
         public float health;
         public int cost;
         public int id;
+        public float shottingInterval = 1f;
+        private float shootSpeed = 50;
+        private float nextShoot = 0;
+
+        private bool died = false;
+        private float maxHealth;
+        private float maxBarX;
 
         #endregion
 
@@ -67,27 +79,95 @@ namespace UnityInvaders.Model
 
         #region Methods
 
-        public void ChangePosition(Vector3 position)
+
+
+        void Awake()
         {
-            transform.position = position;
         }
+
+        // Use this for initialization
+        void Start()
+        {
+            maxHealth = Health;
+            maxBarX = HealthBar.transform.localScale.x;
+        }
+
+        public void SetHealthBar(float myHealth)
+        {
+            HealthBar.transform.localScale = new Vector3((myHealth * maxBarX) / maxHealth,
+                HealthBar.transform.localScale.y,
+                HealthBar.transform.localScale.z);
+        }
+
+        void Update()
+        {
+            if (Target)
+                Shoot();
+        }
+
+        public void Shoot()
+        {
+            if (nextShoot >= Time.time)
+                return;
+
+            nextShoot = Time.time + shottingInterval;
+
+            GameObject bullet = (GameObject)Instantiate(Bullet, BulletPos.transform.position, BulletPos.transform.rotation);
+            var bulletController = bullet.GetComponent<BulletController>();
+            bulletController.Damage = Damage;
+            bulletController.Dispersion = 0;
+            //Le damos velocidad a la bala 
+            bullet.GetComponent<Rigidbody>().velocity = BulletPos.transform.TransformDirection(new Vector3(0, 0, shootSpeed));
+        }
+
+        void DecreaseHealth()
+        {
+            if (!died)
+                TakeDamage(10);
+        }
+
+        #endregion
+
+        #region Methods
 
         public void TakeDamage(float damage)
         {
             if (damage > Health)
+            {
                 health = 0;
+                died = true;
+                //ParticleSystem particleSystem = ((GameObject)Instantiate(destructionEffect, transform.position, Quaternion.identity)).GetComponent<ParticleSystem>();
+                //particleSystem.Play();
+                Destroy(gameObject);
+            }
             else
                 health -= damage;
+
+            SetHealthBar(Health);
         }
 
         public bool IsAlive()
         {
-            return Health > 0;
+            return !died;
         }
 
-        public void TakeDamage(int damage)
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(string.Format("Identifier: {0}", Id));
+            sb.AppendLine(string.Format("Health: {0}", Health));
+            sb.AppendLine(string.Format("Damage: {0}", Damage));
+            //sb.AppendLine(string.Format("Dispersion: {0}", Dispersion));
+            sb.AppendLine(string.Format("Range: {0}", Range));
+            sb.AppendLine(string.Format("Cost: {0}", Cost));
+
+            return sb.ToString();
+        }
+
+        public void ChangePosition(Vector3 position)
+        {
+            transform.localPosition = position;
         }
 
         #endregion

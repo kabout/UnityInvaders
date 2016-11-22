@@ -27,7 +27,7 @@ namespace UnityInvaders.Managers
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (!Physics.Raycast(ray, out hit) || hit.collider == null)
+            if (!Physics.Raycast(ray, out hit, LayerMask.GetMask("Defense")) || hit.collider == null)
             {
                 UnSelected();
                 return;
@@ -44,9 +44,10 @@ namespace UnityInvaders.Managers
             Debug.Log("Selected" + unityDefense.Id);
             unityDefense.Selected = true;
             selectedGameObject = unityDefense;
-            UnityEngine.UI.Text UIInfoText = UIInfoSelectObject.GetComponentInChildren<UnityEngine.UI.Text>();
-            UIInfoText.text = unityDefense.ToString();
-            UIInfoSelectObject.SetActive(true);
+            //UnityEngine.UI.Text UIInfoText = UIInfoSelectObject.GetComponentInChildren<UnityEngine.UI.Text>();
+            //UIInfoText.text = unityDefense.ToString();
+            //UIInfoSelectObject.SetActive(true);
+            gameObject.GetComponent<MoveAlien>().ChangeTarget(hit.collider.gameObject.transform);
         }
 
         void UnSelected()
@@ -57,7 +58,7 @@ namespace UnityInvaders.Managers
             selectedGameObject.Selected = false;
             selectedGameObject = null;
 
-            UIInfoSelectObject.SetActive(false);
+            //UIInfoSelectObject.SetActive(false);
         }
     }
 }

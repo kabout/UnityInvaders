@@ -15,10 +15,6 @@
         /// </summary>
         int Range { get; }
         /// <summary>
-        /// Ataques de la defensa por segundo
-        /// </summary>
-        float AttacksPerSecond { get; }
-        /// <summary>
         /// Coste de la Defensa, según su nivel.
         /// </summary>
         int Cost { get; }

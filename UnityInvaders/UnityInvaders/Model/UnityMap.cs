@@ -266,10 +266,7 @@ namespace UnityInvaders.Model
         }
 
         public bool AddDefense(IDefense defense)
-        {
-            if (!IsValidPosition(defense))
-                return false;
-            
+        {            
             int xInit = Mathf.Max(0, Mathf.RoundToInt(defense.Position.x - defense.Radius));
             int yInit = Mathf.Max(0, Mathf.RoundToInt(defense.Position.z - defense.Radius));
             int xEnd = Mathf.Min(Mathf.RoundToInt(defense.Position.x + defense.Radius), upperBorder);

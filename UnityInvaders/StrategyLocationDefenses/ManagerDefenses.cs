@@ -12,6 +12,7 @@ namespace StrategyLocationDefenses
         private List<KeyValuePair<Vector3,int>> weightedPositions = new List<KeyValuePair<Vector3, int>>();
         private List<Vector2> obstaclePositions = new List<Vector2>();
         private int mapSize, cellSize, defenseRadius;
+        private int[,] map;
         private IList<IObstacle> obstacles;
 
         #endregion
@@ -37,7 +38,10 @@ namespace StrategyLocationDefenses
                 Vector3 position = weightedPositions.FirstOrDefault().Key * cellSize;
 
                 if (IsValidPosition(position, defenses))
+                {
+                    weightedPositions.RemoveAt(0);
                     return position;
+                }
 
                 weightedPositions.RemoveAt(0);
             }
@@ -52,11 +56,22 @@ namespace StrategyLocationDefenses
         private void InitMap()
         {
             int numCells = mapSize / cellSize;
+            map = new int[numCells, numCells];
+
+            for (int i = 0; i < numCells; i++)
+                for (int j = 0; j < numCells; j++)
+                    map[i, j] = 0;
 
             foreach (IObstacle obstacle in obstacles)
             {
                 int xInMap = Mathf.RoundToInt(obstacle.Position.x / cellSize);
                 int zInMap = Mathf.RoundToInt(obstacle.Position.z / cellSize);
+
+                int obstacleRadius = Mathf.RoundToInt(obstacle.Radius / cellSize);
+
+                for (int i = Mathf.Min(0, xInMap - obstacleRadius); i < Mathf.Max(numCells, xInMap + obstacleRadius); i++)
+                    for (int j = Mathf.Min(0, zInMap - obstacleRadius); j < Mathf.Max(numCells, zInMap + obstacleRadius); j++)
+                        map[i, j] = 1;
 
                 obstaclePositions.Add(new Vector2(xInMap, zInMap));
             }
@@ -75,8 +90,11 @@ namespace StrategyLocationDefenses
 
                     List<int> distances = new List<int>();
 
+                    int factorPos = Mathf.Abs((numCells / 2) - (numCells - x)) +
+                            Mathf.Abs((numCells / 2) - (numCells - z));
+
                     foreach (Vector2 position in obstaclePositions)
-                        distances.Add(distanceDistanceToObstacle(x, z, position.x, position.y));
+                        distances.Add(distanceDistanceToObstacle(x, z, position.x, position.y) + factorPos);
 
                     weightedPositions.Add(new KeyValuePair<Vector3, int>(new Vector3(x, 0, z), distances.Min()));
                 }
@@ -93,7 +111,7 @@ namespace StrategyLocationDefenses
         private bool IsValidPosition(Vector3 position, IList<IDefense> defenses)
         {
             if (position.x - defenseRadius <= 0 || position.x + defenseRadius >= mapSize ||
-               position.z - defenseRadius <= 0 || position.z + defenseRadius >= mapSize)
+                position.z - defenseRadius <= 0 || position.z + defenseRadius >= mapSize)
                 return false;
 
             foreach(IObstacle obstacle in obstacles)
@@ -101,7 +119,7 @@ namespace StrategyLocationDefenses
                 float distance = Distance(obstacle.Position, position);
 
                 if (distance < (obstacle.Radius + defenseRadius))
-                    return false;   
+                    return false;
             }
 
             foreach (IDefense defense in defenses)
@@ -111,6 +129,9 @@ namespace StrategyLocationDefenses
                 if(distance < (defense.Radius + defenseRadius))
                     return false;
             }
+
+            // Comprobar que se puede llegar a algún borde desde la posición
+            
 
             return true;
         }

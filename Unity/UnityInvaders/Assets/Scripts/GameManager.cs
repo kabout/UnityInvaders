@@ -1,4 +1,5 @@
-﻿using StrategyLocationDefenses;
+﻿using StrategyAlienAttack;
+using StrategyLocationDefenses;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,12 +35,13 @@ namespace UnityInvaders.Managers
         // Use this for initialization
         void Start ()
         {
-            IDifficultController difficultController = new DifficultController(123);
+            IDifficultController difficultController = new DifficultController(999);
             IObjectManager objectManager = new ObjectManager(difficultController, defense, obstacle);
             IDefenseController defenseController = new DefenseController(difficultController, objectManager);
             IStrategyLocationDefenses strageyLocationDefenses = new ManagerDefenses();
-            IMapController mapController = new MapController(strageyLocationDefenses, difficultController, objectManager, floor);
-            IMap map = mapController.GetEmptyMap(100, 10);
+            IStrategyAlienAttack strategyAlienAttack = new StrategyAlienAttack.StrategyAlienAttack();
+            IMapController mapController = new MapController(strageyLocationDefenses, difficultController, objectManager, strategyAlienAttack, floor);
+            IMap map = mapController.GetEmptyMap(500, 10);
             mapController.InitMap(map);
             //MapToUnity mapToUnity = new MapToUnity(floor, obstacle, defense);
             //UnityMap unityMap = mapToUnity.Convert(map);

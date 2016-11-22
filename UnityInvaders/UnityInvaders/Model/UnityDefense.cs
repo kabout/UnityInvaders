@@ -9,9 +9,14 @@ namespace UnityInvaders.Model
     {
         #region Fields
 
+        public GameObject Torreta;
+        public Transform Target;
+
         public bool selected;
         public GameObject healthBar;
         public GameObject destructionEffect;
+        public GameObject Bullet;
+        public GameObject BulletPos;
 
         public int id;
         public float damage;
@@ -19,9 +24,11 @@ namespace UnityInvaders.Model
         public float health;
         public int cost;
         public int dispersion;
-        public float attackPerSecond;
         public int type;
+        public float shottingInterval = 1f;
 
+        private float shootSpeed = 50;
+        private float nextShoot = 0;
         private bool died = false;
         private float maxHealth;
         private float maxBarX;
@@ -45,8 +52,6 @@ namespace UnityInvaders.Model
 
         public int Dispersion { get { return dispersion; } }
 
-        public float AttacksPerSecond { get { return attackPerSecond; } }
-
         public int Type { get { return type; } }
 
         public bool Selected
@@ -56,7 +61,9 @@ namespace UnityInvaders.Model
             set
             {
                 selected = value;
-                defenseFloor.SetActive(value);
+
+                if(defenseFloor)
+                    defenseFloor.SetActive(value);
             }
         }
 
@@ -88,12 +95,33 @@ namespace UnityInvaders.Model
 
         void Update()
         {
+            if (Target)
+                Shoot();
+            else
+                Torreta.transform.localRotation = Quaternion.identity;
         }
 
         void DecreaseHealth()
         {
             if (!died)
                 TakeDamage(10);
+        }
+
+        public void Shoot()
+        {
+            Torreta.transform.LookAt(Target);
+
+            if (nextShoot >= Time.time)
+                return;
+
+            nextShoot = Time.time + shottingInterval;
+
+            GameObject bullet = (GameObject)Instantiate(Bullet, BulletPos.transform.position, BulletPos.transform.rotation);
+            var bulletController = bullet.GetComponent<BulletController>();
+            bulletController.Damage = Damage;
+            bulletController.Dispersion = Dispersion;
+            //Le damos velocidad a la bala 
+            bullet.GetComponent<Rigidbody>().velocity = BulletPos.transform.TransformDirection(new Vector3(0, 0, shootSpeed));
         }
 
         public void SetHealthBar(float myHealth)

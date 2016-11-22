@@ -79,6 +79,9 @@
     <Reference Include="nunit.framework">
       <HintPath>Assets\Plugins\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="StrategyAlienAttack">
+      <HintPath>Assets\Plugins\StrategyAlienAttack.dll</HintPath>
+    </Reference>
     <Reference Include="StrategyLocationDefenses">
       <HintPath>Assets\Plugins\StrategyLocationDefenses.dll</HintPath>
     </Reference>
@@ -102,6 +105,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AlienEnterInRadius.cs" />
+    <Compile Include="Assets\EnterInRadius.cs" />
+    <Compile Include="Assets\MoveAlien.cs" />
     <Compile Include="Assets\Scripts\BillBoardScript.cs" />
     <Compile Include="Assets\Scripts\DefenseBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\DefenseHealth.cs" />
