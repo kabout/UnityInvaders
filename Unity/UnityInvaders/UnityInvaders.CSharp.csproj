@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AlienEnterInRadius.cs" />
+    <Compile Include="Assets\Destroy.cs" />
     <Compile Include="Assets\EnterInRadius.cs" />
     <Compile Include="Assets\MoveAlien.cs" />
     <Compile Include="Assets\Scripts\BillBoardScript.cs" />

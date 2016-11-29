@@ -38,9 +38,9 @@ public class MoveAlien : MonoBehaviour {
 
     private Vector3 CellCenterToPosition(float i, float j, float cellWidth, float cellHeight)
     {
-        return new Vector3((i * cellWidth) + cellWidth * 0.5f, 0, (j * cellHeight) + cellHeight * 0.5f);
+        return new Vector3((i * cellWidth) + cellWidth * 0.5f, 3, (j * cellHeight) + cellHeight * 0.5f);
     }
-    // Update is called once per frame
+
     void Update ()
     {
         if (completeGoal)
@@ -49,6 +49,7 @@ public class MoveAlien : MonoBehaviour {
         if ((Mathf.Abs(source.position.x - target.position.x)) < 20 && (Mathf.Abs(source.position.z - target.position.z)) < 20)
         {
             source.LookAt(target);
+            source.gameObject.GetComponent<UnityAlien>().Target = target;
             completeGoal = true;
         }
 
@@ -62,7 +63,9 @@ public class MoveAlien : MonoBehaviour {
                 source.LookAt(actualGoal);
             }
             else
+            {
                 completeGoal = true;
+            }
         }
 
         Vector3 motion = actualGoal - source.position;

@@ -116,6 +116,7 @@ namespace UnityInvaders.Model
             var bulletController = bullet.GetComponent<BulletController>();
             bulletController.Damage = Damage;
             bulletController.Dispersion = 0;
+            bulletController.Owner = gameObject;
             //Le damos velocidad a la bala 
             bullet.GetComponent<Rigidbody>().velocity = BulletPos.transform.TransformDirection(new Vector3(0, 0, shootSpeed));
         }

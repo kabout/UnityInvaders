@@ -47,7 +47,8 @@ namespace UnityInvaders.Managers
             //UnityEngine.UI.Text UIInfoText = UIInfoSelectObject.GetComponentInChildren<UnityEngine.UI.Text>();
             //UIInfoText.text = unityDefense.ToString();
             //UIInfoSelectObject.SetActive(true);
-            gameObject.GetComponent<MoveAlien>().ChangeTarget(hit.collider.gameObject.transform);
+            foreach(GameObject alien in GameObject.FindGameObjectsWithTag("Alien"))
+                alien.GetComponent<MoveAlien>().ChangeTarget(hit.collider.gameObject.transform);
         }
 
         void UnSelected()

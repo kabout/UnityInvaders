@@ -8,12 +8,12 @@ public class AlienEnterInRadius : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Defense"))
-        {
-            UnityAlien unityAlien = Alien.GetComponent<UnityAlien>();
+        //if (other.gameObject.CompareTag("Defense"))
+        //{
+        //    UnityAlien unityAlien = Alien.GetComponent<UnityAlien>();
 
-            if (!unityAlien.Target)
-                unityAlien.Target = other.transform;
-        }
+        //    if (!unityAlien.Target)
+        //        unityAlien.Target = other.transform;
+        //}
     }
 }

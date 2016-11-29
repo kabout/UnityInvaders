@@ -5,6 +5,7 @@ public class BulletController : MonoBehaviour
 {
     public float Dispersion;
     public float Damage;
+    public GameObject Owner;
 
     // Use this for initialization
     void Start()
@@ -14,12 +15,18 @@ public class BulletController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Alien"))
+        if (!Owner || !other.gameObject)
+            return;
+
+        if (other.gameObject == Owner)
+            return;
+
+        if (other.gameObject.CompareTag("Alien") && !Owner.CompareTag("Alien"))
         {
             other.gameObject.GetComponent<UnityAlien>().TakeDamage(Damage);
             Destroy(gameObject);
         }
-        else if(other.gameObject.CompareTag("Defense"))
+        else if(other.gameObject.CompareTag("Defense") && !Owner.CompareTag("Defense"))
         {
             other.gameObject.GetComponent<UnityDefense>().TakeDamage(Damage);
             Destroy(gameObject);
@@ -29,7 +36,10 @@ public class BulletController : MonoBehaviour
             Collider[] colliders = Physics.OverlapSphere(transform.position, Dispersion, LayerMask.GetMask("Alien"));
 
             foreach (Collider collider in colliders)
-                collider.gameObject.GetComponent<UnityAlien>().TakeDamage(CalculateDamage(collider.gameObject.transform.position));
+            {
+                if (collider.gameObject.CompareTag("Alien"))
+                    collider.gameObject.GetComponent<UnityAlien>().TakeDamage(CalculateDamage(collider.gameObject.transform.position));
+            }
         }
     }
 

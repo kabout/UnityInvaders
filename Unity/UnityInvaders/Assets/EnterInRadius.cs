@@ -13,7 +13,7 @@ public class EnterInRadius : MonoBehaviour
             UnityDefense unityDefense = Defense.GetComponent<UnityDefense>();
 
             if (!unityDefense.Target)
-                unityDefense.Target = other.transform;
+                unityDefense.Target = other.gameObject.transform;
         }
     }
 }
