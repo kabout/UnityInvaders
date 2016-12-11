@@ -1,11 +1,7 @@
 ﻿using StrategyAlienAttack;
-using StrategyLocationDefenses;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityInvaders.Controllers;
-using UnityInvaders.Interfaces;
-using UnityInvaders.Model;
 
 namespace UnityInvaders.Managers
 {
@@ -38,9 +34,8 @@ namespace UnityInvaders.Managers
             IDifficultController difficultController = new DifficultController(999);
             IObjectManager objectManager = new ObjectManager(difficultController, defense, obstacle);
             IDefenseController defenseController = new DefenseController(difficultController, objectManager);
-            IStrategyLocationDefenses strageyLocationDefenses = new ManagerDefenses();
             IStrategyAlienAttack strategyAlienAttack = new StrategyAlienAttack.StrategyAlienAttack();
-            IMapController mapController = new MapController(strageyLocationDefenses, difficultController, objectManager, strategyAlienAttack, floor);
+            IMapController mapController = new MapController(difficultController, objectManager, strategyAlienAttack, floor);
             IMap map = mapController.GetEmptyMap(500, 10);
             mapController.InitMap(map);
             //MapToUnity mapToUnity = new MapToUnity(floor, obstacle, defense);

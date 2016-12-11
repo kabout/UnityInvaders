@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityInvaders.Interfaces;
-using UnityInvaders.Model;
-using UnityInvaders.Controllers;
 using System.Collections.Generic;
 using StrategyAlienAttack;
 
@@ -24,7 +21,7 @@ public class MoveAlien : MonoBehaviour {
         iObstacles = new List<IObstacle>();
 
         for(int i =0; i < obstacles.Length; i++)
-            iObstacles.Add(obstacles[i].GetComponent<UnityObstacle>());
+            iObstacles.Add(obstacles[i].GetComponent<IObstacle>());
 
         IStrategyAlienAttack strategyAlienAttack = new StrategyAlienAttack.StrategyAlienAttack();
         positions = strategyAlienAttack.CalculatePath(source.position, target.position, iObstacles, new List<IDefense>(), 300, cellSize);

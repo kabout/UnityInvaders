@@ -1,7 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityInvaders.Interfaces;
-using UnityInvaders.Model;
 
 namespace UnityInvaders.Managers
 {

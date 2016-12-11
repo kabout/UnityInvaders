@@ -75,6 +75,14 @@ namespace UnityInvaders.Model
             }
         }
 
+        public float AttacksPerSecond
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         #endregion
 
         #region Unity Methods

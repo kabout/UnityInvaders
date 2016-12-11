@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F64D623C-2F52-4DF7-91AB-2D3E4A8718F0}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UnityInvaders</RootNamespace>
     <AssemblyName>UnityInvaders</AssemblyName>
@@ -34,13 +34,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="StrategyAlienAttack">
       <HintPath>..\StrategyAlienAttack\bin\Release\StrategyAlienAttack.dll</HintPath>
-    </Reference>
-    <Reference Include="StrategyLocationDefenses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\StrategyLocationDefenses\bin\Release\StrategyLocationDefenses.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,7 +77,6 @@
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Interfaces\IObjectManager.cs" />
     <Compile Include="Managers\ObjectManager.cs" />
-    <Compile Include="Model\Position.cs" />
     <Compile Include="Model\UnityObstacle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

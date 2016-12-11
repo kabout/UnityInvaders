@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityInvaders.Model;
 
 public class EnterInRadius : MonoBehaviour
 {

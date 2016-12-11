@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityInvaders.Interfaces;
 
 namespace StrategyAlienAttack
 {

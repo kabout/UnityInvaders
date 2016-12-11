@@ -77,10 +77,6 @@
       <Project>{dd418970-1042-4b12-83cc-fc36e5c5bdcd}</Project>
       <Name>UnityInvaders.Types</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UnityInvaders\UnityInvaders.csproj">
-      <Project>{f64d623c-2f52-4df7-91ab-2d3e4a8718f0}</Project>
-      <Name>UnityInvaders</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
