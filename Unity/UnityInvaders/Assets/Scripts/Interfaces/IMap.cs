@@ -64,7 +64,7 @@ public interface IMap
     /// <param name="position">Posición a comprobar</param>
     /// <param name="radius">Radio del objeto</param>
     /// <returns>Devuelve true si la posición es correcta o false en caso contrario</returns>
-    bool IsValidPosition(Vector3 position, float radius);
+    bool IsValidPosition(IPosition position, float radius);
     /// <summary>
     /// Indica si la defensa está en una posición válida del mapa.
     /// </summary>

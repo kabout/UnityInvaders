@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System;
+using Assets.Scripts.Utils;
 
 public class UnityMap : MonoBehaviour, IMap
 {
@@ -84,10 +85,10 @@ public class UnityMap : MonoBehaviour, IMap
             return false;
 
         obstacles.Add(obstacle);
-        int xInit = Mathf.Max(0, Mathf.RoundToInt(obstacle.Position.x - obstacle.Radius));
-        int yInit = Mathf.Max(0, Mathf.RoundToInt(obstacle.Position.z - obstacle.Radius));
-        int xEnd = Mathf.Min(Mathf.RoundToInt(obstacle.Position.x + obstacle.Radius), upperBorder);
-        int yEnd = Mathf.Min(Mathf.RoundToInt(obstacle.Position.z + obstacle.Radius), upperBorder);
+        int xInit = Mathf.Max(0, Mathf.RoundToInt(obstacle.Position.X - obstacle.Radius));
+        int yInit = Mathf.Max(0, Mathf.RoundToInt(obstacle.Position.Z - obstacle.Radius));
+        int xEnd = Mathf.Min(Mathf.RoundToInt(obstacle.Position.X + obstacle.Radius), upperBorder);
+        int yEnd = Mathf.Min(Mathf.RoundToInt(obstacle.Position.Z + obstacle.Radius), upperBorder);
 
         for (int x = xInit; x < xEnd; x++)
             for (int y = yInit; y < yEnd; y++)
@@ -110,10 +111,10 @@ public class UnityMap : MonoBehaviour, IMap
     /// <param name="obstacle">Obstáculo que se está poniendo en el mapa</param>
     private void UpdateCorrectedMap(IObstacle obstacle)
     {
-        Vector3 position = obstacle.Position;
+        Vector3 position = ConvertPosition.Convert(obstacle.Position);
 
-        int xEnd = Mathf.Min(upperBorder, Mathf.RoundToInt(obstacle.Position.x + obstacle.Radius));
-        int yEnd = Mathf.Min(upperBorder, Mathf.RoundToInt(obstacle.Position.z + obstacle.Radius));
+        int xEnd = Mathf.Min(upperBorder, Mathf.RoundToInt(obstacle.Position.X + obstacle.Radius));
+        int yEnd = Mathf.Min(upperBorder, Mathf.RoundToInt(obstacle.Position.Z + obstacle.Radius));
         int xInit = Mathf.Max(0, Mathf.RoundToInt(position.x - obstacle.Radius));
         int yInit = Mathf.Max(0, Mathf.RoundToInt(position.z - obstacle.Radius));
 
@@ -264,10 +265,10 @@ public class UnityMap : MonoBehaviour, IMap
 
     public bool AddDefense(IDefense defense)
     {
-        int xInit = Mathf.Max(0, Mathf.RoundToInt(defense.Position.x - defense.Radius));
-        int yInit = Mathf.Max(0, Mathf.RoundToInt(defense.Position.z - defense.Radius));
-        int xEnd = Mathf.Min(Mathf.RoundToInt(defense.Position.x + defense.Radius), upperBorder);
-        int yEnd = Mathf.Min(Mathf.RoundToInt(defense.Position.z + defense.Radius), upperBorder);
+        int xInit = Mathf.Max(0, Mathf.RoundToInt(defense.Position.X - defense.Radius));
+        int yInit = Mathf.Max(0, Mathf.RoundToInt(defense.Position.Z - defense.Radius));
+        int xEnd = Mathf.Min(Mathf.RoundToInt(defense.Position.X + defense.Radius), upperBorder);
+        int yEnd = Mathf.Min(Mathf.RoundToInt(defense.Position.Z + defense.Radius), upperBorder);
 
         for (int x = xInit; x < xEnd; x++)
             for (int y = yInit; y < yEnd; y++)
@@ -298,11 +299,11 @@ public class UnityMap : MonoBehaviour, IMap
         return IsValidPosition(defense.Position, defense.Radius);
     }
 
-    public bool IsValidPosition(Vector3 position, float radius)
+    public bool IsValidPosition(IPosition position, float radius)
     {
-        Collider[] collidersDefense = Physics.OverlapSphere(position, radius, LayerMask.GetMask("Defense"));
-        Collider[] collidersObstacle = Physics.OverlapSphere(position, radius, LayerMask.GetMask("Obstacle"));
-        return !collidersDefense.Any() && !collidersObstacle.Any() && !positionsUnReachables.Exists(p => p.x == position.x && p.z == position.z);
+        Collider[] collidersDefense = Physics.OverlapSphere(ConvertPosition.Convert(position), radius, LayerMask.GetMask("Defense"));
+        Collider[] collidersObstacle = Physics.OverlapSphere(ConvertPosition.Convert(position), radius, LayerMask.GetMask("Obstacle"));
+        return !collidersDefense.Any() && !collidersObstacle.Any() && !positionsUnReachables.Exists(p => p.x == position.X && p.z == position.Z);
     }
 
     public int[,] GetMap()

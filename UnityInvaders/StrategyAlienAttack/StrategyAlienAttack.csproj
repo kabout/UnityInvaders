@@ -37,9 +37,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
-    </Reference>
     <Reference Include="UnityInvaders.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\UnityInvaders.Types\bin\Release\UnityInvaders.Types.dll</HintPath>
@@ -47,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StrategyAlienAttack.cs" />
-    <Compile Include="IStrategyAlienAttack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Entity
+public class Entity : IEntity
 {
     #region Properties
 
@@ -9,7 +9,7 @@ public class Entity
         get; private set;
     }
 
-    public Vector3 Position
+    public IPosition Position
     {
         get; private set;
     }
@@ -23,7 +23,7 @@ public class Entity
 
     #region Constructors
 
-    public Entity(int id, Vector3 position, int radius)
+    public Entity(int id, IPosition position, int radius)
     {
         Id = id;
         Position = position;

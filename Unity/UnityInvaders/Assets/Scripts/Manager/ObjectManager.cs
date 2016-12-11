@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Utils;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,12 +25,12 @@ public class ObjectManager : IObjectManager
         this.obstaclePrefab = obstaclePrefab;
     }
 
-    public IDefense GenerateDefense(Vector3 position)
+    public IDefense GenerateDefense(IPosition position)
     {
         float defenseSize = Constants.DEFAULT_DEFENSE_RADIO * 2;
 
         //Instanciar la defensa
-        GameObject defense = GameObject.Instantiate(defensePrefab, position, Quaternion.identity) as GameObject;
+        GameObject defense = GameObject.Instantiate(defensePrefab, ConvertPosition.Convert(position), Quaternion.identity) as GameObject;
 
         if (defense == null)
             return null;

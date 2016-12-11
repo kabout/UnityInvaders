@@ -27,7 +27,7 @@ public interface IAlien : IEntity
     /// Cambia la posición del alien
     /// </summary>
     /// <param name="position">Nueva posición del alien</param>
-    void ChangePosition(Vector3 position);
+    void ChangePosition(IPosition position);
     /// <summary>
     /// Indica si el alien tiene aún vida
     /// </summary>

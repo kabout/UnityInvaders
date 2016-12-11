@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using StrategyAlienAttack;
+using Assets.Scripts.Utils;
 
-public class MoveAlien : MonoBehaviour {
+public class MoveAlien : MonoBehaviour
+{
 
     public Transform source;
     public Transform target;
@@ -24,7 +24,8 @@ public class MoveAlien : MonoBehaviour {
             iObstacles.Add(obstacles[i].GetComponent<IObstacle>());
 
         IStrategyAlienAttack strategyAlienAttack = new StrategyAlienAttack.StrategyAlienAttack();
-        positions = strategyAlienAttack.CalculatePath(source.position, target.position, iObstacles, new List<IDefense>(), 300, cellSize);
+        positions = ConvertPosition.Convert(strategyAlienAttack.CalculatePath(ConvertPosition.Convert(source.position), 
+            ConvertPosition.Convert(target.position), iObstacles, new List<IDefense>(), 300, cellSize));
 
         for(int i = 0; i < positions.Count; i++)
             positions[i] = CellCenterToPosition(positions[i].x, positions[i].z, cellSize, cellSize);
@@ -78,7 +79,8 @@ public class MoveAlien : MonoBehaviour {
         target = newTarget;
 
         IStrategyAlienAttack strategyAlienAttack = new StrategyAlienAttack.StrategyAlienAttack();
-        positions = strategyAlienAttack.CalculatePath(source.position, target.position, iObstacles, new List<IDefense>(), 300, cellSize);
+        positions = ConvertPosition.Convert(strategyAlienAttack.CalculatePath(ConvertPosition.Convert(source.position), 
+            ConvertPosition.Convert(target.position), iObstacles, new List<IDefense>(), 300, cellSize));
 
         for (int i = 0; i < positions.Count; i++)
             positions[i] = CellCenterToPosition(positions[i].x, positions[i].z, cellSize, cellSize);

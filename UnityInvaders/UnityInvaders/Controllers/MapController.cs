@@ -20,7 +20,7 @@ namespace UnityInvaders.Controllers
         IDifficultController difficultController;
         IObjectManager objectManager;
         IStrategyAlienAttack strategyAlienAttack;
-        object strategyLocationDefenses;
+        IStrategyLocationDefenses strategyLocationDefenses;
 
         #endregion
 
@@ -39,7 +39,7 @@ namespace UnityInvaders.Controllers
         private void LoadStrategyLocationDefenses()
         {
             Assembly miExtensionAssembly = Assembly.LoadFile(@"C:\Users\Diego\Source\Repos\UnityInvaders\Lib\StrategyLocationDefenses.dll");
-            strategyLocationDefenses = miExtensionAssembly.CreateInstance("StrategyLocationDefenses.ManagerDefenses");
+            strategyLocationDefenses = (IStrategyLocationDefenses)miExtensionAssembly.CreateInstance("StrategyLocationDefenses.ManagerDefenses");
         }
 
         #endregion
@@ -96,33 +96,33 @@ namespace UnityInvaders.Controllers
 
         private void PlaceDefenses(IMap map)
         {
-            //strategyLocationDefenses.InitStrategy(map.Obstacles, Constants.DEFAULT_DEFENSE_RADIO, map.Size, map.CellSize);
+            strategyLocationDefenses.InitStrategy(map.Obstacles, Constants.DEFAULT_DEFENSE_RADIO, map.Size, map.CellSize);
 
-            //int numDefenses = difficultController.GetNumberOfDefenses(map);
+            int numDefenses = difficultController.GetNumberOfDefenses(map);
 
-            //List<Vector3> freePositions = map.GetFreePositions(Constants.DEFAULT_DEFENSE_RADIO).ToList();
+            List<Vector3> freePositions = map.GetFreePositions(Constants.DEFAULT_DEFENSE_RADIO).ToList();
 
 
 
-            //while (numDefenses > 0)
-            //{
-            //    Vector3 position = strategyLocationDefenses.GetPositionForDefense(map.Defenses);
+            while (numDefenses > 0)
+            {
+                Vector3 position = strategyLocationDefenses.GetPositionForDefense(map.Defenses);
 
-            //    if (position == Vector3.zero)
-            //        return;
-                
-            //    while(strategyAlienAttack.CalculatePath(position, Vector3.zero, map.Obstacles, map.Defenses, map.Size, map.CellSize / 2).Count == 0)
-            //        position = strategyLocationDefenses.GetPositionForDefense(map.Defenses);
+                if (position == Vector3.zero)
+                    return;
 
-            //    IDefense defense = objectManager.GenerateDefense(position);
+                while (strategyAlienAttack.CalculatePath(position, Vector3.zero, map.Obstacles, map.Defenses, map.Size, map.CellSize / 2).Count == 0)
+                    position = strategyLocationDefenses.GetPositionForDefense(map.Defenses);
 
-            //    if (defense == null)
-            //        return;
+                IDefense defense = objectManager.GenerateDefense(position);
 
-            //    map.AddDefense(defense);
+                if (defense == null)
+                    return;
 
-            //    numDefenses--;
-            //}
+                map.AddDefense(defense);
+
+                numDefenses--;
+            }
         }
 
         #endregion

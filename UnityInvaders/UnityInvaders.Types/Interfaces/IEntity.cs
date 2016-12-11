@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public interface IEntity
+﻿public interface IEntity
 {
     /// <summary>
     /// Identificador del objeto
@@ -9,7 +7,7 @@ public interface IEntity
     /// <summary>
     /// Posición del objeto
     /// </summary>
-    Vector3 Position { get; }
+    IPosition Position { get; }
     /// <summary>
     /// Radio del objeto
     /// </summary>

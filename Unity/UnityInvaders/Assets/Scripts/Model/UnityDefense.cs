@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Assets.Scripts.Utils;
+using System.Text;
 using UnityEngine;
 
 public class UnityDefense : MonoBehaviour, IDefense, ISelectable
@@ -63,11 +64,11 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
         }
     }
 
-    public Vector3 Position
+    public IPosition Position
     {
         get
         {
-            return transform.position;
+            return ConvertPosition.Convert(transform.position);
         }
     }
 
@@ -167,9 +168,9 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
         return sb.ToString();
     }
 
-    public void ChangePosition(Vector3 position)
+    public void ChangePosition(IPosition position)
     {
-        transform.position = position;
+        transform.position = ConvertPosition.Convert(position);
     }
 
     #endregion

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public interface IObjectManager
+﻿public interface IObjectManager
 {
     /// <summary>
     /// Genera un obstáculo con medidas entre minRadius y maxRadius.
@@ -16,5 +14,5 @@ public interface IObjectManager
     /// </summary>
     /// <param name="position">Posición de la defensa</param>
     /// <returns>Devuelve una defensa en la posición position del mapa.</returns>
-    IDefense GenerateDefense(Vector3 position);
+    IDefense GenerateDefense(IPosition position);
 }

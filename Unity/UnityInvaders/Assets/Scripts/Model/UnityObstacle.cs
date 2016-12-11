@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.Utils;
 
 public class UnityObstacle : MonoBehaviour, IObstacle
 {
@@ -21,11 +22,11 @@ public class UnityObstacle : MonoBehaviour, IObstacle
         get { return transform.localScale.x / 2; }
     }    
 
-    public Vector3 Position
+    public IPosition Position
     {
         get
         {
-            return transform.position;
+            return ConvertPosition.Convert(transform.position);
         }
     }
 
@@ -33,9 +34,9 @@ public class UnityObstacle : MonoBehaviour, IObstacle
 
     #region Methods
 
-    public void ChangePosition(Vector3 position)
+    public void ChangePosition(IPosition position)
     {
-        transform.position = position;
+        transform.position = ConvertPosition.Convert(position);
     }
 
     #endregion

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Text;
+using Assets.Scripts.Utils;
 
 public class UnityAlien : MonoBehaviour, IAlien
 {
@@ -42,9 +43,9 @@ public class UnityAlien : MonoBehaviour, IAlien
         get { return (int)transform.localScale.z; }
     }
 
-    public Vector3 Position
+    public IPosition Position
     {
-        get { return transform.position; }
+        get { return ConvertPosition.Convert(transform.position); }
     }
 
     public int Cost
@@ -162,9 +163,9 @@ public class UnityAlien : MonoBehaviour, IAlien
         return sb.ToString();
     }
 
-    public void ChangePosition(Vector3 position)
+    public void ChangePosition(IPosition position)
     {
-        transform.localPosition = position;
+        transform.localPosition = ConvertPosition.Convert(position);
     }
 
     #endregion
