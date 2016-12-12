@@ -100,6 +100,7 @@
     <Compile Include="Assets\Camera_Bounds.cs" />
     <Compile Include="Assets\Destroy.cs" />
     <Compile Include="Assets\EnterInRadius.cs" />
+    <Compile Include="Assets\MenuScript.cs" />
     <Compile Include="Assets\MoveAlien.cs" />
     <Compile Include="Assets\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\BillBoardScript.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Assets\TDTK_Free\Scripts\WaveGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\DualCorStudios\Readme.txt" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
   </ItemGroup>
