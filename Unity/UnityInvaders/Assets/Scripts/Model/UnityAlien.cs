@@ -6,6 +6,7 @@ public class UnityAlien : MonoBehaviour, IAlien
 {
     #region Fields
 
+    public bool selected;
     public Transform Target;
     public GameObject HealthBar;
     public GameObject Bullet;
@@ -15,8 +16,8 @@ public class UnityAlien : MonoBehaviour, IAlien
     public float health;
     public int cost;
     public int id;
-    public float shottingInterval = 1f;
-    private float shootSpeed = 50;
+    public float shottingInterval = 1000f;
+    private float shootSpeed = 40;
     private float nextShoot = 0;
 
     private bool died = false;
@@ -31,7 +32,7 @@ public class UnityAlien : MonoBehaviour, IAlien
 
     public int Range { get { return range; } }
 
-    public float Health { get { return health; } }
+    public float Health { get { return health; } }    
 
     public int Width
     {
@@ -107,8 +108,6 @@ public class UnityAlien : MonoBehaviour, IAlien
         if (nextShoot >= Time.time)
             return;
 
-        nextShoot = Time.time + shottingInterval;
-
         GameObject bullet = (GameObject)Instantiate(Bullet, BulletPos.transform.position, BulletPos.transform.rotation);
         var bulletController = bullet.GetComponent<BulletController>();
         bulletController.Damage = Damage;
@@ -116,6 +115,8 @@ public class UnityAlien : MonoBehaviour, IAlien
         bulletController.Owner = gameObject;
         //Le damos velocidad a la bala 
         bullet.GetComponent<Rigidbody>().velocity = BulletPos.transform.TransformDirection(new Vector3(0, 0, shootSpeed));
+
+        nextShoot = Time.time + shottingInterval;
     }
 
     void DecreaseHealth()
@@ -156,7 +157,6 @@ public class UnityAlien : MonoBehaviour, IAlien
         sb.AppendLine(string.Format("Identifier: {0}", Id));
         sb.AppendLine(string.Format("Health: {0}", Health));
         sb.AppendLine(string.Format("Damage: {0}", Damage));
-        //sb.AppendLine(string.Format("Dispersion: {0}", Dispersion));
         sb.AppendLine(string.Format("Range: {0}", Range));
         sb.AppendLine(string.Format("Cost: {0}", Cost));
 

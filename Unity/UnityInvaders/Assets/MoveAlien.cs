@@ -1,38 +1,77 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Assets.Scripts.Utils;
+using System;
+using System.Linq;
 
 public class MoveAlien : MonoBehaviour
 {
-
-    public Transform source;
     public Transform target;
     public GameObject map;
     public GameObject[] obstacles;
-    private List<Vector3> positions;
+    public IStrategyAlienAttack strategyAlienAttack;
+    private IMap iMap;
+    private List<Vector3> positions = new List<Vector3>();
     private Vector3 actualGoal;
     private bool completeGoal = false;
-    private int cellSize = 10;
-    List<IObstacle> iObstacles;
+    private IList<IObstacle> iObstacles;
+    private IList<IDefense> iDefenses;
 
     // Use this for initialization
     void Start ()
     {
-        iObstacles = new List<IObstacle>();
-
-        for(int i =0; i < obstacles.Length; i++)
-            iObstacles.Add(obstacles[i].GetComponent<IObstacle>());
-
-        IStrategyAlienAttack strategyAlienAttack = new StrategyAlienAttack.StrategyAlienAttack();
-        positions = ConvertPosition.Convert(strategyAlienAttack.CalculatePath(ConvertPosition.Convert(source.position), 
-            ConvertPosition.Convert(target.position), iObstacles, new List<IDefense>(), 300, cellSize));
-
-        for(int i = 0; i < positions.Count; i++)
-            positions[i] = CellCenterToPosition(positions[i].x, positions[i].z, cellSize, cellSize);
-
-        positions.RemoveAt(0);
-        actualGoal = positions[0];
+        map = GameObject.FindGameObjectWithTag("Floor");
+        obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        iMap = map.GetComponent<IMap>();
+        iObstacles = iMap.Obstacles;
+        
+        StartAttack();
 	}
+
+    private void StartAttack()
+    {
+        try
+        {
+            target = GetTarget();
+
+            if (target == null)
+                return;
+
+            positions = ConvertPosition.Convert(strategyAlienAttack.CalculatePath(
+                ConvertPosition.Convert(transform.position),
+                ConvertPosition.Convert(target.position),
+                iObstacles, iMap.Defenses, iMap.Size, iMap.CellSize));
+
+            for (int i = 0; i < positions.Count; i++)
+                positions[i] = CellCenterToPosition(positions[i].x, positions[i].z, iMap.CellSize, iMap.CellSize);
+
+            if (positions.Count > 1)
+            {
+                positions.RemoveAt(0);
+                actualGoal = positions.First();
+                transform.LookAt(actualGoal);
+                completeGoal = false;
+            }
+        }
+        catch(Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+    }
+
+    private Transform GetTarget()
+    {
+        IDefense defense = strategyAlienAttack.GetNextDefenseToAttack(GetComponent<IAlien>().Position, 
+            iObstacles, iMap.Defenses, iMap.Size, iMap.CellSize);        
+
+        foreach(var defenseObject in GameObject.FindGameObjectsWithTag("Defense"))
+        {
+            if (defenseObject.GetComponent<IDefense>().Id == defense.Id)
+                return defenseObject.transform;
+        }
+
+        return null;
+    }
 
     private Vector3 CellCenterToPosition(float i, float j, float cellWidth, float cellHeight)
     {
@@ -41,24 +80,30 @@ public class MoveAlien : MonoBehaviour
 
     void Update ()
     {
-        if (completeGoal)
-            return;
+        if (!target || completeGoal)
+        {            
+            if (!target)  
+                StartAttack();
 
-        if ((Mathf.Abs(source.position.x - target.position.x)) < 20 && (Mathf.Abs(source.position.z - target.position.z)) < 20)
+            return;
+        }        
+
+        if ((Mathf.Abs(transform.position.x - target.position.x)) < 20 && (Mathf.Abs(transform.position.z - target.position.z)) < 20)
         {
-            source.LookAt(target);
-            source.gameObject.GetComponent<UnityAlien>().Target = target;
+            transform.LookAt(target);
+            GetComponent<UnityAlien>().Target = target;
             completeGoal = true;
         }
 
-        if ((Mathf.Abs(source.position.x - actualGoal.x)) < 1 && (Mathf.Abs(source.position.z - actualGoal.z)) < 1)
+        if ((Mathf.Abs(transform.position.x - actualGoal.x)) < 1 && (Mathf.Abs(transform.position.z - actualGoal.z)) < 1)
         {
-            positions.RemoveAt(0);
+            if(positions.Any())
+                positions.RemoveAt(0);
 
             if (positions.Count > 0)
             {
-                actualGoal = positions[0];
-                source.LookAt(actualGoal);
+                actualGoal = positions.First();
+                transform.LookAt(actualGoal);
             }
             else
             {
@@ -66,9 +111,14 @@ public class MoveAlien : MonoBehaviour
             }
         }
 
-        Vector3 motion = actualGoal - source.position;
+        Move();
+    }
+
+    private void Move()
+    {
+        Vector3 motion = actualGoal - transform.position;
         motion.Normalize();
-        source.position += motion * 0.5f;
+        transform.position += motion * 0.5f;
     }
 
     public void ChangeTarget(Transform newTarget)
@@ -78,20 +128,12 @@ public class MoveAlien : MonoBehaviour
 
         target = newTarget;
 
-        IStrategyAlienAttack strategyAlienAttack = new StrategyAlienAttack.StrategyAlienAttack();
-        positions = ConvertPosition.Convert(strategyAlienAttack.CalculatePath(ConvertPosition.Convert(source.position), 
-            ConvertPosition.Convert(target.position), iObstacles, new List<IDefense>(), 300, cellSize));
-
-        for (int i = 0; i < positions.Count; i++)
-            positions[i] = CellCenterToPosition(positions[i].x, positions[i].z, cellSize, cellSize);
-
-        if (positions.Count > 0)
-        {
-            positions.RemoveAt(0);
-            actualGoal = positions[0];
-            source.LookAt(actualGoal);
-            completeGoal = false;
-        }
+        StartAttack();
     }
 
+
+    private int ManhattanHeuristic(IPosition newNode, IPosition end)
+    {
+        return (Math.Abs((int)Math.Round(newNode.X - end.X)) + Math.Abs((int)Math.Round(newNode.Z - end.Z)));
+    }
 }

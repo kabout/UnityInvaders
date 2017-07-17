@@ -100,7 +100,6 @@
     <Compile Include="Assets\Camera_Bounds.cs" />
     <Compile Include="Assets\Destroy.cs" />
     <Compile Include="Assets\EnterInRadius.cs" />
-    <Compile Include="Assets\GameConfiguration.cs" />
     <Compile Include="Assets\MenuScript.cs" />
     <Compile Include="Assets\MoveAlien.cs" />
     <Compile Include="Assets\MoveCamera.cs" />
@@ -114,6 +113,7 @@
     <Compile Include="Assets\Scripts\DefenseBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\DefenseHealth.cs" />
     <Compile Include="Assets\Scripts\Destruction.cs" />
+    <Compile Include="Assets\Scripts\GameConfiguration.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IAlien.cs" />

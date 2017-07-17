@@ -27,7 +27,6 @@ public class MoveCamera : MonoBehaviour
         {
             transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
         }
-
         
         float fov = Camera.main.orthographicSize;
         fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;

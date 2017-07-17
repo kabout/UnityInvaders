@@ -143,6 +143,25 @@ namespace StrategyAlienAttack
             return (Math.Abs((int)Math.Round(newNode.X - end.X)) + Math.Abs((int)Math.Round(newNode.Z - end.Z)));
         }
 
+        public IDefense GetNextDefenseToAttack(IPosition alienPosition, IList<IObstacle> obstacles, IList<IDefense> defenses, int sizeMap, int cellSize)
+        {
+            IDefense nextDefense = null;
+            int minDistance = int.MaxValue;
+
+            foreach (var defense in defenses)
+            {
+                int distance = ManhattanHeuristic(alienPosition, defense.Position);
+
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nextDefense = defense;
+                }
+            }
+
+            return nextDefense;
+        }
+
         private class AStar
         {
             #region Properties

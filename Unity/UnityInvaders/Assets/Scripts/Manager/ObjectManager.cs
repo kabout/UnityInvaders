@@ -9,20 +9,25 @@ public class ObjectManager : IObjectManager
 
     public GameObject defensePrefab;
     public GameObject obstaclePrefab;
+    public GameObject alienPrefab;
 
     IDifficultController difficultController;
+    IStrategyAlienAttack strategyAlienAttack;
     private static int nextDefenseId = 1;
     private static int nextObstacleId = 1;
+    private static int nextAlienId = 1;
 
     #endregion
 
-    public ObjectManager(IDifficultController difficultController, GameObject defensePrefab, GameObject obstaclePrefab)
+    public ObjectManager(IDifficultController difficultController, IStrategyAlienAttack strategyAlienAttack, GameObject defensePrefab, GameObject obstaclePrefab, GameObject alienPrefab)
     {
         RandomManager.Seed = DateTime.Now.Millisecond;
         this.difficultController = difficultController;
+        this.strategyAlienAttack = strategyAlienAttack;
 
         this.defensePrefab = defensePrefab;
         this.obstaclePrefab = obstaclePrefab;
+        this.alienPrefab = alienPrefab;
     }
 
     public IDefense GenerateDefense(IPosition position)
@@ -53,7 +58,36 @@ public class ObjectManager : IObjectManager
 
         return unityDefense;
     }
+
+    public IAlien GenerateAlien(IPosition position)
+    {
+        float alienSize = Constants.ALIEN_SIZE * 2;
         
+        GameObject alien = GameObject.Instantiate(alienPrefab, ConvertPosition.Convert(position), Quaternion.identity) as GameObject;
+
+        if (alien == null)
+            return null;
+
+        alien.transform.localScale = new Vector3(alienSize, alienSize, alienSize);
+
+        // Inicializar los valores de la defensa
+        UnityAlien unityAlien = alien.GetComponent(typeof(UnityAlien)) as UnityAlien;
+
+        unityAlien.id = nextAlienId;
+        unityAlien.cost = Constants.DEFAULT_ALIEN_COST;
+        unityAlien.damage = Constants.DEFAULT_ALIEN_DAMAGE;
+        unityAlien.health = Constants.ALIEN_HEALTH;
+        unityAlien.range = Constants.DEFAULT_ALIEN_RANGE;
+        unityAlien.selected = false;
+
+        MoveAlien moveAlien = alien.GetComponent(typeof(MoveAlien)) as MoveAlien;
+        moveAlien.strategyAlienAttack = strategyAlienAttack;
+
+        nextAlienId++;
+
+        return unityAlien;
+    }
+
     public IObstacle GenerateObstacle(IMap map, int minRadius, int maxRadius)
     {
         float radius = RandomManager.GetRandomNumber(minRadius, maxRadius);

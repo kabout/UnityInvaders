@@ -51,7 +51,7 @@ public interface IMap
     /// </summary>
     /// <param name="radius">Radio del objeto</param>
     /// <returns></returns>
-    IList<Vector3> GetFreePositions(float radius);
+    List<Vector3> GetFreePositions(float radius);
     /// <summary>
     /// Indica si el obstáculo está en una posición válida del mapa.
     /// </summary>

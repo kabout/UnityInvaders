@@ -1,5 +1,6 @@
 ﻿using StrategyAlienAttack;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +9,13 @@ namespace UnityInvaders.Managers
     public class GameManager : MonoBehaviour
     {
         public int level;
-        public GameObject obstacle;
-        public GameObject defense;
-        public GameObject floor;
-        public GameObject alien;
+        public GameObject obstaclePrefab;
+        public GameObject defensePrefab;
+        public GameObject floorPrefab;
+        public GameObject alienPrefab;
         public GameObject spaceCamera;
         public SelectionManager selectionManager;
+        public GameConfiguration gameConfiguration;
         public Text timeText;
 
         private const int MIN_OBSTACLE_RADIO = 15;
@@ -21,23 +23,33 @@ namespace UnityInvaders.Managers
         private const float MAX_OBSTACLES_PER_AREA_UNIT = 0.0005f;
         private const float MAX_DEFENSES_PER_AREA_UNIT = 0.0005f;
         private const int DEFAULT_DEFENSE_RADIO = 5;
+        private float timeForNextAlien = 0;
         private float difficulty;
         private int numObstacles;
         private int numDefenses;
         private int size;
+        private IMap map;
+        private IMapController mapController;
         private List<GameObject> obstacles;
         private List<GameObject> defenses;
 
         // Use this for initialization
         void Start ()
         {
+            Assembly strategyAliensAssembly = Assembly.LoadFile(gameConfiguration.StrategyAttackAliensDllPath);
+            IStrategyAlienAttack strategyAlienAttack = (IStrategyAlienAttack)strategyAliensAssembly.CreateInstance("StrategyAlienAttack.StrategyAlienAttack");
+
             IDifficultController difficultController = new DifficultController(400);
-            IObjectManager objectManager = new ObjectManager(difficultController, defense, obstacle);
-            IDefenseController defenseController = new DefenseController(difficultController, objectManager);
-            IStrategyAlienAttack strategyAlienAttack = new StrategyAlienAttack.StrategyAlienAttack();
-            IMapController mapController = new MapController(difficultController, objectManager, strategyAlienAttack, floor);
-            IMap map = mapController.GetEmptyMap(400, 10);
+            IObjectManager objectManager = new ObjectManager(difficultController, strategyAlienAttack, defensePrefab, obstaclePrefab, alienPrefab);
+
+          Assembly strategyLocationDefensesAssembly = Assembly.LoadFile(gameConfiguration.StrategyLocationDefensesDllPath);
+            IStrategyLocationDefenses strategyLocationDefenses = (IStrategyLocationDefenses)strategyLocationDefensesAssembly.CreateInstance("StrategyLocationDefenses.ManagerDefenses");
+            mapController = new MapController(difficultController, objectManager, strategyAlienAttack, strategyLocationDefenses, floorPrefab);
+            map = mapController.GetEmptyMap(400, 10);
             mapController.InitMap(map);
+
+            timeForNextAlien = 1 / Constants.ALIEN_PER_SECOND;            
+            
             //MapToUnity mapToUnity = new MapToUnity(floor, obstacle, defense);
             //UnityMap unityMap = mapToUnity.Convert(map);
 
@@ -81,7 +93,14 @@ namespace UnityInvaders.Managers
             int timeInMinute = (int)(timeInSecond / 60);
             timeInSecond = timeInSecond % 60;
 
-            timeText.text = string.Format("Time: {0:00}:{1:00}", timeInMinute, timeInSecond);            
+            timeText.text = string.Format("Time: {0:00}:{1:00}", timeInMinute, timeInSecond);
+
+            if (timeForNextAlien >= Time.time)
+                return;
+            
+            mapController.AddAliens(map);
+
+            timeForNextAlien = Time.time + 1/Constants.ALIEN_PER_SECOND; 
         }
 
         public void OnGUI ()

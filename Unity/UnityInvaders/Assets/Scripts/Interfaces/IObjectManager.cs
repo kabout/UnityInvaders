@@ -10,9 +10,15 @@
     /// <returns>Devuelve un obstaculo en una posición del mapa.</returns>
     IObstacle GenerateObstacle(IMap map, int minRadius, int maxRadius);
     /// <summary>
-    /// Genera una defensa de tamaño sizeDefense en el mapa map. No la añade al mapa map.
+    /// Genera una defensa en el mapa map. No la añade al mapa map.
     /// </summary>
     /// <param name="position">Posición de la defensa</param>
     /// <returns>Devuelve una defensa en la posición position del mapa.</returns>
     IDefense GenerateDefense(IPosition position);
+    /// <summary>
+    /// Genera un alien en el mapa map. No la añade al mapa map.
+    /// </summary>
+    /// <param name="position">Posición del alien</param>
+    /// <returns>Devuelve un alien en la posición position del mapa.</returns>
+    IAlien GenerateAlien(IPosition position);
 }

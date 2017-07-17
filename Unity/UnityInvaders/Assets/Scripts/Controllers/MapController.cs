@@ -1,12 +1,7 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using UnityEngine;
-using StrategyAlienAttack;
-using System;
-using System.Reflection;
-using System.IO;
-using Assets.Scripts.Utils;
 
 public class MapController : IMapController
 {
@@ -23,19 +18,13 @@ public class MapController : IMapController
     #region Constructors
 
     public MapController(IDifficultController difficultController,
-        IObjectManager objectManager, IStrategyAlienAttack strategyAlienAttack, GameObject mapPrefab)
+        IObjectManager objectManager, IStrategyAlienAttack strategyAlienAttack, IStrategyLocationDefenses strategyLocationDefenses, GameObject mapPrefab)
     {
         this.difficultController = difficultController;
         this.objectManager = objectManager;
         this.strategyAlienAttack = strategyAlienAttack;
-        LoadStrategyLocationDefenses();
+        this.strategyLocationDefenses = strategyLocationDefenses;
         this.mapPrefab = mapPrefab;
-    }
-
-    private void LoadStrategyLocationDefenses()
-    {
-        Assembly miExtensionAssembly = Assembly.LoadFile(@"C:\Users\Diego\Source\Repos\UnityInvaders\Lib\StrategyLocationDefenses.dll");
-        strategyLocationDefenses = (IStrategyLocationDefenses)miExtensionAssembly.CreateInstance("StrategyLocationDefenses.ManagerDefenses");
     }
 
     #endregion
@@ -58,6 +47,24 @@ public class MapController : IMapController
         unityMap.InitMap();
 
         return unityMap;
+    }
+
+    public void AddAliens(IMap map)
+    {
+        int alienMargin = map.Margin + Constants.ALIEN_SIZE + 1;
+
+        List<Vector3> freePostionForAliens = map.GetFreePositions(Constants.ALIEN_SIZE).Where(p => p.x == alienMargin ||
+            p.y == alienMargin || p.x == map.Size - alienMargin || p.y == map.Size - alienMargin).ToList();
+
+        if (!freePostionForAliens.Any())
+            return;
+
+        int index = RandomManager.GetRandomNumber(0, freePostionForAliens.Count - 1);
+        Vector3 position = freePostionForAliens[index];
+        IPosition alienPosition = new Position(position.x, 3, position.z);
+
+        IAlien alien = objectManager.GenerateAlien(alienPosition);
+        map.AddAlien(alien);
     }
 
     public void InitMap(IMap map)

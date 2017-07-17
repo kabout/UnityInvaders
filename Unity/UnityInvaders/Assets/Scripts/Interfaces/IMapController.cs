@@ -16,4 +16,9 @@ public interface IMapController
     /// </summary>
     /// <param name="map">Mapa a inicializar</param>
     void InitMap(IMap map);
+    /// <summary>
+    /// Añade un alien al mapa en una posición libre del mapa.
+    /// </summary>
+    /// <param name="map">MApa en donde añadir el alien</param>
+    void AddAliens(IMap map);
 }

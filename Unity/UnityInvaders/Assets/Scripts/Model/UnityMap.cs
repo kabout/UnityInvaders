@@ -39,9 +39,9 @@ public class UnityMap : MonoBehaviour, IMap
 
     public IList<IObstacle> Obstacles { get { return obstacles; } }
 
-    public IList<IDefense> Defenses { get { return defenses; } }
+    public IList<IDefense> Defenses { get { return defenses.Where(x => x.IsAlive()).ToList(); } }
 
-    public IList<IAlien> Aliens { get { return aliens; } }
+    public IList<IAlien> Aliens { get { return aliens.Where(x =>x.IsAlive()).ToList(); } }
 
     public int Margin { get { return margin; } }
 
@@ -286,7 +286,8 @@ public class UnityMap : MonoBehaviour, IMap
 
     public bool AddAlien(IAlien alien)
     {
-        throw new NotImplementedException();
+        aliens.Add(alien);
+        return true;
     }
 
     public bool IsValidPosition(IObstacle obstacle)
@@ -311,12 +312,12 @@ public class UnityMap : MonoBehaviour, IMap
         return map;
     }
 
-    public IList<Vector3> GetFreePositions(float radius)
+    public List<Vector3> GetFreePositions(float radius)
     {
         int upperBorderObstacle = upperBorder - Mathf.RoundToInt(radius);
         int bottomBorderObstacle = Margin + Mathf.RoundToInt(radius);
 
-        IList<Vector3> freePositionsForRadius = new List<Vector3>();
+        List<Vector3> freePositionsForRadius = new List<Vector3>();
 
         foreach (Vector3 position in freePositions)
             if (position.x > bottomBorderObstacle && position.z > bottomBorderObstacle &&

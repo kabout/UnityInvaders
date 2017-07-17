@@ -22,9 +22,9 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
     public int cost;
     public int dispersion;
     public int type;
-    public float shottingInterval = 1f;
+    public float shottingInterval = 10f;
 
-    private float shootSpeed = 50;
+    private float shootSpeed = 40;
     private float nextShoot = 0;
     private bool died = false;
     private float maxHealth;
@@ -98,6 +98,12 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
             Torreta.transform.localRotation = Quaternion.identity;
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Alien"))
+            Destroy(collision.gameObject);
+    }
+
     void DecreaseHealth()
     {
         if (!died)
@@ -111,8 +117,6 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
         if (nextShoot >= Time.time)
             return;
 
-        nextShoot = Time.time + shottingInterval;
-
         GameObject bullet = (GameObject)Instantiate(Bullet, BulletPos.transform.position, BulletPos.transform.rotation);
         var bulletController = bullet.GetComponent<BulletController>();
         bulletController.Damage = Damage;
@@ -120,6 +124,8 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
         bulletController.Owner = gameObject;
         //Le damos velocidad a la bala 
         bullet.GetComponent<Rigidbody>().velocity = BulletPos.transform.TransformDirection(new Vector3(0, 0, shootSpeed));
+
+        nextShoot = Time.time + shottingInterval;
     }
 
     public void SetHealthBar(float myHealth)
