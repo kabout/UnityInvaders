@@ -5,11 +5,10 @@ public class GameConfiguration : MonoBehaviour
 {
     public enum GameVelocity
     {
-        VerySlow = 0,
+        Pause = 0,
         Slow = 1,
-        Normal = 2,
-        Fast = 3,
-        VeryFast = 4
+        Normal = 3,
+        Fast = 4
     }
 
     public static GameConfiguration gameConfiguration;
@@ -35,11 +34,11 @@ public class GameConfiguration : MonoBehaviour
         NumUcosPerSecond = 2f;
         // 5 minutos
         MaxDurationBattleInSeconds = 300;
-        NumObjects = int.MaxValue;
+        NumObstacles = int.MaxValue;
         NumDefenses = int.MaxValue;
         Velocity = GameVelocity.Normal;
-        DensityDefenses = 0.50f;
-        DensityObstacles = 0.50f;
+        DensityDefenses = 0.1f;
+        DensityObstacles = 0.1f;
         NumAses = 1000;
     }
 
@@ -53,7 +52,7 @@ public class GameConfiguration : MonoBehaviour
     public int NumUcos { get; set; }
     public float NumUcosPerSecond { get; set; }
     public int MaxDurationBattleInSeconds { get; set; }
-    public int NumObjects { get; set; }
+    public int NumObstacles { get; set; }
     public int NumDefenses { get; set; }
     public GameVelocity Velocity { get; set; }
     public float DensityObstacles { get; set; }

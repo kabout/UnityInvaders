@@ -63,28 +63,50 @@ namespace StrategyLocationDefenses
 
             foreach (IObstacle obstacle in obstacles)
             {
-                int xInMap = (int)Math.Round(obstacle.Position.X / cellSize);
-                int zInMap = (int)Math.Round(obstacle.Position.Z / cellSize);
+                float xInMap = obstacle.Position.X / cellSize;
+                float zInMap = obstacle.Position.Z / cellSize;
 
-                int obstacleRadius = (int)Math.Round(obstacle.Radius / cellSize);
+                float obstacleRadius = obstacle.Radius / cellSize;
 
-                for (int i = Math.Min(0, xInMap - obstacleRadius); i < Math.Max(numCells, xInMap + obstacleRadius); i++)
-                    for (int j = Math.Min(0, zInMap - obstacleRadius); j < Math.Max(numCells, zInMap + obstacleRadius); j++)
-                        map[i, j] = 1;
+                int initX = Convert.ToInt32(Math.Floor(xInMap - obstacleRadius));
+                int initZ = Convert.ToInt32(Math.Floor(zInMap - obstacleRadius));
+                int endX = Convert.ToInt32(Math.Round(xInMap + obstacleRadius, MidpointRounding.AwayFromZero));
+                int endZ = Convert.ToInt32(Math.Round(zInMap + obstacleRadius, MidpointRounding.AwayFromZero));
+
+                for (int x = Math.Max(0, initX); x < Math.Min(endX, numCells); x++)
+                    for (int z = Math.Max(0, initZ); z < Math.Min(endZ, numCells); z++)
+                        map[x, z] = 1;
 
                 obstaclePositions.Add(new Position(xInMap, 0, zInMap));
+
+#if DEBUG
+                string mapString = string.Empty;
+
+                for (int i = 0; i < numCells; i++)
+                {
+                    for (int j = 0; j < numCells; j++)
+                        mapString += map[j, i].ToString() + " ";
+                    mapString += "\n";
+                }
+#endif
             }
 
-            int defenseRadiusInMap = defenseRadius / cellSize;
+            float defenseRadiusInMap = (float)defenseRadius / cellSize;
+
+            int intDefenseRadiusInMap = Convert.ToInt32(Math.Round(defenseRadiusInMap, MidpointRounding.AwayFromZero));
+            int maxPosition = numCells - intDefenseRadiusInMap;
 
             for (int x = 0; x < numCells; x++)
             {
-                if (x <= defenseRadiusInMap || x >= (numCells - defenseRadiusInMap))
+                if (x < intDefenseRadiusInMap || x >= maxPosition)
                     continue;
 
                 for (int z = 0; z < numCells; z++)
                 {
-                    if (z <= defenseRadiusInMap || z >= (numCells - defenseRadiusInMap))
+                    if (z < intDefenseRadiusInMap || z >= maxPosition)
+                        continue;
+
+                    if (map[x, z] == 1)
                         continue;
 
                     List<int> distances = new List<int>();

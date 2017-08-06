@@ -135,17 +135,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UnityInvaders.CSharp.Plugins.csproj">
-      <Project>{63C379BF-60B2-9B36-6B69-9EFDBB784013}</Project>
-      <Name>UnityInvaders.CSharp.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityInvaders.CSharp.csproj">
       <Project>{CF5A82FA-9053-953C-50D2-E2AC8526F4FD}</Project>
       <Name>UnityInvaders.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DualCorStudios\BasicUIConcrete\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
     <Compile Include="Assets\TDTK_Free\Scripts\Editor\AboutWindow.cs" />
     <Compile Include="Assets\TDTK_Free\Scripts\Editor\BuildManagerEditor.cs" />
     <Compile Include="Assets\TDTK_Free\Scripts\Editor\CameraControlEditor.cs" />
@@ -168,9 +163,7 @@
     <Compile Include="Assets\TDTK_Free\Scripts\UI\Editor\UIEditor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\DualCorStudios\Readme.txt" />
-    <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
-    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\ColorfulButtons\Credits.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

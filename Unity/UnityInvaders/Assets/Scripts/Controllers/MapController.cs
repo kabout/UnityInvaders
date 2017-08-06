@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using UnityEngine;
@@ -8,22 +9,22 @@ public class MapController : IMapController
     #region Fields
 
     GameObject mapPrefab;
-    IDifficultController difficultController;
     IObjectManager objectManager;
     IStrategyAlienAttack strategyAlienAttack;
     IStrategyLocationDefenses strategyLocationDefenses;
+    GameConfiguration gameConfiguration;
 
     #endregion
 
     #region Constructors
 
-    public MapController(IDifficultController difficultController,
-        IObjectManager objectManager, IStrategyAlienAttack strategyAlienAttack, IStrategyLocationDefenses strategyLocationDefenses, GameObject mapPrefab)
+    public MapController(IObjectManager objectManager, IStrategyAlienAttack strategyAlienAttack,
+        IStrategyLocationDefenses strategyLocationDefenses, GameConfiguration gameConfiguration, GameObject mapPrefab)
     {
-        this.difficultController = difficultController;
         this.objectManager = objectManager;
         this.strategyAlienAttack = strategyAlienAttack;
         this.strategyLocationDefenses = strategyLocationDefenses;
+        this.gameConfiguration = gameConfiguration;
         this.mapPrefab = mapPrefab;
     }
 
@@ -42,7 +43,7 @@ public class MapController : IMapController
 
         // Inicializar los valores de la defensa
         UnityMap unityMap = map.GetComponent(typeof(UnityMap)) as UnityMap;
-        unityMap.margin = 15; // Mathf.RoundToInt(size * 0.1f);
+        unityMap.margin = Constants.MARGIN_MAP;
         unityMap.cellSize = cellSize;
         unityMap.InitMap();
 
@@ -51,9 +52,9 @@ public class MapController : IMapController
 
     public void AddAliens(IMap map)
     {
-        int alienMargin = map.Margin + Constants.ALIEN_SIZE + 1;
+        int alienMargin = map.Margin + Constants.DEFAULT_ALIEN_RADIO + 1;
 
-        List<Vector3> freePostionForAliens = map.GetFreePositions(Constants.ALIEN_SIZE).Where(p => p.x == alienMargin ||
+        List<Vector3> freePostionForAliens = map.GetFreePositions(Constants.DEFAULT_ALIEN_RADIO).Where(p => p.x == alienMargin ||
             p.y == alienMargin || p.x == map.Size - alienMargin || p.y == map.Size - alienMargin).ToList();
 
         if (!freePostionForAliens.Any())
@@ -72,15 +73,34 @@ public class MapController : IMapController
         PlaceObstacles(map);
         map.CorrectCellUnReachables();
         PlaceDefenses(map);
-            
+
+#if DEBUG
         Bitmap image = ExportMapToImage.Instance.ConvertToBitMap(map.GetMap(), map.Size);
         image.Save(@"C:\temp\map.bmp");
-    }       
-      
+#endif
+    }    
+    
+    private int GetNumberOfObstacles(int mapSize)
+    {
+        int maxCellForObstacle = (int)Math.Pow(Constants.MAX_OBSTACLE_RADIUS * 2, 2);
+        int minCellForObstacle = (int)Math.Pow(Constants.MIN_OBSTACLE_RADIUS * 2, 2);
+        int meanCellForObstacle = (maxCellForObstacle + minCellForObstacle) / 2;
+
+        return (int)Math.Floor((Math.Pow(mapSize, 2) * gameConfiguration.DensityObstacles) / meanCellForObstacle);
+    }
+
+    private int GetNumberOfDefenses(int mapSize)
+    {
+        int maxCellForObstacle = (int)Math.Pow(Constants.MAX_OBSTACLE_RADIUS * 2, 2);
+        int minCellForObstacle = (int)Math.Pow(Constants.MIN_OBSTACLE_RADIUS * 2, 2);
+        int meanCellForObstacle = (maxCellForObstacle + minCellForObstacle) / 2;
+
+        return (int)Math.Floor((Math.Pow(mapSize, 2) * gameConfiguration.DensityDefenses) / meanCellForObstacle);
+    }
 
     private void PlaceObstacles(IMap map)
     {
-        int numOfObstacles = difficultController.GetNumberOfObstacles(map);
+        int numOfObstacles =  GetNumberOfObstacles(map.Size);
 
         while (numOfObstacles > 0)
         {
@@ -99,11 +119,7 @@ public class MapController : IMapController
     {
         strategyLocationDefenses.InitStrategy(map.Obstacles, Constants.DEFAULT_DEFENSE_RADIO, map.Size, map.CellSize);
 
-        int numDefenses = difficultController.GetNumberOfDefenses(map);
-
-        //List<Vector3> freePositions = map.GetFreePositions(Constants.DEFAULT_DEFENSE_RADIO).ToList();
-
-
+        int numDefenses = GetNumberOfDefenses(map.Size);
 
         while (numDefenses > 0)
         {

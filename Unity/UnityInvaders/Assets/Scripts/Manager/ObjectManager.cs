@@ -10,8 +10,7 @@ public class ObjectManager : IObjectManager
     public GameObject defensePrefab;
     public GameObject obstaclePrefab;
     public GameObject alienPrefab;
-
-    IDifficultController difficultController;
+    
     IStrategyAlienAttack strategyAlienAttack;
     private static int nextDefenseId = 1;
     private static int nextObstacleId = 1;
@@ -19,10 +18,9 @@ public class ObjectManager : IObjectManager
 
     #endregion
 
-    public ObjectManager(IDifficultController difficultController, IStrategyAlienAttack strategyAlienAttack, GameObject defensePrefab, GameObject obstaclePrefab, GameObject alienPrefab)
+    public ObjectManager(IStrategyAlienAttack strategyAlienAttack, GameObject defensePrefab, GameObject obstaclePrefab, GameObject alienPrefab)
     {
         RandomManager.Seed = DateTime.Now.Millisecond;
-        this.difficultController = difficultController;
         this.strategyAlienAttack = strategyAlienAttack;
 
         this.defensePrefab = defensePrefab;
@@ -32,7 +30,7 @@ public class ObjectManager : IObjectManager
 
     public IDefense GenerateDefense(IPosition position)
     {
-        float defenseSize = Constants.DEFAULT_DEFENSE_RADIO * 2;
+        float defenseSize = Constants.DEFAULT_DEFENSE_RADIO;
 
         //Instanciar la defensa
         GameObject defense = GameObject.Instantiate(defensePrefab, ConvertPosition.Convert(position), Quaternion.identity) as GameObject;
@@ -49,7 +47,7 @@ public class ObjectManager : IObjectManager
         unityDefense.cost = Constants.DEFAULT_DEFENSE_COST;
         unityDefense.damage = Constants.DEFAULT_DEFENSE_DAMAGE;
         unityDefense.dispersion = Constants.DEFAULT_DEFENSE_DISPERSION;
-        unityDefense.health = Constants.DEFENSE_HEALTH;
+        unityDefense.health = Constants.DEFAULT_DEFENSE_HEALTH;
         unityDefense.range = Constants.DEFAULT_DEFENSE_RANGE;
         unityDefense.selected = false;
         unityDefense.type = 0;
@@ -61,7 +59,7 @@ public class ObjectManager : IObjectManager
 
     public IAlien GenerateAlien(IPosition position)
     {
-        float alienSize = Constants.ALIEN_SIZE * 2;
+        float alienSize = Constants.DEFAULT_ALIEN_RADIO;
         
         GameObject alien = GameObject.Instantiate(alienPrefab, ConvertPosition.Convert(position), Quaternion.identity) as GameObject;
 
@@ -74,9 +72,8 @@ public class ObjectManager : IObjectManager
         UnityAlien unityAlien = alien.GetComponent(typeof(UnityAlien)) as UnityAlien;
 
         unityAlien.id = nextAlienId;
-        unityAlien.cost = Constants.DEFAULT_ALIEN_COST;
         unityAlien.damage = Constants.DEFAULT_ALIEN_DAMAGE;
-        unityAlien.health = Constants.ALIEN_HEALTH;
+        unityAlien.health = Constants.DEFAULT_ALIEN_HEALTH;
         unityAlien.range = Constants.DEFAULT_ALIEN_RANGE;
         unityAlien.selected = false;
 
@@ -91,7 +88,7 @@ public class ObjectManager : IObjectManager
     public IObstacle GenerateObstacle(IMap map, int minRadius, int maxRadius)
     {
         float radius = RandomManager.GetRandomNumber(minRadius, maxRadius);
-        float sizeObstacle = radius * 2;
+        float sizeObstacle = radius;
 
         IList<Vector3> freePositions = map.GetFreePositions(radius);
         Vector3 position;

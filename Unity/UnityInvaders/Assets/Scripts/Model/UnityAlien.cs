@@ -9,6 +9,7 @@ public class UnityAlien : MonoBehaviour, IAlien
     public bool selected;
     public Transform Target;
     public GameObject HealthBar;
+    public GameObject DestructionEffect;
     public GameObject Bullet;
     public GameObject BulletPos;
     public float damage;
@@ -97,7 +98,7 @@ public class UnityAlien : MonoBehaviour, IAlien
             HealthBar.transform.localScale.z);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Target)
             Shoot();
@@ -131,18 +132,23 @@ public class UnityAlien : MonoBehaviour, IAlien
 
     public void TakeDamage(float damage)
     {
-        if (damage > Health)
+        lock(this)
         {
-            health = 0;
-            died = true;
-            //ParticleSystem particleSystem = ((GameObject)Instantiate(destructionEffect, transform.position, Quaternion.identity)).GetComponent<ParticleSystem>();
-            //particleSystem.Play();
-            Destroy(gameObject);
-        }
-        else
-            health -= damage;
+            if (damage > Health)
+            {
+                health = 0;
+                died = true;
+                ParticleSystem particleSystem = ((GameObject)Instantiate(DestructionEffect, transform.position, Quaternion.identity)).GetComponent<ParticleSystem>();
+                particleSystem.Play();
+                Destroy(gameObject);
 
-        SetHealthBar(Health);
+                Debug.Log(string.Format("Alien {0} in position ({1},{2}) died!", Id, Position.X, Position.Z));
+            }
+            else
+                health -= damage;
+
+            SetHealthBar(Health);
+        }
     }
 
     public bool IsAlive()

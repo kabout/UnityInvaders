@@ -17,8 +17,18 @@ namespace StrategyAlienAttack
             int[,] mapMatrix = InitMap(obstacles, defenses, sizeMap, cellSize);
 
             int sizeInMatrix = sizeMap / cellSize;
-            IPosition targetMap = new Position((int)Math.Round(target.X / cellSize), posY, (int)Math.Round(target.Z / cellSize));
-            IPosition sourceMap = new Position((int)Math.Round(source.X / cellSize), posY, (int)Math.Round(source.Z / cellSize));
+
+            string mapString = string.Empty;
+
+            for (int i = 0; i < sizeInMatrix; i++)
+            {
+                for (int j = 0; j < sizeInMatrix; j++)
+                    mapString += mapMatrix[j, i].ToString() + " ";
+                mapString += "\n";
+            }
+
+            IPosition targetMap = new Position((int)Math.Floor(target.X / cellSize), posY, (int)Math.Floor(target.Z / cellSize));
+            IPosition sourceMap = new Position((int)Math.Floor(source.X / cellSize), posY, (int)Math.Floor(source.Z / cellSize));
 
             positionWithValue.Add(new AStar(sourceMap, 0, 0, null));
 
@@ -102,13 +112,19 @@ namespace StrategyAlienAttack
 
         private void UpdateMap(IEntity entity, int[,] map, int sizeMap, int cellSize)
         {
-            int xInMap = (int)Math.Round(entity.Position.X / cellSize);
-            int zInMap = (int)Math.Round(entity.Position.Z / cellSize);
+            int matrixSize = sizeMap / cellSize;
+            float xInMap = entity.Position.X / cellSize;
+            float zInMap = entity.Position.Z / cellSize;
 
-            int entityRadius = (int)Math.Round(entity.Radius / cellSize);
+            float entityRadius = entity.Radius / cellSize;
 
-            for (int i = Math.Max(0, xInMap - entityRadius); i < Math.Min(sizeMap, xInMap + entityRadius); i++)
-                for (int j = Math.Max(0, zInMap - entityRadius); j < Math.Min(sizeMap, zInMap + entityRadius); j++)
+            int initX = Convert.ToInt32(Math.Floor(xInMap - entityRadius));
+            int initZ = Math.Max(0, Convert.ToInt32(Math.Floor(zInMap - entityRadius)));
+            int endX = Convert.ToInt32(Math.Round(xInMap + entityRadius, MidpointRounding.AwayFromZero));
+            int endZ = Convert.ToInt32(Math.Round(zInMap + entityRadius, MidpointRounding.AwayFromZero));
+            
+            for (int i = Math.Max(0, initX); i < Math.Min(endX, matrixSize); i++)
+                for (int j = Math.Max(0, initZ); j < Math.Min(endZ, matrixSize); j++)
                     map[i, j] = 1;
         }
 

@@ -78,7 +78,7 @@ public class MoveAlien : MonoBehaviour
         return new Vector3((i * cellWidth) + cellWidth * 0.5f, 3, (j * cellHeight) + cellHeight * 0.5f);
     }
 
-    void Update ()
+    void FixedUpdate()
     {
         if (!target || completeGoal)
         {            

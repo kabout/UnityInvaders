@@ -10,8 +10,8 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
     public Transform Target;
 
     public bool selected;
-    public GameObject healthBar;
-    public GameObject destructionEffect;
+    public GameObject HealthBar;
+    public GameObject DestructionEffect;
     public GameObject Bullet;
     public GameObject BulletPos;
 
@@ -85,12 +85,12 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
     void Start()
     {
         maxHealth = Health;
-        maxBarX = healthBar.transform.localScale.x;
+        maxBarX = HealthBar.transform.localScale.x;
         selected = false;
         //InvokeRepeating("DecreaseHealth", 1f, 1f);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Target)
             Shoot();
@@ -130,9 +130,9 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
 
     public void SetHealthBar(float myHealth)
     {
-        healthBar.transform.localScale = new Vector3((myHealth * maxBarX) / maxHealth,
-            healthBar.transform.localScale.y,
-            healthBar.transform.localScale.z);
+        HealthBar.transform.localScale = new Vector3((myHealth * maxBarX) / maxHealth,
+            HealthBar.transform.localScale.y,
+            HealthBar.transform.localScale.z);
     }
 
     #endregion
@@ -141,19 +141,24 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
 
     public void TakeDamage(float damage)
     {
-        if (damage > Health)
+        lock(this)
         {
-            health = 0;
-            died = true;
-            ParticleSystem particleSystem = ((GameObject)Instantiate(destructionEffect, transform.position, Quaternion.identity)).GetComponent<ParticleSystem>();
-            particleSystem.Play();
-            Destroy(gameObject);
-        }
-        else
-            health -= damage;
+            if (damage > Health)
+            {
+                died = true;
+                health = 0;
+                ParticleSystem particleSystem = ((GameObject)Instantiate(DestructionEffect, transform.position, Quaternion.identity)).GetComponent<ParticleSystem>();
+                particleSystem.Play();
+                Destroy(gameObject);
+                
+                Debug.Log(string.Format("Defense {0} in position ({1},{2}) died!", Id, Position.X, Position.Z));
+            }
+            else
+                health -= damage;
 
-        SetHealthBar(Health);
-    }
+            SetHealthBar(Health);
+        }
+    }    
 
     public bool IsAlive()
     {
