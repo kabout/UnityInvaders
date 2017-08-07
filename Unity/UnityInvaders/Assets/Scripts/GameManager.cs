@@ -42,7 +42,18 @@ namespace UnityInvaders.Managers
             map = mapController.GetEmptyMap(gameConfiguration.SizeMap, gameConfiguration.CellMap);
             mapController.InitMap(map);
 
-            timeForNextAlien = 1 / Constants.ALIEN_PER_SECOND; 
+            int[,] mapBit = map.GetMap();
+
+            string mapString = string.Empty;
+
+            for (int i = 0; i < map.Size; i++)
+            {
+                for (int j = 0; j < map.Size; j++)
+                    mapString += mapBit[i, j].ToString() + " ";
+                mapString += "\n";
+            }
+
+            timeForNextAlien = 1 / gameConfiguration.NumUcosPerSecond; 
         }
 
         // Update is called once per frame
@@ -61,7 +72,7 @@ namespace UnityInvaders.Managers
 
                 mapController.AddAliens(map);
 
-                timeForNextAlien = Time.time + 1 / Constants.ALIEN_PER_SECOND;
+                timeForNextAlien = Time.time + 1 / gameConfiguration.NumUcosPerSecond;
             }
 
             Time.timeScale = 0;
@@ -71,11 +82,6 @@ namespace UnityInvaders.Managers
         public void SetFastVelocity()
         {
             Time.timeScale = (int)GameConfiguration.GameVelocity.Fast;
-        }
-
-        public void OnGUI ()
-        {
-            GUILayout.Button("Nex state");
         }
     }
 }

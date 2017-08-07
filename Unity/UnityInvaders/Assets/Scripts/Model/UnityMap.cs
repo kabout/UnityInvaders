@@ -68,15 +68,15 @@ public class UnityMap : MonoBehaviour, IMap
         positionsUnReachables = new List<Vector3>();
 
         for (int x = 0; x < Size; x++)
-            for (int y = 0; y < Size; y++)
+            for (int z = 0; z < Size; z++)
             {
-                map[x, y] = 0;
-                correctedMap[x, y] = ' ';
-                freePositions.Add(new Vector3(x, 0, y));
+                map[x, z] = 0;
+                correctedMap[x, z] = ' ';
+                freePositions.Add(new Vector3(x, 0, -z));
             }
 
         upperBorder = Size - Margin;
-        freePositions.RemoveAll(p => p.x < Margin || p.x > upperBorder || p.z < Margin || p.z > upperBorder);
+        freePositions.RemoveAll(p => p.x < Margin || p.x > upperBorder || Mathf.Abs(p.z) < Margin || Mathf.Abs(p.z) > upperBorder);
     }
 
     public bool AddObstacle(IObstacle obstacle)
@@ -84,20 +84,22 @@ public class UnityMap : MonoBehaviour, IMap
         if (!IsValidPosition(obstacle))
             return false;
 
+        float zPosition = Mathf.Abs(obstacle.Position.Z);
+
         obstacles.Add(obstacle);
-        int xInit = Mathf.Max(0, Mathf.RoundToInt(obstacle.Position.X - obstacle.Radius));
-        int yInit = Mathf.Max(0, Mathf.RoundToInt(obstacle.Position.Z - obstacle.Radius));
-        int xEnd = Mathf.Min(Mathf.RoundToInt(obstacle.Position.X + obstacle.Radius), upperBorder);
-        int yEnd = Mathf.Min(Mathf.RoundToInt(obstacle.Position.Z + obstacle.Radius), upperBorder);
+        int xInit = Mathf.FloorToInt(obstacle.Position.X - obstacle.Radius);
+        int zInit = Mathf.FloorToInt(zPosition - obstacle.Radius);
+        int xEnd = Mathf.CeilToInt(obstacle.Position.X + obstacle.Radius);
+        int zEnd = Mathf.CeilToInt(zPosition + obstacle.Radius);
 
         for (int x = xInit; x < xEnd; x++)
-            for (int y = yInit; y < yEnd; y++)
+            for (int z = zInit; z < zEnd; z++)
             {
-                map[x, y] = 1;
-                correctedMap[x, y] = 'x';
+                map[x, z] = 1;
+                correctedMap[x, z] = 'x';
             }
 
-        freePositions.RemoveAll(p => p.x >= xInit && p.x < xEnd && p.z >= yInit && p.z < yEnd);
+        freePositions.RemoveAll(p => p.x >= xInit && p.x < xEnd && Mathf.Abs(p.z) >= zInit && Mathf.Abs(p.z) < zEnd);
 
         UpdateCorrectedMap(obstacle);
 
@@ -111,19 +113,19 @@ public class UnityMap : MonoBehaviour, IMap
     /// <param name="obstacle">Obstáculo que se está poniendo en el mapa</param>
     private void UpdateCorrectedMap(IObstacle obstacle)
     {
-        Vector3 position = ConvertPosition.Convert(obstacle.Position);
+        float zPosition = Mathf.Abs(obstacle.Position.Z);
 
-        int xEnd = Mathf.Min(upperBorder, Mathf.RoundToInt(obstacle.Position.X + obstacle.Radius));
-        int yEnd = Mathf.Min(upperBorder, Mathf.RoundToInt(obstacle.Position.Z + obstacle.Radius));
-        int xInit = Mathf.Max(0, Mathf.RoundToInt(position.x - obstacle.Radius));
-        int yInit = Mathf.Max(0, Mathf.RoundToInt(position.z - obstacle.Radius));
+        int xInit = Mathf.FloorToInt(obstacle.Position.X - obstacle.Radius);
+        int zInit = Mathf.FloorToInt(zPosition - obstacle.Radius);
+        int xEnd = Mathf.CeilToInt(obstacle.Position.X + obstacle.Radius);
+        int zEnd = Mathf.CeilToInt(zPosition + obstacle.Radius);
 
-        for (int x = xInit; x > xEnd; x++)
-            for (int y = yInit; y > Margin; y--)
+        for (int z = zInit; z > Margin; z--)
+            for (int x = xInit; x > xEnd; x++)
             {
-                if (correctedMap[x, y] == 'x')
+                if (correctedMap[x, z] == 'x')
                 {
-                    for (int i = y + 1; i < yInit; i++)
+                    for (int i = z + 1; i < zInit; i++)
                         if (correctedMap[x, i] != 'x')
                             correctedMap[x, i] = 'a';
 
@@ -131,25 +133,25 @@ public class UnityMap : MonoBehaviour, IMap
                 }
             }
 
-        for (int y = yInit; y < yEnd; y++)
+        for (int z = zInit; z < zEnd; z++)
             for (int x = xEnd; x < upperBorder; x++)
             {
-                if (correctedMap[x, y] == 'x')
+                if (correctedMap[x, z] == 'x')
                 {
                     for (int i = x - 1; i >= xEnd; i--)
-                        if (correctedMap[i, y] != 'x')
-                            correctedMap[i, y] = 'a';
+                        if (correctedMap[i, z] != 'x')
+                            correctedMap[i, z] = 'a';
 
                     continue;
                 }
             }
 
         for (int x = xInit; x < xEnd; x++)
-            for (int y = yEnd; y < upperBorder; y++)
+            for (int z = zEnd; z < upperBorder; z++)
             {
-                if (correctedMap[x, y] == 'x')
+                if (correctedMap[x, z] == 'x')
                 {
-                    for (int i = y - 1; i >= yEnd; i--)
+                    for (int i = z - 1; i >= zEnd; i--)
                         if (correctedMap[x, i] != 'x')
                             correctedMap[x, i] = 'a';
 
@@ -157,14 +159,14 @@ public class UnityMap : MonoBehaviour, IMap
                 }
             }
 
-        for (int y = yInit; y < yEnd; y++)
+        for (int z = zInit; z < zEnd; z++)
             for (int x = xInit; x > Margin; x--)
             {
-                if (correctedMap[x, y] == 'x')
+                if (correctedMap[x, z] == 'x')
                 {
                     for (int i = x + 1; i < xInit; i++)
-                        if (correctedMap[i, y] != 'x')
-                            correctedMap[i, y] = 'a';
+                        if (correctedMap[i, z] != 'x')
+                            correctedMap[i, z] = 'a';
 
                     continue;
                 }
@@ -265,18 +267,18 @@ public class UnityMap : MonoBehaviour, IMap
 
     public bool AddDefense(IDefense defense)
     {
-        int xInit = Mathf.Max(0, Mathf.RoundToInt(defense.Position.X - defense.Radius));
-        int yInit = Mathf.Max(0, Mathf.RoundToInt(defense.Position.Z - defense.Radius));
-        int xEnd = Mathf.Min(Mathf.RoundToInt(defense.Position.X + defense.Radius), upperBorder);
-        int yEnd = Mathf.Min(Mathf.RoundToInt(defense.Position.Z + defense.Radius), upperBorder);
+        float zPosition = Mathf.Abs(defense.Position.Z);
+
+        int xInit = Mathf.FloorToInt(defense.Position.X - defense.Radius);
+        int zInit = Mathf.FloorToInt(zPosition - defense.Radius);
+        int xEnd = Mathf.CeilToInt(defense.Position.X + defense.Radius);
+        int zEnd = Mathf.CeilToInt(zPosition + defense.Radius);
 
         for (int x = xInit; x < xEnd; x++)
-            for (int y = yInit; y < yEnd; y++)
+            for (int z = zInit; z < zEnd; z++)
             {
-                if (map[x, y] != 0)
-                { }
-                map[x, y] = 2;
-                freePositions.RemoveAll(p => p.x == x && p.y == y);
+                map[x, z] = 2;
+                freePositions.RemoveAll(p => p.x == x && Mathf.Abs(p.z) == z);
             }
 
         defenses.Add(defense);
@@ -320,9 +322,13 @@ public class UnityMap : MonoBehaviour, IMap
         List<Vector3> freePositionsForRadius = new List<Vector3>();
 
         foreach (Vector3 position in freePositions)
-            if (position.x > bottomBorderObstacle && position.z > bottomBorderObstacle &&
-                position.x < upperBorderObstacle && position.z < upperBorderObstacle)
+        {
+            float zPosition = Mathf.Abs(position.z);
+
+            if (position.x > bottomBorderObstacle && zPosition > bottomBorderObstacle &&
+                position.x < upperBorderObstacle && zPosition < upperBorderObstacle)
                 freePositionsForRadius.Add(position);
+        }
 
         return freePositionsForRadius;
     }

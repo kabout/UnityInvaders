@@ -34,7 +34,7 @@ public class MapController : IMapController
 
     public IMap GetEmptyMap(int size, int cellSize)
     {
-        GameObject map = GameObject.Instantiate(mapPrefab, new Vector3(size / 2, 0, size / 2), Quaternion.identity) as GameObject;
+        GameObject map = GameObject.Instantiate(mapPrefab, new Vector3(size / 2, 0, -(size / 2)), Quaternion.identity) as GameObject;
 
         if (map == null)
             return null;
@@ -55,7 +55,7 @@ public class MapController : IMapController
         int alienMargin = map.Margin + Constants.DEFAULT_ALIEN_RADIO + 1;
 
         List<Vector3> freePostionForAliens = map.GetFreePositions(Constants.DEFAULT_ALIEN_RADIO).Where(p => p.x == alienMargin ||
-            p.y == alienMargin || p.x == map.Size - alienMargin || p.y == map.Size - alienMargin).ToList();
+            Math.Abs(p.z) == alienMargin || p.x == map.Size - alienMargin || Math.Abs(p.z) == map.Size - alienMargin).ToList();
 
         if (!freePostionForAliens.Any())
             return;
@@ -71,13 +71,11 @@ public class MapController : IMapController
     public void InitMap(IMap map)
     {
         PlaceObstacles(map);
-        map.CorrectCellUnReachables();
+        //map.CorrectCellUnReachables();
         PlaceDefenses(map);
-
-#if DEBUG
+        
         Bitmap image = ExportMapToImage.Instance.ConvertToBitMap(map.GetMap(), map.Size);
         image.Save(@"C:\temp\map.bmp");
-#endif
     }    
     
     private int GetNumberOfObstacles(int mapSize)
@@ -129,9 +127,13 @@ public class MapController : IMapController
 
             if (position == positionZero)
                 return;
-
-            while (strategyAlienAttack.CalculatePath(position, positionZero, map.Obstacles, map.Defenses, map.Size, map.CellSize / 2).Count == 0)
-                position = strategyLocationDefenses.GetPositionForDefense(map.Defenses);
+            try
+            {
+                while (strategyAlienAttack.CalculatePath(position, positionZero, map.Obstacles, map.Defenses, map.Size, map.CellSize).Count == 0)
+                    position = strategyLocationDefenses.GetPositionForDefense(map.Defenses);            
+            }
+            catch (Exception ex)
+            { }
 
             IDefense defense = objectManager.GenerateDefense(position);
 
@@ -141,7 +143,7 @@ public class MapController : IMapController
             map.AddDefense(defense);
 
             numDefenses--;
-        }
+         }
     }
 
     #endregion

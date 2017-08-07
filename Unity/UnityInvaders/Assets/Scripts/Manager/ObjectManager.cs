@@ -60,6 +60,8 @@ public class ObjectManager : IObjectManager
     public IAlien GenerateAlien(IPosition position)
     {
         float alienSize = Constants.DEFAULT_ALIEN_RADIO;
+
+
         
         GameObject alien = GameObject.Instantiate(alienPrefab, ConvertPosition.Convert(position), Quaternion.identity) as GameObject;
 

@@ -8,7 +8,6 @@ public class MoveAlien : MonoBehaviour
 {
     public Transform target;
     public GameObject map;
-    public GameObject[] obstacles;
     public IStrategyAlienAttack strategyAlienAttack;
     private IMap iMap;
     private List<Vector3> positions = new List<Vector3>();
@@ -21,7 +20,6 @@ public class MoveAlien : MonoBehaviour
     void Start ()
     {
         map = GameObject.FindGameObjectWithTag("Floor");
-        obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         iMap = map.GetComponent<IMap>();
         iObstacles = iMap.Obstacles;
         
@@ -75,7 +73,7 @@ public class MoveAlien : MonoBehaviour
 
     private Vector3 CellCenterToPosition(float i, float j, float cellWidth, float cellHeight)
     {
-        return new Vector3((i * cellWidth) + cellWidth * 0.5f, 3, (j * cellHeight) + cellHeight * 0.5f);
+        return new Vector3((i * cellWidth) + cellWidth * 0.5f, 3, (j * cellHeight) - cellHeight * 0.5f);
     }
 
     void FixedUpdate()
@@ -129,11 +127,5 @@ public class MoveAlien : MonoBehaviour
         target = newTarget;
 
         StartAttack();
-    }
-
-
-    private int ManhattanHeuristic(IPosition newNode, IPosition end)
-    {
-        return (Math.Abs((int)Math.Round(newNode.X - end.X)) + Math.Abs((int)Math.Round(newNode.Z - end.Z)));
     }
 }

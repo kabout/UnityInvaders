@@ -27,8 +27,8 @@ namespace StrategyAlienAttack
                 mapString += "\n";
             }
 
-            IPosition targetMap = new Position((int)Math.Floor(target.X / cellSize), posY, (int)Math.Floor(target.Z / cellSize));
-            IPosition sourceMap = new Position((int)Math.Floor(source.X / cellSize), posY, (int)Math.Floor(source.Z / cellSize));
+            IPosition targetMap = new Position((int)Math.Floor(target.X / cellSize), posY, (int)Math.Floor(Math.Abs(target.Z) / cellSize));
+            IPosition sourceMap = new Position((int)Math.Floor(source.X / cellSize), posY, (int)Math.Floor(Math.Abs(source.Z) / cellSize));
 
             positionWithValue.Add(new AStar(sourceMap, 0, 0, null));
 
@@ -45,6 +45,7 @@ namespace StrategyAlienAttack
 
                     while(actualNode.Parent != null)
                     {
+                        actualNode.Position.Z = -actualNode.Position.Z;
                         inversePath.Push(actualNode.Position);
                         actualNode = actualNode.Parent;
                     }
@@ -53,7 +54,7 @@ namespace StrategyAlienAttack
                 }
 
                 int x = (int)node.Position.X;
-                int z = (int)node.Position.Z;
+                int z = (int)Math.Abs(node.Position.Z);
 
                 if (z > 0)
                 {
@@ -114,23 +115,18 @@ namespace StrategyAlienAttack
         {
             int matrixSize = sizeMap / cellSize;
             float xInMap = entity.Position.X / cellSize;
-            float zInMap = entity.Position.Z / cellSize;
+            float zInMap = Math.Abs(entity.Position.Z) / cellSize;
 
             float entityRadius = entity.Radius / cellSize;
 
-            int initX = Convert.ToInt32(Math.Floor(xInMap - entityRadius));
-            int initZ = Math.Max(0, Convert.ToInt32(Math.Floor(zInMap - entityRadius)));
-            int endX = Convert.ToInt32(Math.Round(xInMap + entityRadius, MidpointRounding.AwayFromZero));
-            int endZ = Convert.ToInt32(Math.Round(zInMap + entityRadius, MidpointRounding.AwayFromZero));
-            
-            for (int i = Math.Max(0, initX); i < Math.Min(endX, matrixSize); i++)
-                for (int j = Math.Max(0, initZ); j < Math.Min(endZ, matrixSize); j++)
-                    map[i, j] = 1;
-        }
+            int xInit = Convert.ToInt32(Math.Floor(xInMap - entityRadius));
+            int zInit = Convert.ToInt32(Math.Floor(zInMap - entityRadius));
+            int xEnd = Convert.ToInt32(Math.Ceiling(xInMap + entityRadius));
+            int zEnd = Convert.ToInt32(Math.Ceiling(zInMap + entityRadius));
 
-        private IPosition CellCenterToPosition(int i, int j, float cellWidth, float cellHeight)
-        {
-            return new Position((j * cellWidth) + cellWidth * 0.5f, (i * cellHeight) + cellHeight * 0.5f, 0);
+            for (int x = xInit; x < xEnd; x++)
+                for (int z = zInit; z < zEnd; z++)
+                    map[x, z] = 1;
         }
 
         private void CheckNewAStarNode (AStar node, IPosition newPosition, IPosition target, List<AStar> positionWithValue, List<AStar> path)
