@@ -1,6 +1,4 @@
-﻿using StrategyAlienAttack;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;

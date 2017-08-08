@@ -6,126 +6,138 @@ using System.Linq;
 
 public class MoveAlien : MonoBehaviour
 {
-    public Transform target;
-    public GameObject map;
-    public IStrategyAlienAttack strategyAlienAttack;
-    private IMap iMap;
-    private List<Vector3> positions = new List<Vector3>();
-    private Vector3 actualGoal;
-    private bool completeGoal = false;
-    private IList<IObstacle> iObstacles;
-    private IList<IDefense> iDefenses;
+	public Transform target;
+	public GameObject map;
+	public IStrategyAlienAttack strategyAlienAttack;
+	private IMap iMap;
+	private List<Vector3> positions = new List<Vector3>();
+	private Vector3 actualGoal;
+	private bool completeGoal = false;
+	private IList<IObstacle> iObstacles;
+	private IList<IDefense> iDefenses = new List<IDefense>();
 
-    // Use this for initialization
-    void Start ()
-    {
-        map = GameObject.FindGameObjectWithTag("Floor");
-        iMap = map.GetComponent<IMap>();
-        iObstacles = iMap.Obstacles;
-        
-        StartAttack();
+	// Use this for initialization
+	void Start ()
+	{
+		map = GameObject.FindGameObjectWithTag("Floor");
+		iMap = map.GetComponent<IMap>();
+		iObstacles = iMap.Obstacles;
+		//iDefenses = iMap.Defenses;
+		
+		StartAttack();
 	}
 
-    private void StartAttack()
-    {
-        try
-        {
-            target = GetTarget();
+	private void StartAttack()
+	{
+		try
+		{
+			target = GetTarget();
 
-            if (target == null)
-                return;
+			if (target == null)
+				return;
 
-            positions = ConvertPosition.Convert(strategyAlienAttack.CalculatePath(
-                ConvertPosition.Convert(transform.position),
-                ConvertPosition.Convert(target.position),
-                iObstacles, iMap.Defenses, iMap.Size, iMap.CellSize));
+			positions = ConvertPosition.Convert(strategyAlienAttack.CalculatePath(
+				ConvertPosition.Convert(transform.position),
+				ConvertPosition.Convert(target.position),
+				iObstacles, iDefenses, iMap.Size, iMap.CellSize));
 
-            for (int i = 0; i < positions.Count; i++)
-                positions[i] = CellCenterToPosition(positions[i].x, positions[i].z, iMap.CellSize, iMap.CellSize);
+			for (int i = 0; i < positions.Count; i++)
+				positions[i] = CellCenterToPosition(positions[i].x, positions[i].z, iMap.CellSize, iMap.CellSize);
 
-            if (positions.Count > 1)
-            {
-                positions.RemoveAt(0);
-                actualGoal = positions.First();
-                transform.LookAt(actualGoal);
-                completeGoal = false;
-            }
-        }
-        catch(Exception ex)
-        {
-            Debug.Log(ex.Message);
-        }
-    }
+			if (positions.Count > 1)
+			{
+				positions.RemoveAt(0);
+				actualGoal = positions.First();
+				transform.LookAt(actualGoal);
+				completeGoal = false;
+			}
+		}
+		catch(Exception ex)
+		{
+			Debug.Log(ex.Message);
+		}
+	}
 
-    private Transform GetTarget()
-    {
-        IDefense defense = strategyAlienAttack.GetNextDefenseToAttack(GetComponent<IAlien>().Position, 
-            iObstacles, iMap.Defenses, iMap.Size, iMap.CellSize);        
+	private Transform GetTarget()
+	{
+		if (target == null)
+		{
+			IDefense defense = strategyAlienAttack.GetNextDefenseToAttack(GetComponent<IAlien>().Position,
+				iObstacles, iMap.Defenses, iMap.Size, iMap.CellSize);
 
-        foreach(var defenseObject in GameObject.FindGameObjectsWithTag("Defense"))
-        {
-            if (defenseObject.GetComponent<IDefense>().Id == defense.Id)
-                return defenseObject.transform;
-        }
+			foreach (var defenseObject in GameObject.FindGameObjectsWithTag("Defense"))
+			{
+				if (defenseObject.GetComponent<IDefense>().Id == defense.Id)
+					return defenseObject.transform;
+			}
 
-        return null;
-    }
+			return null;
+		}
 
-    private Vector3 CellCenterToPosition(float i, float j, float cellWidth, float cellHeight)
-    {
-        return new Vector3((i * cellWidth) + cellWidth * 0.5f, 3, (j * cellHeight) - cellHeight * 0.5f);
-    }
+		return target;
+	}
 
-    void FixedUpdate()
-    {
-        if (!target || completeGoal)
-        {            
-            if (!target)  
-                StartAttack();
+	private Vector3 CellCenterToPosition(float i, float j, float cellWidth, float cellHeight)
+	{
+		return new Vector3((i * cellWidth) + (cellWidth * 0.5f), 3, (j * cellHeight) - (cellHeight * 0.5f));
+	}
 
-            return;
-        }        
+	void FixedUpdate()
+	{
+		if (!target || completeGoal)
+		{            
+			if (!target)  
+				StartAttack();
 
-        if ((Mathf.Abs(transform.position.x - target.position.x)) < 20 && (Mathf.Abs(transform.position.z - target.position.z)) < 20)
-        {
-            transform.LookAt(target);
-            GetComponent<UnityAlien>().Target = target;
-            completeGoal = true;
-        }
+			return;
+		}        
 
-        if ((Mathf.Abs(transform.position.x - actualGoal.x)) < 1 && (Mathf.Abs(transform.position.z - actualGoal.z)) < 1)
-        {
-            if(positions.Any())
-                positions.RemoveAt(0);
+		if ((Mathf.Abs(transform.position.x - target.position.x)) < 20 &&
+			(Mathf.Abs(transform.position.z - target.position.z)) < 20)
+		{
+			transform.LookAt(target);
+			GetComponent<UnityAlien>().Target = target;
+			completeGoal = true;
+		}
 
-            if (positions.Count > 0)
-            {
-                actualGoal = positions.First();
-                transform.LookAt(actualGoal);
-            }
-            else
-            {
-                completeGoal = true;
-            }
-        }
+		if ((Mathf.Abs(transform.position.x - actualGoal.x)) < 1 &&
+			(Mathf.Abs(transform.position.z - actualGoal.z)) < 1)
+		{
+			if(positions.Any())
+				positions.RemoveAt(0);
 
-        Move();
-    }
+			if (positions.Count > 0)
+			{
+				actualGoal = positions.First();
+				transform.LookAt(actualGoal);
+			}
+			else
+			{
+				completeGoal = true;
+			}
+		}
 
-    private void Move()
-    {
-        Vector3 motion = actualGoal - transform.position;
-        motion.Normalize();
-        transform.position += motion * 0.5f;
-    }
+		Move();
+	}
 
-    public void ChangeTarget(Transform newTarget)
-    {
-        if (target == newTarget)
-            return;
+	private void Move()
+	{
+		if (actualGoal != Vector3.zero)
+		{
+			Vector3 motion = actualGoal - transform.position;
+			motion.Normalize();
+			motion.y = 0;
+			transform.position += motion * Time.deltaTime * 15f;
+		}
+	}
 
-        target = newTarget;
+	public void ChangeTarget(Transform newTarget)
+	{
+		if (target == newTarget)
+			return;
 
-        StartAttack();
-    }
+		target = newTarget;
+
+		StartAttack();
+	}
 }

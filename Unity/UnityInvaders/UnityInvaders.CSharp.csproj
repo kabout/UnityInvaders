@@ -76,9 +76,6 @@
     <Reference Include="Mono.Cecil">
       <HintPath>Assets\Plugins\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="StrategyAlienAttack">
-      <HintPath>Assets\Plugins\StrategyAlienAttack.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing">
       <HintPath>Assets\Plugins\System.Drawing.dll</HintPath>
     </Reference>
@@ -92,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Assets\AlienEnterInRadius.cs" />
     <Compile Include="Assets\Camera_Bounds.cs" />
+    <Compile Include="Assets\Cube.cs" />
     <Compile Include="Assets\Destroy.cs" />
     <Compile Include="Assets\EnterInRadius.cs" />
     <Compile Include="Assets\GameManagerTest.cs" />
