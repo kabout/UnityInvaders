@@ -36,9 +36,9 @@ public class GameConfiguration : MonoBehaviour
         MaxDurationBattleInSeconds = 300;
         NumObstacles = int.MaxValue;
         NumDefenses = int.MaxValue;
-        Velocity = GameVelocity.Slow;
-        DensityDefenses = 1f;
-        DensityObstacles = 1f;
+        Velocity = GameVelocity.Normal;
+        DensityDefenses = 0.2f;
+        DensityObstacles = 0.2f;
         NumAses = 1000;
     }
 

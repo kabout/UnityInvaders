@@ -93,6 +93,7 @@
     <Compile Include="Assets\Destroy.cs" />
     <Compile Include="Assets\EnterInRadius.cs" />
     <Compile Include="Assets\GameManagerTest.cs" />
+    <Compile Include="Assets\GameStatistics.cs" />
     <Compile Include="Assets\MenuScript.cs" />
     <Compile Include="Assets\MoveAlien.cs" />
     <Compile Include="Assets\MoveCamera.cs" />

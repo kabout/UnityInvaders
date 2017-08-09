@@ -13,19 +13,21 @@ public class MapController : IMapController
     IStrategyAlienAttack strategyAlienAttack;
     IStrategyLocationDefenses strategyLocationDefenses;
     GameConfiguration gameConfiguration;
+    GameStatistics gameStatistics;
 
     #endregion
 
     #region Constructors
 
     public MapController(IObjectManager objectManager, IStrategyAlienAttack strategyAlienAttack,
-        IStrategyLocationDefenses strategyLocationDefenses, GameConfiguration gameConfiguration, GameObject mapPrefab)
+        IStrategyLocationDefenses strategyLocationDefenses, GameConfiguration gameConfiguration, GameObject mapPrefab, GameStatistics gameStatistics)
     {
         this.objectManager = objectManager;
         this.strategyAlienAttack = strategyAlienAttack;
         this.strategyLocationDefenses = strategyLocationDefenses;
         this.gameConfiguration = gameConfiguration;
         this.mapPrefab = mapPrefab;
+        this.gameStatistics = gameStatistics;
     }
 
     #endregion

@@ -150,7 +150,12 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
                 ParticleSystem particleSystem = ((GameObject)Instantiate(DestructionEffect, transform.position, Quaternion.identity)).GetComponent<ParticleSystem>();
                 particleSystem.Play();
                 Destroy(gameObject);
-                
+
+                GameStatistics gameStatistics = GameObject.FindObjectOfType<GameStatistics>();
+
+                if (gameStatistics != null)
+                    gameStatistics.AddDefense(Id, Position.X, Position.Y, Time.time);
+
                 Debug.Log(string.Format("Defense {0} in position ({1},{2}) died!", Id, Position.X, Position.Z));
             }
             else

@@ -142,6 +142,11 @@ public class UnityAlien : MonoBehaviour, IAlien
                 particleSystem.Play();
                 Destroy(gameObject);
 
+                GameStatistics gameStatistics = GameObject.FindObjectOfType<GameStatistics>();
+
+                if(gameStatistics != null)
+                    gameStatistics.AddAlien(Id, Position.X, Position.Y, Time.time);
+
                 Debug.Log(string.Format("Alien {0} in position ({1},{2}) died!", Id, Position.X, Position.Z));
             }
             else
