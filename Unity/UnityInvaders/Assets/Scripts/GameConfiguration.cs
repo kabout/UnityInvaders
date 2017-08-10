@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class GameConfiguration : MonoBehaviour
 {
@@ -23,10 +24,10 @@ public class GameConfiguration : MonoBehaviour
         else if (gameConfiguration != this)
             Destroy(gameObject);
 
-        StrategyLocationDefensesDllPath = Application.dataPath + @"/../Lib/StrategyLocationDefenses.dll";
-        StrategySelectionDefensesDllPath = Application.dataPath + @"/../Lib/StrategySelectionDefenses.dll";
-        StrategyAttackAliensDllPath = Application.dataPath + @"/../Lib/StrategyAlienAttack.dll";
-        StrategyDefenderAliensDllPath = Application.dataPath + @"/../Lib/StrategyAliensDefender.dll";
+        StrategyLocationDefensesDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategyLocationDefenses.dll");
+        StrategySelectionDefensesDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategySelectionDefenses.dll");
+        StrategyAttackAliensDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategyAlienAttack.dll");
+        StrategyDefenderAliensDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategyAliensDefender.dll");
 
         SizeMap = 300;
         CellMap = 10;

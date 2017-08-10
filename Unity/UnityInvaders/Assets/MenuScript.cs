@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
 using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
+using UnityEditor;
 
 public class MenuScript : MonoBehaviour
 {
+    //[DllImport("user32.dll")]
+    //private static extern void SaveFileDialog(); 
+
     #region Fields
 
     public Canvas MainMenu;
@@ -108,6 +112,18 @@ public class MenuScript : MonoBehaviour
         if (newPath == string.Empty)
             return;
 
+        //System.Windows.Forms.SaveFileDialog ofd = new System.Windows.Forms.SaveFileDialog();
+        //ofd.InitialDirectory = initialPath;
+        //ofd.Title = "Select Dll";
+        //ofd.DefaultExt = "dll";
+
+        //string newPath =  string.Empty;
+
+        //if (ofd.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+        //    return;
+
+        //newPath = ofd.FileName;
+
         button.GetComponentInChildren<Text>().text = "Change Dll";
         path = newPath;
     }
@@ -143,5 +159,5 @@ public class MenuScript : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 }

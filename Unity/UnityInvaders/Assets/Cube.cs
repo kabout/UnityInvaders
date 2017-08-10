@@ -8,8 +8,6 @@ public class Cube : MonoBehaviour {
         GameObject map = GameObject.FindGameObjectWithTag("Floor");
         UnityMap iMap = map.GetComponent<UnityMap>();
         iMap.InitMap();
-        MoveAlien moveAlien = gameObject.GetComponent(typeof(MoveAlien)) as MoveAlien;
-        //moveAlien.strategyAlienAttack = new StrategyAlienAttack.StrategyAlienAttack();
     }
 	// Use this for initialization
 	void Start () {

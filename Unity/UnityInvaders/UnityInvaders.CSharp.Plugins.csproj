@@ -13,7 +13,7 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>Assets\smcs.rsp</CompilerResponseFile>
     <UnityProjectType>GamePlugins:3</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.0f3</UnityVersion>
@@ -27,8 +27,8 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_0;UNITY_5_4;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT</DefineConstants>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_0;UNITY_5_4;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT;</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,8 +37,8 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_0;UNITY_5_4;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT</DefineConstants>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_0;UNITY_5_4;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT;</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -61,23 +61,11 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>Assets\Plugins\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Assets\Plugins\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="StrategyAlienAttack">
-      <HintPath>Assets\Plugins\StrategyAlienAttack.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing">
       <HintPath>Assets\Plugins\System.Drawing.dll</HintPath>
@@ -88,21 +76,332 @@
     <Reference Include="UnityInvaders.Types">
       <HintPath>Assets\Plugins\UnityInvaders.Types.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>Assets\Plugins\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleAds">
+      <HintPath>Assets\Plugins\WP8\GoogleAds.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Standard Assets\Cameras\Scripts\AbstractTargetFollower.cs" />
-    <Compile Include="Assets\Standard Assets\Cameras\Scripts\AutoCam.cs" />
-    <Compile Include="Assets\Standard Assets\Cameras\Scripts\FreeLookCam.cs" />
-    <Compile Include="Assets\Standard Assets\Cameras\Scripts\HandHeldCam.cs" />
-    <Compile Include="Assets\Standard Assets\Cameras\Scripts\LookatTarget.cs" />
-    <Compile Include="Assets\Standard Assets\Cameras\Scripts\PivotBasedCameraRig.cs" />
-    <Compile Include="Assets\Standard Assets\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
-    <Compile Include="Assets\Standard Assets\Cameras\Scripts\TargetFieldOfView.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\AdsDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\EmailDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\IAPDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\InputExDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\InterstitialAdDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\MainDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\MarketingDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\MessageBoxDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\ScoresDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\SocialDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Scripts\StreamsDemo.cs" />
+    <Compile Include="Assets\Plugins\Reign\DemoScenes\Tools\InputMapper.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\AdManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\EmailManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\InAppPurchaseManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\InterstitialAdManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\MarketingManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\MessageBoxManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\PushNotificationManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\ScoreManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\SocialManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Managers\StreamManager.cs" />
+    <Compile Include="Assets\Plugins\Reign\Math\Bound2.cs" />
+    <Compile Include="Assets\Plugins\Reign\Math\Bound3.cs" />
+    <Compile Include="Assets\Plugins\Reign\Math\MathUtilities.cs" />
+    <Compile Include="Assets\Plugins\Reign\Math\Vector2Extensions.cs" />
+    <Compile Include="Assets\Plugins\Reign\Math\Vector3Extensions.cs" />
+    <Compile Include="Assets\Plugins\Reign\Math\Vector4Extensions.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\EditorRuntime\AdPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\EditorRuntime\EmailPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\EditorRuntime\InAppPurchasePlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\EditorRuntime\InterstitialAdPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\EditorRuntime\MarketingPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\EditorRuntime\MessageBoxPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\EditorRuntime\StreamPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Code\InputEx.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Code\MM_AdPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Code\PlayerPrefsEx.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Code\ReignScores_ClassicGUI.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Code\ReignScores_ScorePlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Code\ReignScores_UnityUI.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Code\StreamPluginBase.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Code\TextureGIF.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\BMP\BmpCompression.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\BMP\BmpDecoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\BMP\BmpEncoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\BMP\BmpFileHeader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\BMP\BmpInfoHeader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\BarcodeResult.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\BarcodeResultFormat.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\ExtendedImage.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\ExtendedImage_Operations.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\FlippingType.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\GlobalSuppressions.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\Helpers\Extensions.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\Helpers\Guard.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IBarcodeReader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IBarcodeReaderContract.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IImageFilter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IImageFilterContract.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IImageResizer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IImageResizerContract.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IO\Decoders.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IO\Encoders.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IO\IImageDecoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IO\IImageDecoderContract.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IO\IImageEncoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IO\IImageEncoderContract.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\IO\UnsupportedImageFormatException.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\ImageBase.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\ImageBase_Operations.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\ImageFormatException.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\ImageFrame.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\ImageFrameCollection.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\ImageProperty.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\ImagePropertyCollection.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\Rectangle.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Common\RotationType.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\BilinearResizer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\BinarizerMode.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\BlendingFilter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\Brightness.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\Contrast.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\GaussianBlur.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\Grayscale.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\GrayscaleBT709.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\GrayscaleRMY.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\Inverter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\MatrixFilter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\NearestNeighborResizer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\PrewittX.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\PrewittY.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\Sepia.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\SobelX.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\SobelY.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\Filtering\ZXingBarcodeReader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\GIF\DisposalMethod.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\GIF\GifDecoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\GIF\GifGraphicsControlExtension.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\GIF\GifImageDescriptor.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\GIF\GifLogicalScreenDescriptor.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\GIF\GlobalSuppressions.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\GIF\LZWDecoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\DCT.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\DecodedJpeg.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\Decoder\HuffmanTable.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\Decoder\JpegComponent.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\Decoder\JpegDecoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\Decoder\JpegFrame.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\Decoder\JpegHuffmanTable.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\Decoder\JpegQuantizationTable.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\Decoder\JpegScan.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\Encoder\JpegEncoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\FDCT.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\IO\BinaryReader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\IO\BinaryWriter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\IO\JpegBinaryReader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\Image.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\JpegMarker.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\YCbCr.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\FluxJpeg.Core\ZigZag.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\JpegDecoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\JpegEncoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\BitStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\BitmapDestination.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\DensityUnit.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\ComponentBuffer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\J_BUF_MODE.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\JpegUtils.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\bitread_perm_state.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\bitread_working_state.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\d_derived_tbl.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\huff_entropy_decoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\huff_entropy_encoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_c_coef_controller.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_c_main_controller.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_c_prep_controller.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_color_converter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_color_deconverter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_color_quantizer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_comp_master.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_d_coef_controller.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_d_main_controller.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_d_post_controller.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_decomp_master.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_downsampler.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_entropy_decoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_entropy_encoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_forward_dct.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_input_controller.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_inverse_dct.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_marker_reader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_marker_writer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_scan_info.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\jpeg_upsampler.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\my_1pass_cquantizer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\my_2pass_cquantizer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\my_c_coef_controller.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\my_destination_mgr.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\my_merged_upsampler.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\my_source_mgr.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\my_trans_c_coef_controller.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\my_upsampler.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\phuff_entropy_decoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\Internal\phuff_entropy_encoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\JBLOCK.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\JHUFF_TBL.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\JPEG_MARKER.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\JQUANT_TBL.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\J_COLOR_SPACE.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\J_DCT_METHOD.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\J_DITHER_MODE.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\J_MESSAGE_CODE.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\JpegConstants.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\ReadResult.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jpeg_common_struct.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jpeg_component_info.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jpeg_compress_struct.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jpeg_decompress_struct.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jpeg_destination_mgr.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jpeg_error_mgr.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jpeg_marker_struct.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jpeg_progress_mgr.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jpeg_source_mgr.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Classic\jvirt_array.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\CompressionParameters.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\DecompressionParameters.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\DecompressorToJpegImage.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Enumerations.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\IDecompressDestination.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\IRawImage.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Jpeg.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\JpegImage.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\RawImage.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Sample.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\SampleRow.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\JPG\LibJpeg\Utils.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\Color.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\Contract.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\ContractClassForAttribute.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\ContractVerificationAttribute.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\ObservableCollection.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\OpenReadCompletedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\OpenReadCompletedEventHandler.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\Point.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\Pure.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\Rect.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\Size.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\MissingAPIs\StreamResourceInfo.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\GlobalSuppressions.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\GrayscaleReader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\IColorReader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\PaletteIndexReader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\PngChunk.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\PngColorTypeInformation.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\PngDecoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\PngEncoder.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\PngHeader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\ImageTools\PNG\TruecolorReader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\IAdPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\IEmailPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\IInAppPurchasePlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\IInterstitialAdPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\IMarketingPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\IMessageBoxPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\IPushNotificationPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\IScorePlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\ISocialPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\Interfaces\IStreamPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\BZip2\BZip2.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\BZip2\BZip2Constants.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\BZip2\BZip2Exception.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\BZip2\BZip2InputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Checksums\Adler32.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Checksums\CRC32.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Checksums\IChecksum.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Checksums\StrangeCRC.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Core\FileSystemScanner.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Core\INameTransform.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Core\IScanFilter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Core\NameFilter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Core\PathFilter.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Core\StreamUtils.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Core\WindowsPathUtils.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Encryption\PkzipClassic.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Encryption\ZipAESStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Encryption\ZipAESTransform.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\GZip\GZIPConstants.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\GZip\GZipException.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\GZip\GzipInputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\GZip\GzipOutputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Lzw\LzwConstants.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Lzw\LzwException.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Lzw\LzwInputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Main.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\SharpZipBaseException.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Tar\InvalidHeaderException.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Tar\TarArchive.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Tar\TarBuffer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Tar\TarEntry.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Tar\TarException.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Tar\TarHeader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Tar\TarInputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Tar\TarOutputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\Deflater.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\Inflater.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\FastZip.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\IEntryFactory.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\WindowsNameTransform.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipConstants.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipEntry.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipEntryFactory.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipException.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipExtraData.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipFile.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipHelperStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipInputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipNameTransform.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\SharpZipLib\Zip\ZipOutputStream.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\WinRT\EmailPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\WinRT\MarketingPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\WinRT\MessageBoxPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\WinRT\MicrosoftAdvertising_AdPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\WinRT\MicrosoftStore_InAppPurchasePlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\WinRT\PushNotificationPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\WinRT\SocialPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\WinRT\StreamPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\Shared\WinRT\WinRTPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\AdMob_AdPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\AdMob_InterstitialAdPlugin.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\CurrentAppSimulator\CurrentApp.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\CurrentAppSimulator\LicenseInformation.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\CurrentAppSimulator\ListingInformation.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\CurrentAppSimulator\MockIAP.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\CurrentAppSimulator\MockReceiptState.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\CurrentAppSimulator\MockReceiptStore.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\CurrentAppSimulator\ProductLicense.cs" />
+    <Compile Include="Assets\Plugins\Reign\Platforms\WP8\CurrentAppSimulator\ProductListing.cs" />
+    <Compile Include="Assets\Plugins\Reign\Services\InputExService.cs" />
+    <Compile Include="Assets\Plugins\Reign\Services\ReignServices.cs" />
+    <Compile Include="Assets\Plugins\Reign\Tools\PerPixelOrthoCamera.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorfulButtons\Credits.txt" />
-    <None Include="Assets\DualCorStudios\Readme.txt" />
-    <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
+    <None Include="Assets\Plugins\Reign\ReadMe.txt" />
+    <None Include="Assets\Plugins\WP8\GoogleAds.XML" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

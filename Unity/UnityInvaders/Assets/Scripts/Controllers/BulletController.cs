@@ -51,7 +51,7 @@ public class BulletController : MonoBehaviour
         Vector3 explosionToTarget = targetPosition - transform.position;
 
         // Calculate the distance from the shell to the target.
-        float explosionDistance = explosionToTarget.magnitude;
+        float explosionDistance = explosionToTarget.sqrMagnitude;
 
         // Calculate the proportion of the maximum distance (the explosionRadius) the target is away.
         float relativeDistance = (Dispersion - explosionDistance) / Dispersion;
