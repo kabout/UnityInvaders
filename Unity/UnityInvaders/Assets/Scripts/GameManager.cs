@@ -62,10 +62,10 @@ namespace UnityInvaders.Managers
         {
             IObjectManager objectManager = new ObjectManager(strategyAlienAttack, defensePrefab, obstaclePrefab, alienPrefab);
             mapController = new MapController(objectManager, strategyAlienAttack, strategyLocationDefenses, gameConfiguration, floorPrefab, gameStatistics);
-            map = mapController.GetEmptyMap(gameConfiguration.SizeMap, gameConfiguration.CellMap);
+            map = mapController.GetEmptyMap(gameConfiguration.MapSize, gameConfiguration.CellMapSize);
             mapController.InitMap(map);
 
-            timeForNextAlien = 1 / gameConfiguration.NumUcosPerSecond;
+            timeForNextAlien = 1 / gameConfiguration.NumAliensPerSecond;
         }
 
         IEnumerator SimulateBattle()
@@ -84,7 +84,7 @@ namespace UnityInvaders.Managers
                 {
                     mapController.AddAliens(map);
 
-                    timeForNextAlien = GetTime() + 1 / gameConfiguration.NumUcosPerSecond;
+                    timeForNextAlien = GetTime() + 1 / gameConfiguration.NumAliensPerSecond;
                 }
 
                 yield return null;

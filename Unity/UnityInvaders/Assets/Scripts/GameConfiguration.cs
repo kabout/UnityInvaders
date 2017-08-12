@@ -8,8 +8,9 @@ public class GameConfiguration : MonoBehaviour
     {
         Pause = 0,
         Slow = 1,
-        Normal = 3,
-        Fast = 4
+        Normal = 2,
+        Fast = 3,
+        VeryFast = 4
     }
 
     public static GameConfiguration gameConfiguration;
@@ -29,18 +30,14 @@ public class GameConfiguration : MonoBehaviour
         StrategyAttackAliensDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategyAlienAttack.dll");
         StrategyDefenderAliensDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategyAliensDefender.dll");
 
-        SizeMap = 300;
-        CellMap = 10;
-        NumUcos = int.MaxValue;
-        NumUcosPerSecond = 2f;
+        MapSize = 300;
+        CellMapSize = 10;
+        NumAliensPerSecond = 2f;
         // 5 minutos
         MaxDurationBattleInSeconds = 300;
-        NumObstacles = int.MaxValue;
-        NumDefenses = int.MaxValue;
         Velocity = GameVelocity.Normal;
         DensityDefenses = 0.2f;
         DensityObstacles = 0.2f;
-        NumAses = 1000;
     }
 
     public string StrategyLocationDefensesDllPath { get; set; }
@@ -48,15 +45,11 @@ public class GameConfiguration : MonoBehaviour
     public string StrategyAttackAliensDllPath { get; set; }
     public string StrategyDefenderAliensDllPath { get; set; }
 
-    public int SizeMap { get; set; }
-    public int CellMap { get; set; }
-    public int NumUcos { get; set; }
-    public float NumUcosPerSecond { get; set; }
+    public int MapSize { get; set; }
+    public int CellMapSize { get; set; }
+    public float NumAliensPerSecond { get; set; }
     public int MaxDurationBattleInSeconds { get; set; }
-    public int NumObstacles { get; set; }
-    public int NumDefenses { get; set; }
     public GameVelocity Velocity { get; set; }
     public float DensityObstacles { get; set; }
     public float DensityDefenses { get; set; }
-    public int NumAses { get; set; }
 }
