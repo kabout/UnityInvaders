@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using System;
 
 public class GameConfiguration : MonoBehaviour
 {
@@ -24,20 +25,6 @@ public class GameConfiguration : MonoBehaviour
         }
         else if (gameConfiguration != this)
             Destroy(gameObject);
-
-        StrategyLocationDefensesDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategyLocationDefenses.dll");
-        StrategySelectionDefensesDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategySelectionDefenses.dll");
-        StrategyAttackAliensDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategyAlienAttack.dll");
-        StrategyDefenderAliensDllPath = Path.Combine(Application.streamingAssetsPath, @"StrategyAliensDefender.dll");
-
-        MapSize = 300;
-        CellMapSize = 10;
-        NumAliensPerSecond = 2f;
-        // 5 minutos
-        MaxDurationBattleInSeconds = 300;
-        Velocity = GameVelocity.Normal;
-        DensityDefenses = 0.2f;
-        DensityObstacles = 0.2f;
     }
 
     public string StrategyLocationDefensesDllPath { get; set; }

@@ -28,8 +28,11 @@ namespace UnityInvaders.Managers
             if (!Physics.Raycast(ray, out hit, LayerMask.GetMask("Defense")) || hit.collider == null)
             {
                 UnSelected();
+                UIInfoSelectObject.SetActive(false);
                 return;
             }
+
+            UIInfoSelectObject.SetActive(true);
 
             UnityDefense unityDefense = hit.collider.gameObject.GetComponent<UnityDefense>();
 
@@ -45,8 +48,8 @@ namespace UnityInvaders.Managers
             //UnityEngine.UI.Text UIInfoText = UIInfoSelectObject.GetComponentInChildren<UnityEngine.UI.Text>();
             //UIInfoText.text = unityDefense.ToString();
             //UIInfoSelectObject.SetActive(true);
-            foreach(GameObject alien in GameObject.FindGameObjectsWithTag("Alien"))
-                alien.GetComponent<MoveAlien>().ChangeTarget(hit.collider.gameObject.transform);
+            //foreach(GameObject alien in GameObject.FindGameObjectsWithTag("Alien"))
+            //    alien.GetComponent<MoveAlien>().ChangeTarget(hit.collider.gameObject.transform);
         }
 
         void UnSelected()

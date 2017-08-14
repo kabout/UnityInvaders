@@ -70,14 +70,17 @@
     <Reference Include="System.Drawing">
       <HintPath>Assets\Plugins\System.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>Assets\Plugins\System.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.DataContract">
       <HintPath>Assets\Plugins\Unity.DataContract.dll</HintPath>
     </Reference>
     <Reference Include="UnityInvaders.Types">
       <HintPath>Assets\Plugins\UnityInvaders.Types.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms">
-      <HintPath>Assets\Plugins\System.Windows.Forms.dll</HintPath>
+    <Reference Include="Ookii.Dialogs">
+      <HintPath>Assets\Plugins\Ookii.Dialogs.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +124,11 @@
     <Compile Include="Assets\Scripts\Utils\ConvertPositionToVector3.cs" />
     <Compile Include="Assets\Scripts\Utils\ExportMapToImage.cs" />
     <Compile Include="Assets\Scripts\Utils\RandomManager.cs" />
+    <Compile Include="Assets\StandaloneFileBrowser\IStandaloneFileBrowser.cs" />
+    <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowser.cs" />
+    <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserEditor.cs" />
+    <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserMac.cs" />
+    <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserWindows.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ColorfulButtons\Credits.txt" />

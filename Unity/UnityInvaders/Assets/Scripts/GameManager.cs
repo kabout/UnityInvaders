@@ -20,13 +20,18 @@ namespace UnityInvaders.Managers
         public GameObject spaceCamera;
         public Canvas UIGame;
         public Canvas BattleResume;
+        public Canvas PauseMenu;
         public SelectionManager selectionManager;
-        public GameConfiguration gameConfiguration;
         public GameStatistics gameStatistics;
         public Text timeText;
+        public Text TotalTime;
+        public Text TotalDefensesDestroyed;
+        public Text TotalAliensDestroyed;
+        public Text VelocityText;
 
         private float startTime = 0;
         private float timeForNextAlien = 0;
+        private float timeForNextPulsation = 1;
         private IMap map;
         private IMapController mapController;
         private IStrategyAlienAttack strategyAlienAttack;
@@ -34,45 +39,72 @@ namespace UnityInvaders.Managers
 
         void Awake()
         {
-            Time.timeScale = (int)gameConfiguration.Velocity;
+            Time.timeScale = (int)GameConfiguration.gameConfiguration.Velocity;
         }
 
         // Use this for initialization
         void Start ()
         {
-            BattleResume.enabled = false;
-            UIGame.enabled = true;
+            BattleResume.gameObject.SetActive(false);
+            UIGame.gameObject.SetActive(true);
+            VelocityText.text = string.Format("Game Velocity: {0}", (GameConfiguration.GameVelocity)Time.timeScale);
 
             LoadStrategies();
             InitBattle();
-
             StartCoroutine(SimulateBattle());
+        }
+
+        void Update()
+        {
+            if (timeForNextPulsation > Time.time)
+                return;
+
+            if (Input.GetKey(KeyCode.P))
+            {
+                Time.timeScale = 0;
+                PauseMenu.gameObject.SetActive(true);
+                timeForNextPulsation = Time.time + 1;
+            }
+            else if (Input.GetKey(KeyCode.Plus) || Input.GetKey(KeyCode.KeypadPlus))
+            {
+                int newVelocity = (int)Time.timeScale + 1;
+                Time.timeScale = newVelocity < 5 ? newVelocity : Time.timeScale;
+                VelocityText.text = string.Format("Game Velocity: {0}", (GameConfiguration.GameVelocity)Time.timeScale);
+                timeForNextPulsation = Time.time + 1;
+            }
+            else if (Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.KeypadMinus))
+            {
+                int newVelocity = (int)Time.timeScale - 1;
+                Time.timeScale = newVelocity > 0 ? newVelocity : Time.timeScale;
+                VelocityText.text = string.Format("Game Velocity: {0}", (GameConfiguration.GameVelocity)Time.timeScale);
+                timeForNextPulsation = Time.time + 1;
+            }
         }
 
         private void LoadStrategies()
         {
-            Assembly strategyAliensAssembly = Assembly.LoadFile(gameConfiguration.StrategyAttackAliensDllPath);
+            Assembly strategyAliensAssembly = Assembly.LoadFile(GameConfiguration.gameConfiguration.StrategyAttackAliensDllPath);
             strategyAlienAttack = (IStrategyAlienAttack)strategyAliensAssembly.CreateInstance("StrategyAlienAttack.StrategyAlienAttack");
            
-            Assembly strategyLocationDefensesAssembly = Assembly.LoadFile(gameConfiguration.StrategyLocationDefensesDllPath);
+            Assembly strategyLocationDefensesAssembly = Assembly.LoadFile(GameConfiguration.gameConfiguration.StrategyLocationDefensesDllPath);
             strategyLocationDefenses = (IStrategyLocationDefenses)strategyLocationDefensesAssembly.CreateInstance("StrategyLocationDefenses.ManagerDefenses");
         }
 
         private void InitBattle()
         {
             IObjectManager objectManager = new ObjectManager(strategyAlienAttack, defensePrefab, obstaclePrefab, alienPrefab);
-            mapController = new MapController(objectManager, strategyAlienAttack, strategyLocationDefenses, gameConfiguration, floorPrefab, gameStatistics);
-            map = mapController.GetEmptyMap(gameConfiguration.MapSize, gameConfiguration.CellMapSize);
+            mapController = new MapController(objectManager, strategyAlienAttack, strategyLocationDefenses, GameConfiguration.gameConfiguration, floorPrefab, gameStatistics);
+            map = mapController.GetEmptyMap(GameConfiguration.gameConfiguration.MapSize, GameConfiguration.gameConfiguration.CellMapSize);
             mapController.InitMap(map);
 
-            timeForNextAlien = 1 / gameConfiguration.NumAliensPerSecond;
+            timeForNextAlien = 1 / GameConfiguration.gameConfiguration.NumAliensPerSecond;
         }
 
         IEnumerator SimulateBattle()
         {
             startTime = Time.time;
 
-            while (map.Defenses.Any() || GetTime() > gameConfiguration.MaxDurationBattleInSeconds)
+            while (map.Defenses.Any() || GetTime() > GameConfiguration.gameConfiguration.MaxDurationBattleInSeconds)
             {
                 float timeInSecond = GetTime();
                 int timeInMinute = (int)(timeInSecond / 60);
@@ -84,31 +116,24 @@ namespace UnityInvaders.Managers
                 {
                     mapController.AddAliens(map);
 
-                    timeForNextAlien = GetTime() + 1 / gameConfiguration.NumAliensPerSecond;
+                    timeForNextAlien = GetTime() + 1 / GameConfiguration.gameConfiguration.NumAliensPerSecond;
                 }
 
                 yield return null;
             }
-                        
+
             Time.timeScale = 0;
+            TotalTime.text += string.Format(" {0:00} seconds", GetTime());
+            TotalDefensesDestroyed.text += " " + gameStatistics.NumberOfDestroyedDefenses;
+            TotalAliensDestroyed.text += " " + gameStatistics.NumberOfDiedAliens;
 
-            GameObject.Find("TotalTime").GetComponent<Text>().text += string.Format(" {0:00} seconds", GetTime());
-            GameObject.Find("TotalDefensesDestroyed").GetComponent<Text>().text += " " + gameStatistics.NumberOfDestroyedDefenses;
-            GameObject.Find("TotalAliensDestroyed").GetComponent<Text>().text += " " + gameStatistics.NumberOfDiedAliens;
-
-            BattleResume.enabled = true;
-            UIGame.enabled = false;
-            Thread.Sleep(1);
+            BattleResume.gameObject.SetActive(true);
+            UIGame.gameObject.SetActive(false);
         }
 
-        float GetTime()
+        private float GetTime()
         {
             return Time.time - startTime;
-        }
-
-        public void SetFastVelocity()
-        {
-            Time.timeScale = (int)GameConfiguration.GameVelocity.Fast;
         }
 
         public void BackToMainMenu()
@@ -142,6 +167,18 @@ namespace UnityInvaders.Managers
                     diedEntity.Z,
                     diedEntity.Time - startTime);
             } 
+        }
+
+        public void Resume()
+        {
+            PauseMenu.gameObject.SetActive(false);
+            Time.timeScale = (int)GameConfiguration.gameConfiguration.Velocity;
+        }
+
+        public void Quit()
+        {
+            StopCoroutine(SimulateBattle());
+            SceneManager.LoadScene("Menu");
         }
     }
 }
