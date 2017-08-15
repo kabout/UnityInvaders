@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityInvaders.Types", "UnityInvaders.Types\UnityInvaders.Types.csproj", "{DD418970-1042-4B12-83CC-FC36E5C5BDCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityInvaders.Types", "UnityInvaders.Types.csproj", "{DD418970-1042-4B12-83CC-FC36E5C5BDCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

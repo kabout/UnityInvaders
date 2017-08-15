@@ -21,10 +21,6 @@
     /// </summary>
     float Health { get; }
     /// <summary>
-    /// Tipo de defensa
-    /// </summary>
-    int Type { get; }
-    /// <summary>
     /// Resta salud a la defensa indicado por damage
     /// </summary>
     /// <param name="damage">Puntos de vida a restar</param>

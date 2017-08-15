@@ -21,7 +21,6 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
     public float health;
     public int cost;
     public int dispersion;
-    public int type;
     public float shottingInterval = 10f;
 
     private float shootSpeed = 40;
@@ -48,8 +47,6 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
     public int Cost { get { return cost; } }
 
     public int Dispersion { get { return dispersion; } }
-
-    public int Type { get { return type; } }
 
     public bool Selected
     {

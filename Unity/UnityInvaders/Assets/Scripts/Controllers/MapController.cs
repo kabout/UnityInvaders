@@ -10,24 +10,28 @@ public class MapController : IMapController
 
     GameObject mapPrefab;
     IObjectManager objectManager;
-    IStrategyAlienAttack strategyAlienAttack;
+    IStrategySelectionDefenses strategySelectionDefenses;
     IStrategyLocationDefenses strategyLocationDefenses;
+    IStrategyAlienAttack strategyAlienAttack;
     GameConfiguration gameConfiguration;
-    GameStatistics gameStatistics;
 
     #endregion
 
     #region Constructors
 
-    public MapController(IObjectManager objectManager, IStrategyAlienAttack strategyAlienAttack,
-        IStrategyLocationDefenses strategyLocationDefenses, GameConfiguration gameConfiguration, GameObject mapPrefab, GameStatistics gameStatistics)
+    public MapController(
+        IObjectManager objectManager, 
+        IStrategySelectionDefenses strategySelectionDefenses,
+        IStrategyLocationDefenses strategyLocationDefenses,
+        IStrategyAlienAttack strategyAlienAttack,
+        GameConfiguration gameConfiguration, GameObject mapPrefab)
     {
         this.objectManager = objectManager;
-        this.strategyAlienAttack = strategyAlienAttack;
+        this.strategySelectionDefenses = strategySelectionDefenses;
         this.strategyLocationDefenses = strategyLocationDefenses;
+        this.strategyAlienAttack = strategyAlienAttack;
         this.gameConfiguration = gameConfiguration;
         this.mapPrefab = mapPrefab;
-        this.gameStatistics = gameStatistics;
     }
 
     #endregion
@@ -56,14 +60,14 @@ public class MapController : IMapController
     {
         int alienMargin = map.Margin + Constants.DEFAULT_ALIEN_RADIO + 1;
 
-        List<Vector3> freePostionForAliens = map.GetFreePositions(Constants.DEFAULT_ALIEN_RADIO).Where(p => p.x == alienMargin ||
+        List<Vector3> freePositionForAliens = map.GetFreePositions(Constants.DEFAULT_ALIEN_RADIO).Where(p => p.x == alienMargin ||
             Math.Abs(p.z) == alienMargin || p.x == map.Size - alienMargin || Math.Abs(p.z) == map.Size - alienMargin).ToList();
 
-        if (!freePostionForAliens.Any())
+        if (!freePositionForAliens.Any())
             return;
 
-        int index = RandomManager.GetRandomNumber(0, freePostionForAliens.Count - 1);
-        Vector3 position = freePostionForAliens[index];
+        int index = RandomManager.GetRandomNumber(0, freePositionForAliens.Count - 1);
+        Vector3 position = freePositionForAliens[index];
         IPosition alienPosition = new Position(position.x, 3, position.z);
 
         IAlien alien = objectManager.GenerateAlien(alienPosition);
@@ -120,6 +124,9 @@ public class MapController : IMapController
         strategyLocationDefenses.InitStrategy(map.Obstacles, Constants.DEFAULT_DEFENSE_RADIO, map.Size, map.CellSize);
 
         int numDefenses = GetNumberOfDefenses(map.Size);
+        int availablesAses = numDefenses * Constants.GetDefenseMeanCost();
+
+        var possibleDefenses = new List<IDefense>();
 
         while (numDefenses > 0)
         {
@@ -134,7 +141,7 @@ public class MapController : IMapController
                 while (strategyAlienAttack.CalculatePath(position, positionZero, map.Obstacles, map.Defenses, map.Size, map.CellSize).Count == 0)
                     position = strategyLocationDefenses.GetPositionForDefense(map.Defenses);            
             }
-            catch (Exception ex)
+            catch (Exception)
             { }
 
             IDefense defense = objectManager.GenerateDefense(position);
@@ -142,10 +149,12 @@ public class MapController : IMapController
             if (defense == null)
                 return;
 
-            map.AddDefense(defense);
-
+            possibleDefenses.Add(defense);
             numDefenses--;
-         }
+        }
+
+        foreach(IDefense defense in strategySelectionDefenses.GetDefenses(possibleDefenses, availablesAses))
+            map.AddDefense(defense);
     }
 
     #endregion

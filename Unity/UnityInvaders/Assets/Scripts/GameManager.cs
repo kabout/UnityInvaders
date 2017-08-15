@@ -21,6 +21,8 @@ namespace UnityInvaders.Managers
         public Canvas UIGame;
         public Canvas BattleResume;
         public Canvas PauseMenu;
+        public Canvas BattleInfo;
+        public Text BattleInfoInform;
         public SelectionManager selectionManager;
         public GameStatistics gameStatistics;
         public Text timeText;
@@ -35,6 +37,7 @@ namespace UnityInvaders.Managers
         private IMap map;
         private IMapController mapController;
         private IStrategyAlienAttack strategyAlienAttack;
+        private IStrategySelectionDefenses strategySelectionDefenses;
         private IStrategyLocationDefenses strategyLocationDefenses;
 
         void Awake()
@@ -46,7 +49,10 @@ namespace UnityInvaders.Managers
         void Start ()
         {
             BattleResume.gameObject.SetActive(false);
+            BattleInfo.gameObject.SetActive(false);
+            PauseMenu.gameObject.SetActive(false);
             UIGame.gameObject.SetActive(true);
+
             VelocityText.text = string.Format("Game Velocity: {0}", (GameConfiguration.GameVelocity)Time.timeScale);
 
             LoadStrategies();
@@ -88,13 +94,21 @@ namespace UnityInvaders.Managers
            
             Assembly strategyLocationDefensesAssembly = Assembly.LoadFile(GameConfiguration.gameConfiguration.StrategyLocationDefensesDllPath);
             strategyLocationDefenses = (IStrategyLocationDefenses)strategyLocationDefensesAssembly.CreateInstance("StrategyLocationDefenses.ManagerDefenses");
+
+            Assembly strategySelectionDefensesAssembly = Assembly.LoadFile(GameConfiguration.gameConfiguration.StrategySelectionDefensesDllPath);
+            strategySelectionDefenses = (IStrategySelectionDefenses)strategySelectionDefensesAssembly.CreateInstance("StrategySelectionDefenses.StrategySelectionDefenses");
         }
 
         private void InitBattle()
         {
             IObjectManager objectManager = new ObjectManager(strategyAlienAttack, defensePrefab, obstaclePrefab, alienPrefab);
-            mapController = new MapController(objectManager, strategyAlienAttack, strategyLocationDefenses, GameConfiguration.gameConfiguration, floorPrefab, gameStatistics);
-            map = mapController.GetEmptyMap(GameConfiguration.gameConfiguration.MapSize, GameConfiguration.gameConfiguration.CellMapSize);
+
+            mapController = new MapController(objectManager, strategySelectionDefenses, strategyLocationDefenses, 
+                strategyAlienAttack, GameConfiguration.gameConfiguration, floorPrefab);
+
+            map = mapController.GetEmptyMap(GameConfiguration.gameConfiguration.MapSize, 
+                GameConfiguration.gameConfiguration.CellMapSize);
+
             mapController.InitMap(map);
 
             timeForNextAlien = 1 / GameConfiguration.gameConfiguration.NumAliensPerSecond;
@@ -104,7 +118,7 @@ namespace UnityInvaders.Managers
         {
             startTime = Time.time;
 
-            while (map.Defenses.Any() || GetTime() > GameConfiguration.gameConfiguration.MaxDurationBattleInSeconds)
+            while (map.Defenses.Any() && GetTime() <= GameConfiguration.gameConfiguration.MaxDurationBattleInSeconds)
             {
                 float timeInSecond = GetTime();
                 int timeInMinute = (int)(timeInSecond / 60);
@@ -152,11 +166,15 @@ namespace UnityInvaders.Managers
             List<DiedEntity> diedEntities = gameStatistics.GetDiedEntitiesOrderByTime();
 
             GenerateBattleInfo(diedEntities);
+            BattleResume.gameObject.SetActive(false);
         }
 
         private void GenerateBattleInfo(List<DiedEntity> diedEntities)
         {
             StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine();
+            sb.AppendLine();
 
             foreach(DiedEntity diedEntity in diedEntities)
             {
@@ -166,7 +184,10 @@ namespace UnityInvaders.Managers
                     diedEntity.X,
                     diedEntity.Z,
                     diedEntity.Time - startTime);
-            } 
+            }
+
+            BattleInfoInform.text = sb.ToString();
+            BattleInfo.gameObject.SetActive(true);
         }
 
         public void Resume()
@@ -179,6 +200,13 @@ namespace UnityInvaders.Managers
         {
             StopCoroutine(SimulateBattle());
             SceneManager.LoadScene("Menu");
+        }
+
+        public void BackToResumenBattle()
+        {
+            BattleInfo.gameObject.SetActive(false);
+            BattleResume.gameObject.SetActive(true);
+
         }
     }
 }

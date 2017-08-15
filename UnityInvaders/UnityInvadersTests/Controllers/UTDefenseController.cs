@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UnityInvaders.Interfaces;
-using UnityInvaders.Controllers;
-using UnityInvaders.Model;
-using UnityInvaders.Managers;
+//using UnityInvaders.Interfaces;
+//using UnityInvaders.Controllers;
+//using UnityInvaders.Model;
+//using UnityInvaders.Managers;
 
 namespace UnityInvadersTests.Controllers
 {

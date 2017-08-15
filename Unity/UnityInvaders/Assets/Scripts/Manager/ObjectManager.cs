@@ -44,17 +44,22 @@ public class ObjectManager : IObjectManager
         UnityDefense unityDefense = defense.GetComponent(typeof(UnityDefense)) as UnityDefense;
 
         unityDefense.id = nextDefenseId;
-        unityDefense.cost = Constants.DEFAULT_DEFENSE_COST;
-        unityDefense.damage = Constants.DEFAULT_DEFENSE_DAMAGE;
-        unityDefense.dispersion = Constants.DEFAULT_DEFENSE_DISPERSION;
-        unityDefense.health = Constants.DEFAULT_DEFENSE_HEALTH;
-        unityDefense.range = Constants.DEFAULT_DEFENSE_RANGE;
+        unityDefense.health = RandomManager.GetRandomNumber(Constants.DEFENSE_MIN_HEALTH, Constants.DEFENSE_MAX_HEALTH);
+        unityDefense.damage = RandomManager.GetRandomNumber(Constants.DEFENSE_MIN_DAMAGE, Constants.DEFENSE_MAX_DAMAGE);
+        unityDefense.range = RandomManager.GetRandomNumber(Constants.DEFENSE_MIN_RANGE, Constants.DEFENSE_MAX_RANGE);
+        unityDefense.dispersion = RandomManager.GetRandomNumber(Constants.DEFENSE_MIN_DISPERSION, Constants.DEFENSE_MAX_DISPERSION);
         unityDefense.selected = false;
-        unityDefense.type = 0;
+        unityDefense.cost = CalculateDefenseCost(unityDefense);
 
         nextDefenseId++;
 
         return unityDefense;
+    }
+
+    private int CalculateDefenseCost(UnityDefense defense)
+    {
+        return (int)Math.Round(defense.Health * 0.2 + defense.Range * 0.3 + defense.Damage * 0.4 + defense.Dispersion * 0.1);
+        
     }
 
     public IAlien GenerateAlien(IPosition position)

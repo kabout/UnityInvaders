@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{054789CC-1163-4C3C-89F1-0A98E2368374}</ProjectGuid>
+    <ProjectGuid>{33603569-589D-4671-B5F4-1D38F28AC00D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnityInvadersTests</RootNamespace>
-    <AssemblyName>UnityInvadersTests</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>UnitTestProject1</RootNamespace>
+    <AssemblyName>UnitTestProject1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,7 +16,6 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,10 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq, Version=4.7.99.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.7.99\lib\net45\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\Unity\UnityInvaders\Library\UnityAssemblies\UnityEngine.dll</HintPath>
+    <Reference Include="UnityInvaders.Types">
+      <HintPath>..\..\UnityInvaders.Types\bin\Release\UnityInvaders.Types.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -50,33 +52,22 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
-          <Private>False</Private>
-        </Reference>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Controllers\UTDefenseController.cs" />
-    <Compile Include="Controllers\UTGameController.cs" />
-    <Compile Include="Controllers\UTAlienController.cs" />
-    <Compile Include="Controllers\UTMapController.cs" />
-    <Compile Include="Controllers\UTDifficultController.cs" />
-    <Compile Include="Managers\UTObjectManager.cs" />
-    <Compile Include="Model\UTObject.cs" />
-    <Compile Include="Model\UTAlien.cs" />
-    <Compile Include="Model\UTDefense.cs" />
-    <Compile Include="Model\UTMap.cs" />
-    <Compile Include="Model\UTObstacle.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transforms\UTDefenseToUnity.cs" />
-    <Compile Include="Utils\UTRandomManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UnityInvaders.Types\UnityInvaders.Types.csproj">
-      <Project>{dd418970-1042-4b12-83cc-fc36e5c5bdcd}</Project>
-      <Name>UnityInvaders.Types</Name>
+    <ProjectReference Include="..\StrategyLocationDefenses.csproj">
+      <Project>{33e3ec98-85f1-43eb-863d-525402eb5cba}</Project>
+      <Name>StrategyLocationDefenses</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

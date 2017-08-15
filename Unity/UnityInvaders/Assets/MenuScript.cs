@@ -431,6 +431,7 @@ public class MenuScript : MonoBehaviour
         catch(Exception ex)
         {
             Debug.LogError("The file isn't a valid configuration file.");
+            Debug.LogError(ex);
         }
     }
 
@@ -453,6 +454,7 @@ public class MenuScript : MonoBehaviour
         catch (Exception ex)
         {
             Debug.LogError("Error saving the configuration");
+            Debug.LogError(ex);
         }
 
     }

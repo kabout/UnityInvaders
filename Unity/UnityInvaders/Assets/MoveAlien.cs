@@ -12,6 +12,7 @@ public class MoveAlien : MonoBehaviour
 	private IMap iMap;
 	private List<Vector3> positions = new List<Vector3>();
 	private Vector3 actualGoal;
+    private UnityAlien unityAlien;
 	private bool completeGoal = false;
 	private IList<IObstacle> iObstacles;
 	private IList<IDefense> iDefenses = new List<IDefense>();
@@ -21,7 +22,8 @@ public class MoveAlien : MonoBehaviour
 	{
 		map = GameObject.FindGameObjectWithTag("Floor");
 		iMap = map.GetComponent<IMap>();
-		iObstacles = iMap.Obstacles;
+        unityAlien = GetComponent<UnityAlien>();
+        iObstacles = iMap.Obstacles;
 		//iDefenses = iMap.Defenses;
 		
 		StartAttack();
@@ -54,7 +56,6 @@ public class MoveAlien : MonoBehaviour
 		}
 		catch(Exception ex)
 		{
-			Debug.Log(ex.Message);
 		}
 	}
 
@@ -92,12 +93,13 @@ public class MoveAlien : MonoBehaviour
 			return;
 		}        
 
-		if ((Mathf.Abs(transform.position.x - target.position.x)) < 20 &&
-			(Mathf.Abs(transform.position.z - target.position.z)) < 20)
+		if ((Mathf.Abs(transform.position.x - target.position.x)) < unityAlien.Range &&
+			(Mathf.Abs(transform.position.z - target.position.z)) < unityAlien.Range)
 		{
 			transform.LookAt(target);
-			GetComponent<UnityAlien>().Target = target;
+            unityAlien.Target = target;
 			completeGoal = true;
+            return;
 		}
 
 		if ((Mathf.Abs(transform.position.x - actualGoal.x)) < 1 &&
@@ -114,20 +116,33 @@ public class MoveAlien : MonoBehaviour
 			else
 			{
 				completeGoal = true;
+                transform.position = GetRandomPositionInCell(transform.position);
+                return;
 			}
 		}
 
 		Move();
 	}
 
-	private void Move()
+    private Vector3 GetRandomPositionInCell(Vector3 position)
+    {
+        int xCell = Mathf.RoundToInt(position.x / iMap.CellSize);
+        int zCell = Mathf.RoundToInt(position.z / iMap.CellSize);
+
+        int newXPosition = RandomManager.GetRandomNumber(xCell, xCell + 1);
+        int newZPosition = RandomManager.GetRandomNumber(zCell, zCell + 1);
+
+        return new Vector3(newXPosition, position.y, newZPosition);
+    }
+
+    private void Move()
 	{
 		if (actualGoal != Vector3.zero)
 		{
 			Vector3 motion = actualGoal - transform.position;
 			motion.Normalize();
 			motion.y = 0;
-			transform.position += motion * Time.deltaTime * 15f;
+			transform.position += motion * Time.deltaTime * 30f;
 		}
 	}
 
