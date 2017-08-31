@@ -145,9 +145,9 @@ public class UnityAlien : MonoBehaviour, IAlien
                 GameStatistics gameStatistics = GameObject.FindObjectOfType<GameStatistics>();
 
                 if(gameStatistics != null)
-                    gameStatistics.AddAlien(Id, Position.X, Position.Y, Time.time);
+                    gameStatistics.AddAlien(Id, Position.X, Position.Z, Time.time);
 
-                Debug.Log(string.Format("Alien {0} in position ({1},{2}) died!", Id, Position.X, Position.Z));
+                Debug.Log(string.Format("Alien {0} in position ({1:0.00},{2:0.00}) died!", Id, Position.X, Position.Z));
             }
             else
                 health -= damage;

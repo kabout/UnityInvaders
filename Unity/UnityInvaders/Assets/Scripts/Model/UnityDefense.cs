@@ -151,9 +151,9 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
                 GameStatistics gameStatistics = GameObject.FindObjectOfType<GameStatistics>();
 
                 if (gameStatistics != null)
-                    gameStatistics.AddDefense(Id, Position.X, Position.Y, Time.time);
+                    gameStatistics.AddDefense(Id, Position.X, Position.Z, Time.time);
 
-                Debug.Log(string.Format("Defense {0} in position ({1},{2}) died!", Id, Position.X, Position.Z));
+                Debug.Log(string.Format("Defense {0} in position ({1:0.00},{2:0.00}) died!", Id, Position.X, Position.Z));
             }
             else
                 health -= damage;

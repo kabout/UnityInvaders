@@ -43,7 +43,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManagerDefenses.cs" />
+    <Compile Include="StrategyLocationDefenses1.cs" />
+    <Compile Include="StrategyLocationDefenses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

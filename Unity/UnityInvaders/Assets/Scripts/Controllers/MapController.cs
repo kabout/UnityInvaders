@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,27 +10,19 @@ public class MapController : IMapController
     #region Fields
 
     GameObject mapPrefab;
-    IObjectManager objectManager;
-    IStrategySelectionDefenses strategySelectionDefenses;
-    IStrategyLocationDefenses strategyLocationDefenses;
-    IStrategyAlienAttack strategyAlienAttack;
+    IObjectFactory objectManager;
+    IStrategyFactory strategyFactory;
     GameConfiguration gameConfiguration;
 
     #endregion
 
     #region Constructors
 
-    public MapController(
-        IObjectManager objectManager, 
-        IStrategySelectionDefenses strategySelectionDefenses,
-        IStrategyLocationDefenses strategyLocationDefenses,
-        IStrategyAlienAttack strategyAlienAttack,
+    public MapController(IObjectFactory objectManager, IStrategyFactory strategyFactory,
         GameConfiguration gameConfiguration, GameObject mapPrefab)
     {
         this.objectManager = objectManager;
-        this.strategySelectionDefenses = strategySelectionDefenses;
-        this.strategyLocationDefenses = strategyLocationDefenses;
-        this.strategyAlienAttack = strategyAlienAttack;
+        this.strategyFactory = strategyFactory;
         this.gameConfiguration = gameConfiguration;
         this.mapPrefab = mapPrefab;
     }
@@ -56,7 +49,7 @@ public class MapController : IMapController
         return unityMap;
     }
 
-    public void AddAliens(IMap map)
+    public void AddAlien(IMap map)
     {
         int alienMargin = map.Margin + Constants.DEFAULT_ALIEN_RADIO + 1;
 
@@ -80,15 +73,15 @@ public class MapController : IMapController
         //map.CorrectCellUnReachables();
         PlaceDefenses(map);
         
-        Bitmap image = ExportMapToImage.Instance.ConvertToBitMap(map.GetMap(), map.Size);
-        image.Save(@"C:\temp\map.bmp");
+        //Bitmap image = ExportMapToImage.Instance.ConvertToBitMap(map.GetMap(), map.Size);
+        //image.Save(@"C:\temp\map.bmp");
     }    
     
     private int GetNumberOfObstacles(int mapSize)
     {
         int maxCellForObstacle = (int)Math.Pow(Constants.MAX_OBSTACLE_RADIUS * 2, 2);
         int minCellForObstacle = (int)Math.Pow(Constants.MIN_OBSTACLE_RADIUS * 2, 2);
-        int meanCellForObstacle = (maxCellForObstacle + minCellForObstacle) / 2;
+        int meanCellForObstacle = (2 * (maxCellForObstacle + minCellForObstacle)) / 3;
 
         return (int)Math.Floor((Math.Pow(mapSize, 2) * gameConfiguration.DensityObstacles) / meanCellForObstacle);
     }
@@ -97,7 +90,7 @@ public class MapController : IMapController
     {
         int maxCellForObstacle = (int)Math.Pow(Constants.MAX_OBSTACLE_RADIUS * 2, 2);
         int minCellForObstacle = (int)Math.Pow(Constants.MIN_OBSTACLE_RADIUS * 2, 2);
-        int meanCellForObstacle = (maxCellForObstacle + minCellForObstacle) / 2;
+        int meanCellForObstacle = (2 * (maxCellForObstacle + minCellForObstacle)) / 3;
 
         return (int)Math.Floor((Math.Pow(mapSize, 2) * gameConfiguration.DensityDefenses) / meanCellForObstacle);
     }
@@ -121,18 +114,21 @@ public class MapController : IMapController
 
     private void PlaceDefenses(IMap map)
     {
+        IStrategyLocationDefenses strategyLocationDefenses = strategyFactory.GetStrategyLocationDefenses();
         strategyLocationDefenses.InitStrategy(map.Obstacles, Constants.DEFAULT_DEFENSE_RADIO, map.Size, map.CellSize);
+
+        IStrategyAlienAttack strategyAlienAttack = strategyFactory.GetStrategyAlientAttack();
+        IStrategySelectionDefenses strategySelectionDefenses = strategyFactory.GetStrategySelectionDefeses();
 
         int numDefenses = GetNumberOfDefenses(map.Size);
         int availablesAses = numDefenses * Constants.GetDefenseMeanCost();
 
         var possibleDefenses = new List<IDefense>();
+        IPosition positionZero = new Position(0, 0, 0);
 
         while (numDefenses > 0)
         {
             IPosition position = strategyLocationDefenses.GetPositionForDefense(map.Defenses);
-
-            IPosition positionZero = new Position(0, 0, 0);
 
             if (position == positionZero)
                 return;

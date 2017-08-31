@@ -5,7 +5,8 @@ using System.Text;
 
 namespace StrategySelectionDefenses
 { 
-    public class StrategySelectionDefenses : IStrategySelectionDefenses
+    // Formula
+    public class StrategySelectionDefenses1 : IStrategySelectionDefenses
     {
         public IEnumerable<IDefense> GetDefenses(IEnumerable<IDefense> defenses, int maxAses)
         {

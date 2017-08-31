@@ -20,5 +20,5 @@ public interface IMapController
     /// Añade un alien al mapa en una posición libre del mapa.
     /// </summary>
     /// <param name="map">MApa en donde añadir el alien</param>
-    void AddAliens(IMap map);
+    void AddAlien(IMap map);
 }

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AlienEnterInRadius" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AlienEnterInRadius.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera_Bounds" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADQAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAADAAAAA=</HashCode>
+      <FileName>Assets\Camera_Bounds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnterInRadius" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAAAAA=</HashCode>
+      <FileName>Assets\EnterInRadius.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManagerTest" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAACAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GameManagerTest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiedEntity" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAQQE=</HashCode>
+      <FileName>Assets\GameStatistics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameStatistics">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAEAAAAAAQCACAAAAAAAABAgAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Assets\GameStatistics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveAlien" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAAEAAAAqAAAEAAIkAAIAACIAAAAAAAEAAIAAAAgFA=</HashCode>
+      <FileName>Assets\MoveAlien.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveCamera" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAAAAAAAAAAAEAAAAAAAAAUAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\MoveCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constants" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EaAAyAARASAAAAAAAEBAEAAAAQACAAAAQIIAAAFEAQg=</HashCode>
+      <FileName>Assets\Scripts\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletController" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAAAAAAAAAAAAAAAAAAAAAAQAAAAAAQAQA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\BulletController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapController" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIABACAIAAUAAEAIAIAAEAAAAABAAAAEAAAAAAAEAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\MapController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gameConfiguration" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DefenseBehaviourScript" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\DefenseBehaviourScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DefenseHealth" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAIACABAAAAAAAAAAAAAEAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Assets\Scripts\DefenseHealth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameConfiguration" Collapsed="true">
+    <Position X="9.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIAAAAAAAgQAAAABAAAAAAAgAACCAABAAgAAAAAEgEA=</HashCode>
+      <FileName>Assets\Scripts\GameConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HealthBar" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\HealthBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityAlien" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwAKCICIBiMBjAAkAAAAAHAAAEAQAABAABAAkgAQAkg=</HashCode>
+      <FileName>Assets\Scripts\Model\UnityAlien.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UnityDefense" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>A5AKCICIAiMBjAAkACAAADAAAEAQAABIABAAkgAQAko=</HashCode>
+      <FileName>Assets\Scripts\Model\UnityDefense.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UnityMap" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AtAAEARABAAAgAQQAEQAQEAAAVBAgAEQAAAAAJIAEAA=</HashCode>
+      <FileName>Assets\Scripts\Model\UnityMap.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UnityObstacle" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAIAAAAAAAAAgAAAAAAAAAAAAAAAAQAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Model\UnityObstacle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UIDirectionControl" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UIDirectionControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomManager" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAABgAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utils\RandomManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityInvaders.Managers.GameController">
+    <Position X="2.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQRAMEAAgCAAQEAEABggWgAEHQAAAAEQgEhAAAwEBUE=</HashCode>
+      <FileName>Assets\Scripts\GameController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mapController" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Assets.Scripts.Utils.ConvertPosition" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utils\ConvertPositionToVector3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="System.Collections.Generic.IEnumerable&lt;T&gt;" Collapsed="true">
+    <Position X="4.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="IMapController" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAABAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interfaces\IMapController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="EntityType" Collapsed="true">
+    <Position X="14.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAgAAAAA=</HashCode>
+      <FileName>Assets\GameStatistics.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

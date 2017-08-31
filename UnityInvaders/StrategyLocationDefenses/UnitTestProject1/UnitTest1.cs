@@ -38,7 +38,7 @@ namespace UnitTestProject1
             obstacle4.Setup(x => x.Position).Returns(new Position(75, 0, -70));
             obstacles.Add(obstacle4.Object);
 
-            IStrategyLocationDefenses strategyLocationDefenses = new ManagerDefenses();
+            IStrategyLocationDefenses strategyLocationDefenses = new StrategyLocationDefenses.StrategyLocationDefenses();
             strategyLocationDefenses.InitStrategy(obstacles, 5, 100, 10);
             List<IDefense> defenses = new List<IDefense>();
 

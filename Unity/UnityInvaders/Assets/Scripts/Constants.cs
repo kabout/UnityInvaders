@@ -4,7 +4,7 @@ using System;
 public static class Constants
 {
     public const int DEFAULT_DEFENSE_ATTACKS_PER_SECOND = 1;
-    public const int DEFAULT_DEFENSE_RADIO = 10;
+    public const int DEFAULT_DEFENSE_RADIO = 5;
     public const int DEFENSE_MIN_HEALTH = 50;
     public const int DEFENSE_MAX_HEALTH = 150;
     public const int DEFENSE_MIN_RANGE = 5;
