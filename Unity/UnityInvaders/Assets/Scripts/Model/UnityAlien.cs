@@ -24,6 +24,7 @@ public class UnityAlien : MonoBehaviour, IAlien
     private bool died = false;
     private float maxHealth;
     private float maxBarX;
+    private AudioSource DiedSound;
 
     #endregion
 
@@ -82,6 +83,7 @@ public class UnityAlien : MonoBehaviour, IAlien
 
     void Awake()
     {
+        DiedSound = this.gameObject.GetComponent<AudioSource>();
     }
 
     // Use this for initialization
@@ -140,7 +142,10 @@ public class UnityAlien : MonoBehaviour, IAlien
                 died = true;
                 ParticleSystem particleSystem = ((GameObject)Instantiate(DestructionEffect, transform.position, Quaternion.identity)).GetComponent<ParticleSystem>();
                 particleSystem.Play();
-                Destroy(gameObject);
+
+                DiedSound.Play();
+
+                Destroy(gameObject, 2);
 
                 GameStatistics gameStatistics = GameObject.FindObjectOfType<GameStatistics>();
 

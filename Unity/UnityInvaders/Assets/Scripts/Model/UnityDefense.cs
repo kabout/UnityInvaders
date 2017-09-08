@@ -29,6 +29,7 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
     private float maxHealth;
     private float maxBarX;
     private GameObject defenseFloor;
+    private AudioSource DiedSound;
 
     #endregion
 
@@ -76,6 +77,7 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
     void Awake()
     {
         defenseFloor = this.transform.Find("DefenseFloor").gameObject;
+        DiedSound = this.gameObject.GetComponent<AudioSource>();
     }
 
     // Use this for initialization
@@ -146,7 +148,9 @@ public class UnityDefense : MonoBehaviour, IDefense, ISelectable
                 health = 0;
                 ParticleSystem particleSystem = ((GameObject)Instantiate(DestructionEffect, transform.position, Quaternion.identity)).GetComponent<ParticleSystem>();
                 particleSystem.Play();
-                Destroy(gameObject);
+                DiedSound.Play();
+
+                Destroy(gameObject, 1);
 
                 GameStatistics gameStatistics = GameObject.FindObjectOfType<GameStatistics>();
 
